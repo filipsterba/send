@@ -3,7 +3,7 @@ import json
 import requests
 from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from app import app
-
+from flask_oauthlib.client import OAuth
 
 import time
 from config import DEEPSEEK_API_KEY  # Přidáme import
