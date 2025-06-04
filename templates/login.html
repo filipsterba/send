@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
+    <style>
+        .loader-overlay {
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(30, 38, 57, 0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s;
+        }
+        .loader-spinner {
+            border: 5px solid #eee;
+            border-top: 5px solid var(--color-primary, #FF7849);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        body.loading .container,
+        body.loading .form-container {
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="loading">
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-spinner"></div>
+    </div>
+    <div class="container">
+        <div class="form-panel">
+            <button class="toggle-mode" id="toggleModeBtn" style="position:absolute;top:2rem;right:2rem;">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="{{ url_for('index') }}" class="btn" style="margin-bottom: 1.5rem; display: inline-block; width: auto;">&#8592; Back</a>
+            
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="flash-message" style="margin-bottom:1rem; color:#E74C3C; background:rgba(231,76,60,0.08); border-radius:8px; padding:0.7rem 1rem;">
+                  {% for message in messages %}
+                    {{ message }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+            
+            <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+                <div class="form-header">
+                    <h2>Login to FixIt</h2>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-input" id="loginIdentity" name="loginIdentity" placeholder=" " required>
+                    <label for="loginIdentity">Username or Email</label>
+                    <div style="font-size:0.9em;color:var(--color-muted);margin-top:0.3em;">You can use your username or email.</div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-input" id="loginPassword" name="loginPassword" placeholder=" " required>
+                    <label for="loginPassword">Password</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Login</button>
+                </div>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
+                </div>
+            </form>
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+            <div class="social-buttons">
+                <button class="social-btn google-btn" onclick="socialLogin('google')" type="button">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button class="social-btn facebook-btn" onclick="socialLogin('facebook')" type="button">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Loader hide after all content is loaded
+        window.onload = function () {
+            document.body.classList.remove('loading');
+            document.getElementById('loaderOverlay').style.opacity = '0';
+            setTimeout(function () {
+                document.getElementById('loaderOverlay').style.display = 'none';
+            }, 400);
+        };
+
+        // Theme toggle with localStorage
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('toggleModeBtn');
+            const icon = toggleBtn.querySelector('i');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+
+            document.documentElement.classList.toggle('light', savedTheme === 'light');
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            icon.classList.toggle('fa-moon', savedTheme === 'light');
+            icon.classList.toggle('fa-sun', savedTheme === 'dark');
+
+            toggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light');
+                document.documentElement.classList.toggle('light', !isLight);
+                document.documentElement.classList.toggle('dark', isLight);
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            });
+        });
+
+        function socialLogin(provider) {
+            alert('Login with ' + provider);
+        }
+    </script>
+</body>
+</html>

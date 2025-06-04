@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root.light {
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border: #E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon: #00C08B;
+            --color-primary: #FF7849;
+            --color-accent: #2D3E50;
+            --color-progress: #00C08B;
+        }
+        :root {
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #2C3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border: #474545;
+            --color-primary: #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon: #00C08B;
+            --radius: 16px;
+            --color-progress: #00C08B;
+        }
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            min-height: 100vh;
+        }
+        body {
+            margin: 0;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        header {
+            background: var(--bg-accent);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 200;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        /* Tabs */
+        .settings-tabs {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2.5rem 0 2rem 0;
+            border-bottom: 1.5px solid var(--color-border);
+            overflow-x: auto;
+        }
+        .settings-tab {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-muted);
+            padding: 0.7rem 1.2rem 1rem 1.2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: color 0.2s, border 0.2s;
+        }
+        .settings-tab.active, .settings-tab:hover {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+            background: none;
+        }
+        /* Cards */
+        .settings-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 2rem 1.5rem 2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: box-shadow 0.2s;
+        }
+        .settings-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .settings-form label {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--color-text);
+            display: block;
+        }
+        .settings-form input[type="text"],
+        .settings-form input[type="email"],
+        .settings-form input[type="password"],
+        .settings-form input[type="tel"],
+        .settings-form select {
+            width: 80%;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .settings-form input:focus,
+        .settings-form select:focus {
+            border: 1.5px solid var(--color-primary);
+        }
+        .settings-form .avatar-upload {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .avatar-preview {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--bg-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-icon);
+            overflow: hidden;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+        }
+        .settings-form .btn {
+            background: linear-gradient(90deg, var(--color-primary) 60%, var(--color-accent) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 12px 0 rgba(255,120,73,0.08);
+            margin-top: 0.5rem;
+        }
+
+        .settings-form .btn:hover {
+            background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-primary) 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .settings-form .switch-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .switch-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--color-text);
+            cursor: pointer;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--color-border);
+            border-radius: 24px;
+            transition: background 0.2s;
+        }
+        .switch input:checked + .slider {
+            background: var(--color-progress);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+        .switch input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .settings-form .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .settings-form .form-row > * {
+            flex: 1 1 0;
+        }
+        .settings-form .select-group {
+            margin-bottom: 1rem;
+        }
+        .settings-form .select-group label {
+            margin-bottom: 0.3rem;
+        }
+        .settings-form .select-group select {
+            margin-bottom: 0;
+        }
+        .settings-form .theme-toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .settings-form .theme-toggle-row .theme-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .settings-form .theme-toggle-row .theme-toggle-btn.active {
+            color: var(--color-progress);
+        }
+        .settings-form .danger-btn {
+            background: linear-gradient(90deg, #e53935 60%, #ff7849 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .settings-form .danger-btn:hover {
+            background: linear-gradient(90deg, #ff7849 60%, #e53935 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: var(--color-card);
+            color: var(--color-text);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .toast.success { color: var(--color-progress);}
+        .toast.error { color: #e53935;}
+        /* Responsive */
+        @media (max-width: 700px) {
+            .settings-card {
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
+            .settings-tabs {
+                gap: 0.5rem;
+                font-size: 0.97rem;
+            }
+        }
+        @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--bg-accent);
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            visibility: hidden;
+        }
+
+        .nav-links.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .nav-links a:hover {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bar">
+            <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="settings-tabs" id="settingsTabs">
+                <button class="settings-tab active" data-tab="all"><i class="fas fa-cog"></i> Settings</button>
+            </div>
+            <section class="settings-card settings-section" id="tab-all">
+                <!-- Profile Settings -->
+                <h2><i class="fas fa-user"></i> Profile Settings</h2>
+                <form class="settings-form" id="profileForm" autocomplete="off">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview" id="avatarPreview">
+                            {% if user.avatar %}
+            <img src="{{ user.avatar }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+        {% else %}
+            <i class="fas fa-user"></i>
+        {% endif %}
+                        </div>
+                        <div>
+                            <label for="avatarInput" style="margin-bottom:0.2rem;">Avatar (optional)</label>
+                            <input type="file" id="avatarInput" accept="image/*" style="margin-bottom:0.2rem;">
+                        </div>
+                    </div>
+                    <label for="displayName">Display Name</label>
+                    <input type="text" id="displayName" name="displayName" required value="{{ user.username }}">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required value="{{ user_email }}" readonly>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" pattern="^\+?\d{7,15}$" value="{{ user.phone }}" placeholder="+420123456789">
+                    <button type="submit" class="btn">Save changes</button>
+                </form>
+                <!-- Theme Switcher -->
+                <div class="settings-form theme-toggle-row" style="margin-top:2rem;">
+                    <label style="font-weight:500;">Theme</label>
+                    <button type="button" id="lightModeBtn" class="theme-toggle-btn"><i class="fas fa-sun"></i> Light</button>
+                    <button type="button" id="darkModeBtn" class="theme-toggle-btn"><i class="fas fa-moon"></i> Dark</button>
+                </div>
+                <!-- Password Change -->
+                <hr style="margin:2rem 0;border:none;border-top:1px solid var(--color-border);">
+                <h2><i class="fas fa-lock"></i> Change Password</h2>
+                <form class="settings-form" id="passwordForm" autocomplete="off">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" id="oldPassword" name="oldPassword" required>
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" name="newPassword" required minlength="6">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                    <button type="submit" class="btn">Update Password</button>
+                </form>
+                <!-- Account Actions -->
+                <hr style="margin:2rem 0;border:none;border-top:1px solid var(--color-border);">
+                <h2><i class="fas fa-user-cog"></i> Account Actions</h2>
+                <form class="settings-form" id="accountForm">
+                    <button type="button" class="btn" id="logoutBtn" style="margin-bottom:1rem;"><i class="fas fa-sign-out-alt"></i> Log out</button>
+                    <button type="button" class="danger-btn" id="deleteAccountBtn"><i class="fas fa-trash"></i> Delete my account</button>
+                </form>
+            </section>
+        </div>
+        <!-- Delete Account Modal -->
+        <div id="deleteModal" style="display:none;position:fixed;z-index:9999;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
+            <div style="background:var(--color-card);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 1.5rem;max-width:350px;width:95%;margin:auto;display:flex;flex-direction:column;gap:1rem;">
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;"><i class="fas fa-exclamation-triangle" style="color:#e53935"></i> Confirm Deletion</h2>
+                <div style="color:var(--color-muted);font-size:1rem;margin-bottom:0.5rem;">Are you sure you want to delete your account? This action cannot be undone.</div>
+                <div style="display:flex;gap:1rem;justify-content:flex-end;">
+                    <button type="button" class="btn" id="cancelDeleteBtn" style="background:var(--color-accent);color:#fff;">Cancel</button>
+                    <button type="button" class="danger-btn" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#"><i class="fas fa-user"></i> Profile</a>
+        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        const navLinks = document.querySelector('.nav-links');
+        const icon = this.querySelector('i');
+        
+        navLinks.classList.toggle('active');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        }
+    });
+        // Theme toggle in header
+        document.getElementById('themeToggleBtn').addEventListener('click', function() {
+            const html = document.documentElement;
+            const icon = this.querySelector('i');
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('fixit-theme', html.classList.contains('light') ? 'light' : 'dark');
+        });
+        // Tabs logic (only one tab)
+        document.querySelectorAll('.settings-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.settings-section').forEach(sec => sec.style.display = 'none');
+                document.getElementById('tab-' + this.dataset.tab).style.display = '';
+            });
+        });
+        // Show the only tab by default
+        document.getElementById('tab-all').style.display = '';
+        // Avatar upload
+        document.getElementById('avatarInput').addEventListener('change', async function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('avatarPreview');
+    
+    if (file) {
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            preview.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+        };
+        reader.readAsDataURL(file);
+
+        // Upload to server
+        const formData = new FormData();
+        formData.append('avatar', file);
+
+        try {
+            const response = await fetch('/api/update-profile', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                showToast('Avatar updated successfully!', 'success');
+            } else {
+                showToast(data.msg || 'Failed to update avatar', 'error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showToast('Error updating avatar', 'error');
+        }
+    }
+});
+        // Profile form validation & AJAX
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = {
+                displayName: document.getElementById('displayName').value,
+                phone: document.getElementById('phone').value
+            };
+
+            try {
+                const response = await fetch("{{ url_for('update_profile') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('Profile updated successfully!');
+                } else {
+                    alert(data.msg || 'Failed to update profile');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating profile');
+            }
+        });
+
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = {
+                oldPassword: document.getElementById('oldPassword').value,
+                newPassword: document.getElementById('newPassword').value
+            };
+
+            if (formData.newPassword !== document.getElementById('confirmPassword').value) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            try {
+                const response = await fetch("{{ url_for('change_password') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('Password updated successfully!');
+                    this.reset();
+                } else {
+                    alert(data.msg || 'Failed to update password');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error updating password');
+            }
+        });
+        // Notifications form
+        document.getElementById('notificationsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Notification preferences saved!', 'success');
+        });
+        // Language form
+        document.getElementById('languageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Language & region saved!', 'success');
+        });
+        // Theme tab logic
+        function setTheme(theme) {
+            const html = document.documentElement;
+            if (theme === 'light') {
+                html.classList.add('light');
+                html.classList.remove('dark');
+            } else {
+                html.classList.add('dark');
+                html.classList.remove('light');
+            }
+            localStorage.setItem('fixit-theme', theme);
+            updateThemeButtons();
+            // Save theme to server (AJAX)
+            fetch("{{ url_for('update_profile') }}", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({theme: theme})
+            }).catch(() => {});
+        }
+        function updateThemeButtons() {
+            const html = document.documentElement;
+            document.getElementById('lightModeBtn').classList.toggle('active', html.classList.contains('light'));
+            document.getElementById('darkModeBtn').classList.toggle('active', html.classList.contains('dark'));
+        }
+        document.getElementById('lightModeBtn').addEventListener('click', function() {
+            setTheme('light');
+        });
+        document.getElementById('darkModeBtn').addEventListener('click', function() {
+            setTheme('dark');
+        });
+        // Load theme from localStorage on page load
+        (function() {
+            const theme = localStorage.getItem('fixit-theme');
+            if (theme) setTheme(theme);
+            else updateThemeButtons();
+        })();
+        // Account actions
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            window.location.href = "{{ url_for('logout') }}";
+        });
+        // Delete account modal
+        const deleteModal = document.getElementById('deleteModal');
+        document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+            deleteModal.style.display = 'flex';
+        });
+        document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
+            deleteModal.style.display = 'none';
+        });
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            deleteModal.style.display = 'none';
+            showToast('Account deleted!', 'success');
+            // window.location.href = 'signup.html';
+        });
+        // Toast
+        function showToast(msg, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + (type || '');
+            toast.style.display = 'flex';
+            setTimeout(() => { toast.style.display = 'none'; }, 2200);
+        }
+    </script>
+</body>
+</html>

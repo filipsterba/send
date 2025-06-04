@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start New Repair | FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root.light {
+        --bg-primary: #FFFDFB;
+        --bg-secondary: #FDE4D2;
+        --bg-accent: #FFF4EB;
+        --color-btn: #2D3E50;
+        --color-btn-hover: #0B0F1C;
+        --color-login-btn: #FFFFFF;
+        --color-login-btn-hover: #FF7849;
+        --color-card: #FFF4EB;
+        --color-text: #1C1C1E;
+        --color-muted: #6B6B6D;
+        --color-white: #FFFFFF;
+        --color-border:#E4DAD1;
+        --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        --radius: 16px;
+        --color-icon:       #00C08B;
+        --color-icon-devices:       #1C1C1E;
+        --color-primary:    #FF7849;     /* soft orange / coral */
+        --color-accent:     #2D3E50;     /* deep petrol */
+        }
+
+        :root {
+        --bg-primary: #0B0F1C;
+        --bg-secondary: #1E2639;
+        --bg-accent: #2C3E50;
+        --color-btn: #2C3E50;
+        --color-btn-hover: #0B0F1C;
+        --color-login-btn: #2C3E50;
+        --color-login-btn-hover: #0B0F1C;
+        --color-card: #2C3E50;
+        --color-text: #F4F4F4;
+        --color-muted: #AAB0BC;
+        --color-white: #FFFFFF;
+        --color-border:#474545;
+        --color-primary:    #FF7849;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        --color-icon:       #00C08B;
+        --color-icon-devices:       #00C08B;
+        --radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--secondary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+        }
+        
+        p {
+            color: var(--text-medium);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--color-btn), var(--color-btn-hover));
+            color: white;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 192, 139, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--primary);
+            border: 1px solid rgba(0, 192, 139, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            border-color: var(--primary);
+        }
+        
+        /* Header */
+        .header {
+            background: var(--bg-primary); /* Use main background, not accent */
+            color: var(--color-text);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--color-text); /* Ensure text color matches theme */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary); /* Highlight on hover */
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text); /* Ensure toggle button matches theme */
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle.active::before {
+            transform: translateX(24px);
+        }
+
+        .profile-dropdown {
+            position: relative;
+        }
+
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            min-width: 150px;
+            display: none;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--color-primary);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(120deg, var(--color-primary) 0%, var(--bg-secondary) 100%) !important;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            min-height: 340px;
+        }
+        
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 340px;
+        }
+        
+        .hero-content {
+            flex: 1 1 340px;
+            min-width: 300px;
+            padding: 48px 0;
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            color: var(--color-text);
+            font-weight: 700;
+            margin-bottom: 18px;
+            line-height: 1.15;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text);
+            margin-bottom: 28px;
+        }
+        
+        .hero-image {
+            flex: 1 1 320px;
+            min-width: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 0;
+        }
+        
+        /* Form Section */
+        .form-section {
+            background-color: var(--bg-accent);
+            padding: 60px 0 80px;
+        }
+        
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--color-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        .step.active .step-number {
+            background: linear-gradient(135deg, var(--color-icon) 0%, var(--bg-secondary) 100%);
+            color: var(--color-white);
+        }
+        .step.completed .step-number {
+            background-color: var(--color-icon);
+            color: var(--color-white);
+        }
+        .step.inactive .step-number {
+            background-color: var(--color-icon);
+            color: var(--color-white);
+            opacity: 0.7;
+        }
+        
+        .step-title {
+            font-size: 14px;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+        
+        .step.active .step-title {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .form-page {
+            display: none;
+            background-color: var(--color-card);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        .form-page h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+        .form-page p {
+            font-size: 16px;
+            color: var(--color-muted);
+        }
+        
+        .form-page.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 192, 139, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .device-types {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .device-type {
+            position: relative;
+        }
+        
+        .device-type input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .device-type label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-accent);
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .device-type label:hover {
+            background-color: rgba(255, 157, 0, 0.3);
+        }
+        
+        .device-type input:checked + label {
+            background-color: rgba(255, 157, 0, 0.3);
+            border: 2px solid var(--primary);
+        }
+        
+        .device-icon {
+            font-size: 32px;
+            color: var(--color-icon);
+            margin-bottom: 16px;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+        
+        .upload-area:hover {
+            background-color: rgba(255, 157, 0, 0.3);
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            color: var(--color-text);
+            margin-bottom: 16px;
+        }
+        /* Footer */
+        footer {
+            background-color: #1A202C;
+            color: var(--color-white);
+            padding: 80px 0 32px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            padding-left: 7%;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-grid p {
+            color: var(--color-white);
+        }
+        
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+        
+        .footer-brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .footer-link-list {
+            list-style: none;
+        }
+        
+        .footer-link-list li {
+            margin-bottom: 16px;
+        }
+        
+        .footer-link-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link-list a:hover {
+            color: var(--color-white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-color: var(--color-btn);
+        }
+        
+        .social-link:hover {
+            background-color: var(--color-btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--color-white);
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .social-link {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-image {
+                order: -1;
+                margin-bottom: 32px;
+            }
+
+            .device-types {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .device-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-page {
+                padding: 24px;
+            }
+            
+            .form-steps {
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .form-steps::before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: row;
+                width: 100%;
+                gap: 16px;
+            }
+            
+            .step-number {
+                margin-bottom: 0;
+            }
+        }
+        /* Mobile Navigation */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--color-text);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--bg-accent);
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            visibility: hidden;
+        }
+
+        .nav-links.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .nav-links a:hover {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+        }
+    }
+    .summary-group {
+        color: var(--color-text);
+    }
+    .summary-value {
+        color: var(--color-text);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .terms-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+        user-select: none;
+    }
+    .custom-checkbox {
+        position: relative;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-top: 2px;
+    }
+    .custom-checkbox input[type="checkbox"] {
+        opacity: 0;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+    .checkmark {
+        position: absolute;
+        top: 0; left: 0;
+        width: 24px; height: 24px;
+        background: var(--color-white);
+        border: 2px solid var(--color-primary);
+        border-radius: 8px;
+        transition: background 0.2s, border-color 0.2s;
+        box-shadow: 0 2px 8px rgba(255,120,73,0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom-checkbox input[type="checkbox"]:checked ~ .checkmark {
+        background: linear-gradient(135deg, var(--color-primary) 60%, var(--color-icon) 100%);
+        border-color: var(--color-primary);
+    }
+    .checkmark svg {
+        display: none;
+        width: 16px;
+        height: 16px;
+        color: #fff;
+    }
+    .custom-checkbox input[type="checkbox"]:checked ~ .checkmark svg {
+        display: block;
+    }
+    .terms-label {
+        font-size: 1rem;
+        color: var(--color-text);
+        line-height: 1.5;
+        cursor: pointer;
+        margin-top: 1px;
+    }
+    .terms-label a {
+        color: var(--color-primary);
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+    .terms-label a:hover {
+        color: var(--color-icon);
+    }
+    /* Error style for checkbox (optional) */
+    .terms-checkbox.error .terms-label {
+        color: #e53935;
+    }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="{{ url_for('home') }}"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container hero-container">
+            <div class="hero-content" style="flex: 1 1 340px; min-width: 300px; padding: 48px 0;">
+                <h1 class="hero-title" style="font-size: 2.8rem; color: #fff; font-weight: 700; margin-bottom: 18px; line-height: 1.15;">
+                    Send us your device<br>
+                    <span style="color: #FFE7D6;">We'll handle the rest</span>
+                </h1>
+                <p class="hero-subtitle" style="font-size: 1.25rem; color: #fff; margin-bottom: 28px;">
+                    Fill out a simple form, we'll pick up your device, repair it, and deliver it back safely.<br>
+                    <span style="color: #FFE7D6;">Fast, safe, worry-free.</span>
+                </p>
+                <a href="#repairForm" class="btn" style="background: #fff; color: #FF7849; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: none;">
+                    Start Repair <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                </a>
+            </div>
+            <div class="hero-image" style="flex: 1 1 320px; min-width: 260px; display: flex; justify-content: center; align-items: center; padding: 32px 0;">
+                <img src="https://undraw.co/api/illustrations/undraw_fixing_bugs_w7gi.svg?color=FF7849,00C08B" alt="Device repair illustration" style="max-width: 340px; width: 100%; height: auto; border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(45,62,80,0.10); background: #fff;">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container form-container">
+            <div class="form-steps" id="formSteps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Device Info</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Your Info</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Summary</div>
+                </div>
+            </div>
+            <form id="repairForm" enctype="multipart/form-data">
+                <!-- Step 1: Device Info -->
+                <div class="form-page active" data-page="1">
+                    <h2>Tell us about your device</h2>
+                    <p class="form-subtitle">Select what you need repaired</p>
+                    <div class="form-group">
+                        <label>Device Type</label>
+                        <div class="device-types">
+                            <div class="device-type">
+                                <input type="radio" name="deviceType" id="phone" value="phone" checked>
+                                <label for="phone">
+                                    <div class="device-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    Phone
+                                </label>
+                            </div>
+                            <div class="device-type">
+                                <input type="radio" name="deviceType" id="laptop" value="laptop">
+                                <label for="laptop">
+                                    <div class="device-icon">
+                                        <i class="fas fa-laptop"></i>
+                                    </div>
+                                    Laptop
+                                </label>
+                            </div>
+                            <div class="device-type">
+                                <input type="radio" name="deviceType" id="tablet" value="tablet">
+                                <label for="tablet">
+                                    <div class="device-icon">
+                                        <i class="fas fa-tablet-alt"></i>
+                                    </div>
+                                    Tablet
+                                </label>
+                            </div>
+                            <div class="device-type">
+                                <input type="radio" name="deviceType" id="console" value="console">
+                                <label for="console">
+                                    <div class="device-icon">
+                                        <i class="fas fa-gamepad"></i>
+                                    </div>
+                                    Console
+                                </label>
+                            </div>
+                            <div class="device-type">
+                                <input type="radio" name="deviceType" id="other" value="other">
+                                <label for="other">
+                                    <div class="device-icon">
+                                        <i class="fas fa-microchip"></i>
+                                    </div>
+                                    Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <input type="text" id="brand" name="brand" class="form-control" placeholder="e.g. Apple, Samsung, Dell">
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <input type="text" id="model" name="model" class="form-control" placeholder="e.g. iPhone 13, Galaxy S21, XPS 15">
+                    </div>
+                    <div class="form-group">
+                        <label for="issue">What's wrong?</label>
+                        <textarea id="issue" name="issue" class="form-control" placeholder="Please describe the issue in detail..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload a photo (optional)</label>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <p id="uploadText">Drop your image here or click to browse</p>
+                            <input type="file" id="photoInput" name="photo" accept="image/*" style="display:none;">
+                            <img id="photoPreview" src="" alt="Preview" style="display:none;max-width:180px;margin-top:12px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"/>
+                            <button type="button" id="removePhotoBtn" style="display:none;margin-top:8px;background:#FF7849;color:#fff;border:none;padding:4px 12px;border-radius:8px;cursor:pointer;">Remove</button>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <div></div>
+                        <button type="button" class="btn next-step" data-next="2">Continue</button>
+                    </div>
+                </div>
+                <!-- Step 2: Your Info -->
+                <div class="form-page" data-page="2" style="display:none;">
+                    <h2>Your Information</h2>
+                    <p class="form-subtitle">Please provide your contact details</p>
+                    <div class="form-group">
+                        <label for="yourName">Full Name</label>
+                        <input type="text" id="yourName" name="yourName" class="form-control" placeholder="e.g. John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="e.g. john.doe@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="e.g. +1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Pickup Address</label>
+                        <textarea id="address" name="address" class="form-control" placeholder="Enter the address where we should pick up your device" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" class="form-control" placeholder="e.g. Prague" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">ZIP Code</label>
+                        <input type="text" id="zip" name="zip" class="form-control" placeholder="e.g. 11000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupDate">Preferred Pickup Date</label>
+                        <input type="date" id="pickupDate" name="pickupDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupTime">Preferred Pickup Time</label>
+                        <input type="time" id="pickupTime" name="pickupTime" class="form-control">
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-step" data-prev="1" style="color: #fff;">Back</button>
+                        <button type="button" class="btn next-step" data-next="3">Continue</button>
+                    </div>
+                </div>
+                <!-- Step 3: Summary & Submit -->
+                <div class="form-page" data-page="3" style="display:none;">
+                    <h2>Review & Submit</h2>
+                    <p class="form-subtitle">Please review your information and submit your request</p>
+                    <div class="summary-group">
+                        <div class="summary-item">
+                            <strong>Device Type:</strong> <span class="summary-value" id="summaryDeviceType"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Brand:</strong> <span class="summary-value" id="summaryBrand"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Model:</strong> <span class="summary-value" id="summaryModel"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Issue:</strong> <span class="summary-value" id="summaryIssue"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Photo:</strong> <span class="summary-value" id="summaryPhoto"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Your Name:</strong> <span class="summary-value" id="summaryYourName"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Email:</strong> <span class="summary-value" id="summaryEmail"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Phone Number:</strong> <span class="summary-value" id="summaryPhoneNumber"></span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Address:</strong> <span class="summary-value" id="summaryAddress"></span>
+                        </div>
+                    </div>
+                    <div class="terms-checkbox" id="termsCheckbox">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="termsAgree">
+                            <div class="checkmark"></div>
+                        </label>
+                        <label for="termsAgree" class="terms-label">
+                            I agree to the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a>.
+                        </label>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-step" data-prev="2" style="color: #fff;">Back</button>
+                        <button type="submit" class="btn">Submit Repair Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- JavaScript na konci body -->
+    <script>
+        // Theme toggle
+        document.getElementById('themeToggleBtn').addEventListener('click', function() {
+            const html = document.documentElement;
+            const icon = this.querySelector('i');
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', html.classList.contains('light') ? 'light' : 'dark');
+        });
+
+        // Mobile menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Profile dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+        }
+
+        // Upload photo area logic
+        const uploadArea = document.getElementById('uploadArea');
+        const photoInput = document.getElementById('photoInput');
+        const photoPreview = document.getElementById('photoPreview');
+        const uploadText = document.getElementById('uploadText');
+        const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+        uploadArea.addEventListener('click', function(e) {
+            if (e.target === removePhotoBtn) return;
+            photoInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.style.background = 'rgba(0,192,139,0.08)';
+        });
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.style.background = '';
+        });
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                photoInput.files = e.dataTransfer.files;
+                handlePhotoChange();
+            }
+        });
+
+        photoInput.addEventListener('change', handlePhotoChange);
+
+        function handlePhotoChange() {
+            const file = photoInput.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoPreview.src = e.target.result;
+                    photoPreview.style.display = 'block';
+                    removePhotoBtn.style.display = 'inline-block';
+                    uploadText.textContent = file.name;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                photoPreview.src = '';
+                photoPreview.style.display = 'none';
+                removePhotoBtn.style.display = 'none';
+                uploadText.textContent = 'Drop your image here or click to browse';
+            }
+        }
+
+        removePhotoBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            photoInput.value = '';
+            photoPreview.src = '';
+            photoPreview.style.display = 'none';
+            removePhotoBtn.style.display = 'none';
+            uploadText.textContent = 'Drop your image here or click to browse';
+        });
+
+        // Multi-step navigation with axis and step switching + validation + summary fill
+        document.addEventListener('DOMContentLoaded', function () {
+            const formPages = document.querySelectorAll('.form-page');
+            const steps = document.querySelectorAll('.form-steps .step');
+            let currentPage = 0;
+
+            function updateSteps(idx) {
+                steps.forEach((step, i) => {
+                    step.classList.remove('active', 'completed');
+                    if (i === idx) {
+                        step.classList.add('active');
+                    } else if (i < idx) {
+                        step.classList.add('completed');
+                    }
+                });
+            }
+
+            function showPage(idx) {
+                formPages.forEach((page, i) => {
+                    page.style.display = (i === idx) ? 'block' : 'none';
+                    if (i === idx) page.classList.add('active');
+                    else page.classList.remove('active');
+                });
+                updateSteps(idx);
+                currentPage = idx;
+                if (currentPage === 2) fillSummary();
+            }
+
+            // Validate required fields for each step
+            function validateStep(idx) {
+                if (idx === 0) {
+                    // Step 1: Device Info
+                    const brand = document.getElementById('brand').value.trim();
+                    const model = document.getElementById('model').value.trim();
+                    const issue = document.getElementById('issue').value.trim();
+                    if (!brand || !model || !issue) {
+                        alert('Please fill in all required device info fields.');
+                        return false;
+                    }
+                }
+                if (idx === 1) {
+                    // Step 2: Your Info
+                    const yourName = document.getElementById('yourName').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const phoneNumber = document.getElementById('phoneNumber').value.trim();
+                    const address = document.getElementById('address').value.trim();
+                    const city = document.getElementById('city').value.trim();
+                    const zip = document.getElementById('zip').value.trim();
+                    if (!yourName || !email || !phoneNumber || !address || !city || !zip) {
+                        alert('Please fill in all required contact fields.');
+                        return false;
+                    }
+                    // Simple email validation
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        alert('Please enter a valid email address.');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Next step
+            document.querySelectorAll('.next-step').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (!validateStep(currentPage)) return;
+                    if (currentPage < formPages.length - 1) {
+                        showPage(currentPage + 1);
+                    }
+                });
+            });
+
+            // Previous step
+            document.querySelectorAll('.prev-step').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (currentPage > 0) {
+                        showPage(currentPage - 1);
+                    }
+                });
+            });
+
+            // Step axis click (allow direct navigation to completed/active steps)
+            steps.forEach((step, idx) => {
+                step.addEventListener('click', function () {
+                    if ((step.classList.contains('completed') || step.classList.contains('active')) && idx <= currentPage) {
+                        showPage(idx);
+                    }
+                });
+            });
+
+            // Show first page on load
+            showPage(0);
+
+            // Fill summary step with user input
+            function fillSummary() {
+                // Device Info
+                document.getElementById('summaryDeviceType').textContent =
+                    document.querySelector('input[name="deviceType"]:checked')?.value.charAt(0).toUpperCase() +
+                    document.querySelector('input[name="deviceType"]:checked')?.value.slice(1) || '';
+                document.getElementById('summaryBrand').textContent = document.getElementById('brand').value;
+                document.getElementById('summaryModel').textContent = document.getElementById('model').value;
+                document.getElementById('summaryIssue').textContent = document.getElementById('issue').value;
+                // Photo
+                const photoPreview = document.getElementById('photoPreview');
+                const summaryPhoto = document.getElementById('summaryPhoto');
+                if (photoPreview && photoPreview.src && photoPreview.style.display !== 'none') {
+                    summaryPhoto.textContent = '';
+                    summaryPhoto.innerHTML = `<img src="${photoPreview.src}" alt="Photo" style="max-width:100px;max-height:80px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"/>`;
+                } else {
+                    summaryPhoto.textContent = '—';
+                    summaryPhoto.innerHTML = '';
+                }
+                // User Info
+                document.getElementById('summaryYourName').textContent = document.getElementById('yourName').value;
+                document.getElementById('summaryEmail').textContent = document.getElementById('email').value;
+                document.getElementById('summaryPhoneNumber').textContent = document.getElementById('phoneNumber').value;
+                document.getElementById('summaryAddress').textContent = document.getElementById('address').value;
+                document.getElementById('summaryCity').textContent = document.getElementById('city').value;
+                document.getElementById('summaryZip').textContent = document.getElementById('zip').value;
+                document.getElementById('summaryPickupDate').textContent = document.getElementById('pickupDate').value;
+                document.getElementById('summaryPickupTime').textContent = document.getElementById('pickupTime').value;
+            }
+
+            // Prevent submit if terms not checked
+            document.getElementById('repairForm').addEventListener('submit', function(e) {
+                const terms = document.getElementById('termsAgree');
+                if (!terms.checked) {
+                    alert('You must agree to the terms and conditions.');
+                    terms.focus();
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('repairForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            try {
+                const response = await fetch("{{ url_for('submit_repair') }}", {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.ok) {
+                    window.location.href = "{{ url_for('my_repairs') }}";
+                } else {
+                    alert('Error submitting repair request');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting repair request');
+            }
+        });
+    </script>
+</body>
+</html>

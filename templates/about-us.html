@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us - FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        :root.light {
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-login-btn: #FFFFFF;
+            --color-login-btn-hover: #FF7849;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border:#E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon:       #00C08B;
+            --color-icon-devices:       #1C1C1E;
+            --color-primary:    #FF7849;
+            --color-accent:     #2D3E50;
+        }
+        :root {
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #2C3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-login-btn: #2C3E50;
+            --color-login-btn-hover: #0B0F1C;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border:#474545;
+            --color-primary:    #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon:       #00C08B;
+            --color-icon-devices:       #00C08B;
+            --radius: 16px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        /* Header */
+        .header {
+            background: var(--bg-accent);
+            color: var(--color-text);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle.active::before {
+            transform: translateX(24px);
+        }
+        .profile-dropdown {
+            position: relative;
+        }
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            min-width: 150px;
+            display: none;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            color: var(--color-primary);
+        }
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 80px 0 120px;
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+            gap: 2.5rem;
+        }
+        .hero-content {
+            flex: 1 1 0;
+            text-align: left;
+            padding: 3rem 1rem 3rem 5vw;
+            z-index: 1;
+            max-width: 700px;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--color-text);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-align: left;
+        }
+        .hero-subtext {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--color-muted);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-align: left;
+        }
+        .hero-image {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 220px;
+            max-width: 500px;
+            padding-right: 5vw;
+        }
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /*Mission section*/
+        .mission {
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--color-text);
+            background-clip: text;
+        }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow); 
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .mission-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+
+        /* Team Section */
+        .team-section {
+            max-width: 1100px;
+            margin: 0 auto 3rem auto;
+            padding: 2.5rem 1rem 2.5rem 1rem;
+            background: var(--bg-accent);
+        }
+        .team-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--color-primary);
+            letter-spacing: -1px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            justify-items: center;
+        }
+        .team-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            width: 100%;
+            max-width: 320px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .team-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        }
+        .team-avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+            border: 4px solid var(--color-primary);
+            background: var(--color-white);
+        }
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .team-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--color-text);
+        }
+        .team-role {
+            font-size: 1rem;
+            color: var(--color-muted);
+            margin-bottom: 0.5rem;
+        }
+        .team-hover {
+            position: absolute;
+            inset: 0;
+            background: rgba(44,62,80,0.97);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(.4,0,.2,1);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .team-card:hover .team-hover,
+        .team-card:focus-within .team-hover {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .team-quote {
+            font-size: 1.05rem;
+            font-style: italic;
+            margin-bottom: 1.2rem;
+        }
+        .team-social {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        .team-social:hover {
+            color: var(--color-primary);
+        }
+        /* Why Choose Us Section */
+        .why-choose-us {
+            max-width: 1100px;
+            margin: 0 auto 3rem auto;
+            padding: 2.5rem 1rem 0 1rem;
+        }
+        .why-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--color-primary);
+            letter-spacing: -1px;
+        }
+        .why-features {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .why-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem 2rem;
+            min-width: 270px;
+            max-width: 350px;
+            flex: 1 1 0;
+            transition: 0.4s all;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .why-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        }
+        .why-icon {
+            font-size: 2.8rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 4px 18px 0 rgba(0,0,0,0.10);
+            flex-shrink: 0;
+            margin-right: 0.5rem;
+            transition: box-shadow 0.3s;
+        }
+        .why-card:hover .why-icon {
+            box-shadow: 0 8px 32px 0 rgba(255,120,73,0.18), 0 2px 8px 0 rgba(0,192,139,0.10);
+        }
+        .why-info h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+        .why-info p {
+            font-size: 1rem;
+            color: var(--color-text);
+            opacity: 0.92;
+        }
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0 3rem;
+                gap: 1.5rem;
+            }
+            .hero-content {
+                padding: 2rem 1rem 0 1rem;
+                text-align: center;
+                max-width: 100%;
+            }
+            .hero-title,
+            .hero-subtext {
+                text-align: center;
+            }
+            .hero-image {
+                padding-right: 0;
+            }
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .why-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .why-card {
+                width: 100%;
+                max-width: 420px;
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 220px;
+                padding: 1.5rem 0;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtext {
+                font-size: 1rem;
+            }
+            .hero-image img {
+                max-width: 220px;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .team-card {
+                max-width: 100%;
+                padding: 1.5rem 1rem;
+            }
+        }
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--bg-accent);
+                padding: 20px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                visibility: hidden;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                box-shadow: var(--shadow);
+            }
+            .nav-links a {
+                font-size: 18px;
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .nav-links a:hover {
+                background: var(--bg-secondary);
+                border-radius: var(--radius);
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #1A202C;
+            color: var(--color-white);
+            padding: 80px 0 32px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            padding-left: 7%;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-grid p {
+            color: var(--color-white);
+        }
+        
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+        
+        .footer-brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .footer-link-list {
+            list-style: none;
+        }
+        
+        .footer-link-list li {
+            margin-bottom: 16px;
+        }
+        
+        .footer-link-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link-list a:hover {
+            color: var(--color-white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-color: var(--color-btn);
+        }
+        
+        .social-link:hover {
+            background-color: var(--color-btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--color-white);
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .social-link {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+            }
+        }
+
+        /* Animate on load and scroll */
+        .animate-on-load {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s cubic-bezier(.4,0,.2,1) forwards;
+        }
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        .animate-delay-3 { animation-delay: 0.6s; }
+        .animate-delay-4 { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        }
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Button and link hover improvements */
+        .action-btn, .btn-primary, .btn-secondary, .footer-link-list a, .social-link, .team-social {
+            transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s, color 0.2s;
+        }
+        .action-btn:hover, .btn-primary:hover, .btn-secondary:hover, .footer-link-list a:hover, .social-link:hover, .team-social:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .loader-overlay {
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(30, 38, 57, 0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s;
+        }
+        .loader-spinner {
+            border: 5px solid #eee;
+            border-top: 5px solid var(--color-primary, #FF7849);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        body.loading .container {
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="loading">
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-spinner"></div>
+    </div>
+    <!-- Header -->
+    <header class="header animate-on-load animate-delay-1">
+        <nav class="nav-container">
+            <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                <li><a href="{{ url_for('about_us') }}" class="active">About us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()">
+                        {% if user.avatar %}
+                <img src="{{ user.avatar }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+            {% else %}
+                <i class="fas fa-user"></i>
+            {% endif %}
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--Hero Section-->
+    <section class="hero scroll-fade">
+        <div class="hero-content">
+            <h1 class="hero-title animate-on-load animate-delay-2">Our tools are real. Our emotional stability? Held together by hope and caffeine</h1>
+            <p class="hero-subtext animate-on-load animate-delay-3">
+                <i>- Fix It team.</i>
+            </p>
+        </div>
+        <div class="hero-image animate-on-load animate-delay-4">
+            <img src="/api/placeholder/500/400" alt="Nase fotka" />
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission scroll-fade">
+        <div class="container">
+            <h2 class="section-title animate-on-load animate-delay-2">Our Mission</h2>
+            <div class="mission-grid">
+                <div class="glass-card mission-card scroll-fade">
+                    <span class="mission-icon">♻️</span>
+                    <h3>Reduce E-Waste</h3>
+                    <p>Every repair prevents electronic waste from ending up in landfills</p>
+                </div>
+                <div class="glass-card mission-card scroll-fade">
+                    <span class="mission-icon">🔧</span>
+                    <h3>Make Repair Accessible</h3>
+                    <p>Professional repairs should be convenient and affordable for everyone</p>
+                </div>
+                <div class="glass-card mission-card scroll-fade">
+                    <span class="mission-icon">🤝</span>
+                    <h3>Support Local Technicians</h3>
+                    <p>Empowering skilled repair professionals in communities worldwide</p>
+                </div>
+                <div class="glass-card mission-card scroll-fade">
+                    <span class="mission-icon">🌍</span>
+                    <h3>Build a Sustainable Future</h3>
+                    <p>Creating a circular economy where technology lasts longer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Team Section-->
+    <section class="team-section scroll-fade">
+        <h2 class="team-title animate-on-load animate-delay-2">Meet the Team</h2>
+        <div class="team-grid">
+            <div class="team-card scroll-fade">
+                <div class="team-avatar">
+                    <img src="" alt="Mykyta Nikolenko">
+                </div>
+                <div class="team-info">
+                    <h3>Mykyta Nikolenko</h3>
+                    <p class="team-role">Frontend and UI/UX</p>
+                </div>
+                <div class="team-hover">
+                    <p class="team-quote">“Moje produktivita stoupá úměrně s hladinou kofeinu.”</p>
+                    <a href="https://linkedin.com/" target="_blank" class="team-social"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-card scroll-fade">
+                <div class="team-avatar">
+                    <img src="" alt="Dominik Olšansky">
+                </div>
+                <div class="team-info">
+                    <h3>Dominik Olšansky</h3>
+                    <p class="team-role">Sustainability Lead</p>
+                </div>
+                <div class="team-hover">
+                    <p class="team-quote">“Když prší tak leje”</p>
+                    <a href="https://twitter.com/" target="_blank" class="team-social"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-card scroll-fade">
+                <div class="team-avatar">
+                    <img src="" alt="Filip Štěrba">
+                </div>
+                <div class="team-info">
+                    <h3>Filip Štěrba</h3>
+                    <p class="team-role">Customer Hero</p>
+                </div>
+                <div class="team-hover">
+                    <p class="team-quote">“Roblox, Roblox, Roblox...”</p>
+                    <a href="https://instagram.com/" target="_blank" class="team-social"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us scroll-fade">
+        <h2 class="why-title animate-on-load animate-delay-2">Why Choose Us</h2>
+        <div class="why-features">
+            <div class="why-card scroll-fade">
+                <div class="why-icon" style="background: linear-gradient(135deg, #FF7849 60%, #FFD6C0 100%);">
+                    ⚡
+                </div>
+                <div class="why-info">
+                    <h3>Fast Pickup & Delivery</h3>
+                    <p>We collect and return your device quickly, so you’re never long without your tech.</p>
+                </div>
+            </div>
+            <div class="why-card scroll-fade">
+                <div class="why-icon" style="background: linear-gradient(135deg, #2D3E50 60%, #00C08B 100%);">
+                    🔒
+                </div>
+                <div class="why-info">
+                    <h3>Secure Repairs</h3>
+                    <p>Your data and device are protected by strict security protocols at every step.</p>
+                </div>
+            </div>
+            <div class="why-card scroll-fade">
+                <div class="why-icon" style="background: linear-gradient(135deg, #00C08B 60%, #FF7849 100%);">
+                    🌿
+                </div>
+                <div class="why-info">
+                    <h3>Eco-Certified Process</h3>
+                    <p>Our repairs are certified eco-friendly, minimizing environmental impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-brand-logo">FixIt</div>
+                <p>Smart Tech Repairs Without the Stress</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul class="footer-link-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">My Repairs</a></li>
+                    <li><a href="#">About us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: support@fixit.com</p>
+                <p>Phone: 1-800-FIX-IT-NOW</p>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loader hide after all content is loaded
+        window.onload = function () {
+            document.body.classList.remove('loading');
+            document.getElementById('loaderOverlay').style.opacity = '0';
+            setTimeout(function () {
+                document.getElementById('loaderOverlay').style.display = 'none';
+            }, 400);
+        };
+
+        // Profile dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+        }
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const profileBtn = document.querySelector('.profile-btn');
+            if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            const icon = toggleBtn.querySelector('i');
+            // Load theme from localStorage
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('light', savedTheme === 'light');
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            if (savedTheme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            toggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light');
+                document.documentElement.classList.toggle('light', !isLight);
+                document.documentElement.classList.toggle('dark', isLight);
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const icon = this.querySelector('i');
+            navLinks.classList.toggle('active');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Animate on load for .animate-on-load
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.animate-on-load').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        });
+
+        // Scroll fade-in for .scroll-fade
+        function handleScrollFade() {
+            const elements = document.querySelectorAll('.scroll-fade');
+            const trigger = window.innerHeight * 0.92;
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < trigger) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScrollFade);
+        window.addEventListener('DOMContentLoaded', handleScrollFade);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root.light {
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-login-btn: #FFFFFF;
+            --color-login-btn-hover: #FF7849;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border:#E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon:       #00C08B;
+            --color-icon-devices:       #1C1C1E;
+            --color-primary:    #FF7849;
+            --color-accent:     #2D3E50;
+        }
+        :root {
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #2C3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-login-btn: #2C3E50;
+            --color-login-btn-hover: #0B0F1C;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border:#474545;
+            --color-primary:    #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon:       #00C08B;
+            --color-icon-devices:       #00C08B;
+            --radius: 16px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .header {
+            background: var(--bg-accent);
+            color: var(--color-text);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle.active::before {
+            transform: translateX(24px);
+        }
+        .profile-dropdown {
+            position: relative;
+        }
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            min-width: 150px;
+            display: none;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            color: var(--color-primary);
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--bg-accent);
+                padding: 20px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                visibility: hidden;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                box-shadow: var(--shadow);
+            }
+            .nav-links a {
+                font-size: 18px;
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .nav-links a:hover {
+                background: var(--bg-secondary);
+                border-radius: var(--radius);
+            }
+        }
+        /* ...existing code... */
+        .price-main {
+            max-width: 1100px;
+            margin: 0 auto 3rem auto;
+            padding: 2.5rem 1rem 0 1rem;
+        }
+        .tabs {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem 0.5rem;
+            position: sticky;
+            top: 90px;
+            z-index: 10;
+        }
+        .tab-btn {
+            background: var(--color-card);
+            color: var(--color-text);
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.8rem 2.2rem;
+            font-size: 1.12rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: none;
+            transition: background 0.4s, color 0.2s, transform 0.2s;
+            outline: none;
+            position: relative;
+            min-width: 120px;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+            color: #fff;
+            transform: translateY(-4px) scale(1.06);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .tab-btn:focus-visible {
+            outline: 2px solid var(--color-primary);
+        }
+        .price-cards-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .price-card-group {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            min-height: 420px;
+            /* Animation for switching */
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        .price-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            min-width: 340px;
+            max-width: 440px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+            margin: 0 1.5rem;
+            position: relative;
+        }
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 8px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            opacity: 0.18;
+        }
+        .price-card:hover {
+            transform: translateY(-12px) scale(1.04);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        }
+        .price-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .price-card-icon {
+            font-size: 2.5rem;
+        }
+        .price-card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .diagnostic-fee {
+            font-size: 1.12rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            font-weight: 500;
+        }
+        .repair-list {
+            list-style: none;
+            margin: 0 0 1.2rem 0;
+            padding: 0;
+        }
+        .repair-list li {
+            font-size: 1.08rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 6px;
+            padding: 0.3rem 0.6rem;
+        }
+        .repair-icon {
+            font-size: 1.2em;
+            margin-right: 0.3em;
+        }
+        .accordion.unusual-repair {
+            margin-bottom: 1.2rem;
+        }
+        .accordion-toggle {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 1.08rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+        .accordion-toggle i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        .accordion.open .accordion-toggle i {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+            padding-left: 1.2rem;
+        }
+        .accordion.open .accordion-content {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+        .accordion-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .accordion-content li {
+            font-size: 1.02rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn.request-quote-btn {
+            margin-top: 1.2rem;
+            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.9rem 1.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background-size: 200% 100%;
+            background-position: left center;
+            transition: background-position 0.4s cubic-bezier(.4,0,.2,1), background 0.4s cubic-bezier(.4,0,.2,1), transform 0.2s;
+            box-shadow: 0 2px 12px 0 rgba(255,120,73,0.08);
+            letter-spacing: 0.02em;
+        }
+        .btn.request-quote-btn:hover {
+            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            background-position: right center;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 24px 0 rgba(255,120,73,0.18);
+        }
+        .price-disclaimer-section {
+            margin: 2.5rem auto 0 auto;
+            max-width: 700px;
+            text-align: center;
+        }
+        .price-disclaimer {
+            background: var(--color-card);
+            color: var(--color-text);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem 1rem;
+            font-size: 1.1rem;
+            opacity: 0.92;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #1A202C;
+            color: var(--color-white);
+            padding: 80px 0 32px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            padding-left: 7%;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-grid p {
+            color: var(--color-white);
+        }
+        
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+        
+        .footer-brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        
+        .footer-link-list {
+            list-style: none;
+        }
+        
+        .footer-link-list li {
+            margin-bottom: 16px;
+        }
+        
+        .footer-link-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link-list a:hover {
+            color: var(--color-white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-color: var(--color-btn);
+        }
+        
+        .social-link:hover {
+            background-color: var(--color-btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .footer-bottom a:hover {
+            color: var(--color-white);
+        }
+
+        @media (max-width: 1100px) {
+            .price-main {
+                max-width: 98vw;
+            }
+            .price-card {
+                margin: 0 0.5rem;
+            }
+        }
+        @media (max-width: 900px) {
+            .tabs {
+                gap: 0.5rem;
+                padding: 0.7rem 0.2rem;
+            }
+            .price-card {
+                min-width: 0;
+                max-width: 100%;
+                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .price-card-group {
+                min-height: 0;
+            }
+            .price-card {
+                margin: 0;
+            }
+        }
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .social-link {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+            }
+        }
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+        .loader-overlay {
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(30, 38, 57, 0.45);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s;
+        }
+        .loader-spinner {
+            border: 5px solid #eee;
+            border-top: 5px solid var(--color-primary, #FF7849);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        body.loading .container {
+            filter: blur(4px);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()">
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="price-main">
+        <section class="price-tabs-section">
+            <div class="tabs" id="deviceTabs">
+                <button class="tab-btn active" data-tab="phone">📱 Phone</button>
+                <button class="tab-btn" data-tab="laptop">💻 Laptop</button>
+                <button class="tab-btn" data-tab="smartwatch">⌚ Smartwatch</button>
+                <button class="tab-btn" data-tab="console">🕹 Console</button>
+                <button class="tab-btn" data-tab="audio">🎧 Audio</button>
+            </div>
+        </section>
+
+        <section class="price-cards-section">
+            <!-- Phone -->
+            <div class="price-card-group" data-tab-content="phone">
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-card-icon">📱</span>
+                        <span class="price-card-title">Phone Repairs</span>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="diagnostic-fee">
+                            <span class="repair-icon">💬</span>
+                            Diagnostic: <strong>290&nbsp;Kč</strong>
+                        </div>
+                        <ul class="repair-list">
+                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>1 500&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>900&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 800&nbsp;Kč</strong></li>
+                        </ul>
+                        <div class="accordion unusual-repair">
+                            <button class="accordion-toggle">
+                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><span class="repair-icon">📶</span> SIM/Chip issues – from <strong>1 200&nbsp;Kč</strong></li>
+                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 000–4 500&nbsp;Kč</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="btn request-quote-btn">Request Custom Quote</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Laptop -->
+            <div class="price-card-group" data-tab-content="laptop" style="display:none;">
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-card-icon">💻</span>
+                        <span class="price-card-title">Laptop Repairs</span>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="diagnostic-fee">
+                            <span class="repair-icon">💬</span>
+                            Diagnostic: <strong>290&nbsp;Kč</strong>
+                        </div>
+                        <ul class="repair-list">
+                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>2 000&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>1 200&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">💧</span> Water damage – from <strong>2 500&nbsp;Kč</strong></li>
+                        </ul>
+                        <div class="accordion unusual-repair">
+                            <button class="accordion-toggle">
+                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><span class="repair-icon">💾</span> Data recovery – from <strong>1 500&nbsp;Kč</strong></li>
+                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 500–5 000&nbsp;Kč</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="btn request-quote-btn">Request Custom Quote</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Smartwatch -->
+            <div class="price-card-group" data-tab-content="smartwatch" style="display:none;">
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-card-icon">⌚</span>
+                        <span class="price-card-title">Smartwatch Repairs</span>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="diagnostic-fee">
+                            <span class="repair-icon">💬</span>
+                            Diagnostic: <strong>290&nbsp;Kč</strong>
+                        </div>
+                        <ul class="repair-list">
+                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>1 200&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>700&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 500&nbsp;Kč</strong></li>
+                        </ul>
+                        <div class="accordion unusual-repair">
+                            <button class="accordion-toggle">
+                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><span class="repair-icon">🔗</span> Strap/connection issues – from <strong>500&nbsp;Kč</strong></li>
+                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>1 500–3 500&nbsp;Kč</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="btn request-quote-btn">Request Custom Quote</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Console -->
+            <div class="price-card-group" data-tab-content="console" style="display:none;">
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-card-icon">🕹</span>
+                        <span class="price-card-title">Console Repairs</span>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="diagnostic-fee">
+                            <span class="repair-icon">💬</span>
+                            Diagnostic: <strong>290&nbsp;Kč</strong>
+                        </div>
+                        <ul class="repair-list">
+                            <li><span class="repair-icon">🪟</span> HDMI/Display issues – from <strong>1 200&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">🔋</span> Power supply – from <strong>1 000&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">💧</span> Water damage – from <strong>2 000&nbsp;Kč</strong></li>
+                        </ul>
+                        <div class="accordion unusual-repair">
+                            <button class="accordion-toggle">
+                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><span class="repair-icon">🎮</span> Controller repairs – from <strong>600&nbsp;Kč</strong></li>
+                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 000–4 000&nbsp;Kč</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="btn request-quote-btn">Request Custom Quote</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Audio -->
+            <div class="price-card-group" data-tab-content="audio" style="display:none;">
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-card-icon">🎧</span>
+                        <span class="price-card-title">Audio Device Repairs</span>
+                    </div>
+                    <div class="price-card-body">
+                        <div class="diagnostic-fee">
+                            <span class="repair-icon">💬</span>
+                            Diagnostic: <strong>290&nbsp;Kč</strong>
+                        </div>
+                        <ul class="repair-list">
+                            <li><span class="repair-icon">🔊</span> Speaker repair – from <strong>800&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>600&nbsp;Kč</strong></li>
+                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 200&nbsp;Kč</strong></li>
+                        </ul>
+                        <div class="accordion unusual-repair">
+                            <button class="accordion-toggle">
+                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><span class="repair-icon">🎤</span> Microphone issues – from <strong>700&nbsp;Kč</strong></li>
+                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>1 500–3 000&nbsp;Kč</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="btn request-quote-btn">Request Custom Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="price-disclaimer-section">
+            <div class="price-disclaimer">
+                <strong>Note:</strong> The prices listed are approximate. The exact amount will be provided after device diagnostics.<br>
+                Diagnostics are free if you proceed with the repair.
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-brand-logo">FixIt</div>
+                <p>Smart Tech Repairs Without the Stress</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul class="footer-link-list">
+                    <li><a href="user-page.html">Home</a></li>
+                    <li><a href="price-list.html">Pricing</a></li>
+                    <li><a href="my-repairs.html">My Repairs</a></li>
+                    <li><a href="about.html">About us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: support@fixit.com</p>
+                <p>Phone: 1-800-FIX-IT-NOW</p>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <script>
+        // Profile dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside or on dropdown link
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const profileBtn = document.querySelector('.profile-btn');
+            if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+            // Zavřít dropdown při kliknutí na odkaz
+            if (dropdown.contains(event.target) && event.target.tagName === 'A') {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.querySelector('.toggle-mode');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+
+            document.documentElement.classList.toggle('light', savedTheme === 'light');
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+
+            const icon = toggleBtn.querySelector('i');
+            if (savedTheme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light');
+                document.documentElement.classList.toggle('light', !isLight);
+                document.documentElement.classList.toggle('dark', isLight);
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const navLinks = document.querySelector('.nav-links');
+            const icon = this.querySelector('i');
+            navLinks.classList.toggle('active');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Zavřít menu při kliknutí na odkaz
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Tabs logic
+        function showTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+            document.querySelectorAll('.price-card-group').forEach(group => {
+                group.style.display = group.getAttribute('data-tab-content') === tab ? 'flex' : 'none';
+            });
+        }
+        // Nastavit výchozí tab při načtení
+        document.addEventListener('DOMContentLoaded', function() {
+            showTab('phone');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    showTab(this.getAttribute('data-tab'));
+                });
+            });
+        });
+
+        // Accordion logic
+        document.querySelectorAll('.accordion-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const accordion = this.closest('.accordion');
+                accordion.classList.toggle('open');
+            });
+        });
+
+        // Loader hide after all content is loaded
+        window.onload = function () {
+            document.body.classList.remove('loading');
+            document.getElementById('loaderOverlay').style.opacity = '0';
+            setTimeout(function () {
+                document.getElementById('loaderOverlay').style.display = 'none';
+            }, 400);
+        };
+    </script>
+</body>
+</html>

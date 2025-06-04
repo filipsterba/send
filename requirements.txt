@@ -1,0 +1,33 @@
+flask==2.0.1
+werkzeug==2.0.3
+jinja2==3.0.3
+itsdangerous==2.0.1
+click==8.0.3
+
+flask-session==0.4.0
+
+requests==2.31.0
+
+openai==0.11.3
+
+Flask-OAuthlib==0.9.6
+oauthlib==3.2.2
+
+google-api-python-client==2.108.0
+google-auth-httplib2==0.1.1
+google-auth-oauthlib==1.1.0
+
+# Optional: for email sending (if you use Flask-Mail)
+# Flask-Mail==0.9.1
+
+# Optional: for image processing (if you allow avatar uploads)
+# Pillow==10.2.0
+
+# Optional: for password hashing (recommended)
+# passlib==1.7.4
+
+# Optional: for .env support (if you use environment variables)
+# python-dotenv==1.0.1
+
+# Optional: for better debugging
+# flask-debugtoolbar==0.13.1
