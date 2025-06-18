@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - FixIt</title>
+    <title>Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
@@ -49,14 +48,14 @@
             <button class="toggle-mode" id="toggleModeBtn" style="position:absolute;top:2rem;right:2rem;">
                 <i class="fas fa-moon"></i>
             </button>
-            <a href="{{ url_for('index') }}" class="btn" style="margin-bottom: 1.5rem; display: inline-block; width: auto;">&#8592; Back</a>
+            <a href="{{ url_for('home') }}" class="btn" style="margin-bottom: 1.5rem; display: inline-block; width: auto;">&#8592; Zpět</a>
             <form id="registerForm" method="POST" action="{{ url_for('register') }}">
                 <div class="form-header">
-                    <h2>Create an Account</h2>
+                    <h2>Vytvořit účet</h2>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-input" id="registerUsername" name="registerUsername" placeholder=" " required>
-                    <label for="registerUsername">Username</label>
+                    <label for="registerUsername">Uživatelské jméno</label>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-input" id="registerEmail" name="registerEmail" placeholder=" " required>
@@ -64,17 +63,17 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-input" id="registerPassword" name="registerPassword" placeholder=" " required>
-                    <label for="registerPassword">Password</label>
+                    <label for="registerPassword">Heslo</label>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn">Register</button>
+                    <button type="submit" class="btn">Registrovat se</button>
                 </div>
                 <div class="form-footer">
-                    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+                    <p>Máte účet? <a href="{{ url_for('login') }}">Přihlaste se zde</a>.</p>
                 </div>
             </form>
             <div class="divider">
-                <span>or continue with</span>
+                <span>nebo pokračujte s</span>
             </div>
             <div class="social-buttons">
                 <button class="social-btn google-btn" onclick="socialLogin('google')" type="button">
@@ -128,4 +127,5 @@
         };
     </script>
 </body>
+</html>
 </html>

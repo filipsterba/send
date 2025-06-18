@@ -1,7 +1,7 @@
 <nav class="nav-container">
-    <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+    <a href="{{ url_for('index') }}" class="logo">FixIt</a>
     <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
         <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
         <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
         <li><a href="{{ url_for('repair_guides') }}">Guides</a></li>
@@ -16,8 +16,8 @@
                 <i class="fas fa-user"></i>
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-user"></i> Profile</a>
-                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profile</a>
+                <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
                 <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </div>

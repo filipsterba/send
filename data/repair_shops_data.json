@@ -1,0 +1,98 @@
+[
+  {
+    "id": "shop1",
+    "name": "TechFix Central",
+    "device_types": ["phone", "tablet", "laptop"],
+    "address": "Hlavná 1, 123 45 Mesto A",
+    "phone": "+421 900 111 222",
+    "website": "https://techfixcentral.example.com",
+    "description": "Rýchle a spoľahlivé opravy mobilov, tabletov a notebookov všetkých značiek."
+  },
+  {
+    "id": "shop2",
+    "name": "PC & Laptop Clinic",
+    "device_types": ["laptop", "desktop", "console"],
+    "address": "Technická 5, 123 45 Mesto B",
+    "phone": "+421 900 333 444",
+    "website": "https://pclaptopclinic.example.com",
+    "description": "Špecializujeme sa na komplexné opravy počítačov, notebookov a herných konzol."
+  },
+  {
+    "id": "shop3",
+    "name": "Mobilný Servis Expres",
+    "device_types": ["phone"],
+    "address": "Rýchla 33, 123 45 Mesto B",
+    "phone": "+421 900 999 000",
+    "website": "https://mobilservisexpres.example.com",
+    "description": "Expresné opravy mobilných telefónov, výmeny displejov a batérií na počkanie."
+  },
+  {
+    "id": "shop4",
+    "name": "Apple Servis Pro",
+    "device_types": ["phone", "tablet", "laptop"],
+    "address": "Jablková 10, 123 45 Mesto F",
+    "phone": "+421 900 888 777",
+    "website": "https://appleservispro.example.com",
+    "description": "Špecializovaný servis pre Apple zariadenia. Originálne diely a záruka na opravu."
+  },
+  {
+    "id": "shop5",
+    "name": "Notebooky.sk",
+    "device_types": ["laptop"],
+    "address": "Elektronická 15, 123 45 Mesto G",
+    "phone": "+421 900 222 333",
+    "website": "https://notebooky.example.com",
+    "description": "Opravy, čistenie a upgrade notebookov všetkých značiek. Rýchle vybavenie a priaznivé ceny."
+  },
+  {
+    "id": "shop6",
+    "name": "Tablet Centrum",
+    "device_types": ["tablet"],
+    "address": "Tabletová 3, 123 45 Mesto H",
+    "phone": "+421 900 444 555",
+    "website": "https://tabletcentrum.example.com",
+    "description": "Opravy tabletov, výmena displejov, batérií a portov. Príjemné ceny a rýchly servis."
+  },
+  {
+    "id": "shop7",
+    "name": "GameZone Repairs",
+    "device_types": ["console"],
+    "address": "Herná 8, 123 45 Mesto E",
+    "phone": "+421 900 654 321",
+    "website": "https://gamezonerepairs.example.com",
+    "description": "Opravy herných konzol PlayStation, Xbox a Nintendo. Diagnostika a čistenie v cene."
+  },
+  {
+    "id": "shop8",
+    "name": "Universal Tech Repairs",
+    "device_types": ["phone", "tablet", "laptop", "desktop", "console", "other"],
+    "address": "Univerzálna 100, 123 45 Mesto Z",
+    "phone": "+421 900 123 321",
+    "website": "https://utechrepairs.example.com",
+    "description": "Opravy všech typů elektronických zařízení. Rychlý servis, nízké ceny."
+  }
+]
+        "name": "Tablet Centrum",
+        "specializations": ["Tablets"],
+        "address": "Tabletová 3, 123 45 Mesto H",
+        "phone": "+421 900 444 555",
+        "website": "https://tabletcentrum.example.com",
+        "description": "Opravy tabletov, výmena displejov, batérií a portov. Príjemné ceny a rýchly servis."
+    },
+    {
+        "name": "HiFi Audio Servis",
+        "specializations": ["Audio Equipment"],
+        "address": "Zvuková 9, 123 45 Mesto I",
+        "phone": "+421 900 666 777",
+        "website": "https://hifiaudioservis.example.com",
+        "description": "Opravy a údržba HiFi systémov, zosilňovačov a reproduktorov. Profesionálny prístup."
+    },
+    {
+        "name": "Konzolový Svet",
+        "specializations": ["Consoles"],
+        "address": "Gamerova 12, 123 45 Mesto J",
+        "phone": "+421 900 111 333",
+        "website": "https://konzolovysvet.example.com",
+        "description": "Rýchle opravy konzol, výmena HDMI portov, čistenie a diagnostika zdarma."
+    }
+]

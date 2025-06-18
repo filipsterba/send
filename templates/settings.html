@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings | FixIt</title>
+    <title>User Settings</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -71,6 +70,8 @@
             justify-content: space-between;
             height: 80px;
             padding: 0 1.5rem;
+            max-width: 1180px;
+            margin: 0 auto;
         }
         .logo {
             font-size: 1.8rem;
@@ -396,33 +397,48 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-bar">
+        <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
             <a href="{{ url_for('home') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
-                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
-                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+                <li><a href="{{ url_for('index') }}">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít servisy</a></li>
+                <li><a href="{{ url_for('about_us') }}">O nás</a></li>
             </ul>
             <div class="nav-right">
                 <button class="toggle-mode" id="themeToggleBtn">
                     <i class="fas fa-moon"></i>
                 </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar }}" alt="Profil" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profil</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Nastavení</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Odhlásit se</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
     <main>
         <div class="container">
             <div class="settings-tabs" id="settingsTabs">
-                <button class="settings-tab active" data-tab="all"><i class="fas fa-cog"></i> Settings</button>
+                <button class="settings-tab active" data-tab="all"><i class="fas fa-cog"></i> Nastavení</button>
             </div>
             <section class="settings-card settings-section" id="tab-all">
                 <!-- Profile Settings -->
-                <h2><i class="fas fa-user"></i> Profile Settings</h2>
-                <form class="settings-form" id="profileForm" autocomplete="off">
+                <h2><i class="fas fa-user"></i> Nastavení profilu</h2>
+                <form class="settings-form" id="profileForm" method="post" action="{{ url_for('update_profile') }}" autocomplete="off">
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatarPreview">
                             {% if user.avatar %}
@@ -432,61 +448,55 @@
         {% endif %}
                         </div>
                         <div>
-                            <label for="avatarInput" style="margin-bottom:0.2rem;">Avatar (optional)</label>
+                            <label for="avatarInput" style="margin-bottom:0.2rem;">Avatar (volitelné)</label>
                             <input type="file" id="avatarInput" accept="image/*" style="margin-bottom:0.2rem;">
                         </div>
                     </div>
-                    <label for="displayName">Display Name</label>
+                    <label for="displayName">Jméno</label>
                     <input type="text" id="displayName" name="displayName" required value="{{ user.username }}">
-                    <label for="email">Email Address</label>
+                    <label for="email">Emailová adresa</label>
                     <input type="email" id="email" name="email" required value="{{ user_email }}" readonly>
-                    <label for="phone">Phone Number</label>
+                    <label for="phone">Telefonní číslo</label>
                     <input type="tel" id="phone" name="phone" pattern="^\+?\d{7,15}$" value="{{ user.phone }}" placeholder="+420123456789">
-                    <button type="submit" class="btn">Save changes</button>
+                    <button type="submit" class="btn">Uložit změny</button>
                 </form>
-                <!-- Theme Switcher -->
-                <div class="settings-form theme-toggle-row" style="margin-top:2rem;">
-                    <label style="font-weight:500;">Theme</label>
-                    <button type="button" id="lightModeBtn" class="theme-toggle-btn"><i class="fas fa-sun"></i> Light</button>
-                    <button type="button" id="darkModeBtn" class="theme-toggle-btn"><i class="fas fa-moon"></i> Dark</button>
-                </div>
                 <!-- Password Change -->
                 <hr style="margin:2rem 0;border:none;border-top:1px solid var(--color-border);">
-                <h2><i class="fas fa-lock"></i> Change Password</h2>
-                <form class="settings-form" id="passwordForm" autocomplete="off">
-                    <label for="oldPassword">Old Password</label>
+                <h2><i class="fas fa-lock"></i> Změna hesla</h2>
+                <form class="settings-form" id="passwordForm" method="post" action="{{ url_for('change_password') }}" autocomplete="off">
+                    <label for="oldPassword">Staré heslo</label>
                     <input type="password" id="oldPassword" name="oldPassword" required>
-                    <label for="newPassword">New Password</label>
+                    <label for="newPassword">Nové heslo</label>
                     <input type="password" id="newPassword" name="newPassword" required minlength="6">
-                    <label for="confirmPassword">Confirm New Password</label>
+                    <label for="confirmPassword">Potvrďte nové heslo</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
-                    <button type="submit" class="btn">Update Password</button>
+                    <button type="submit" class="btn">Aktualizovat heslo</button>
                 </form>
                 <!-- Account Actions -->
                 <hr style="margin:2rem 0;border:none;border-top:1px solid var(--color-border);">
-                <h2><i class="fas fa-user-cog"></i> Account Actions</h2>
+                <h2><i class="fas fa-user-cog"></i> Akce účtu</h2>
                 <form class="settings-form" id="accountForm">
-                    <button type="button" class="btn" id="logoutBtn" style="margin-bottom:1rem;"><i class="fas fa-sign-out-alt"></i> Log out</button>
-                    <button type="button" class="danger-btn" id="deleteAccountBtn"><i class="fas fa-trash"></i> Delete my account</button>
+                    <button type="button" class="btn" id="logoutBtn" style="margin-bottom:1rem;"><i class="fas fa-sign-out-alt"></i> Odhlásit se</button>
+                    <button type="button" class="danger-btn" id="deleteAccountBtn"><i class="fas fa-trash"></i> Smazat můj účet</button>
                 </form>
             </section>
         </div>
         <!-- Delete Account Modal -->
         <div id="deleteModal" style="display:none;position:fixed;z-index:9999;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
             <div style="background:var(--color-card);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 1.5rem;max-width:350px;width:95%;margin:auto;display:flex;flex-direction:column;gap:1rem;">
-                <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;"><i class="fas fa-exclamation-triangle" style="color:#e53935"></i> Confirm Deletion</h2>
-                <div style="color:var(--color-muted);font-size:1rem;margin-bottom:0.5rem;">Are you sure you want to delete your account? This action cannot be undone.</div>
+                <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;"><i class="fas fa-exclamation-triangle" style="color:#e53935"></i> Potvrďte smazání</h2>
+                <div style="color:var(--color-muted);font-size:1rem;margin-bottom:0.5rem;">Opravdu chcete smazat svůj účet? Tato akce je nevratná.</div>
                 <div style="display:flex;gap:1rem;justify-content:flex-end;">
-                    <button type="button" class="btn" id="cancelDeleteBtn" style="background:var(--color-accent);color:#fff;">Cancel</button>
-                    <button type="button" class="danger-btn" id="confirmDeleteBtn">Delete</button>
+                    <button type="button" class="btn" id="cancelDeleteBtn" style="background:var(--color-accent);color:#fff;">Zrušit</button>
+                    <button type="button" class="danger-btn" id="confirmDeleteBtn">Smazat</button>
                 </div>
             </div>
         </div>
     </main>
     <div class="dropdown-menu" id="dropdownMenu">
-        <a href="#"><i class="fas fa-user"></i> Profile</a>
-        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
-        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profil</a>
+        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Nastavení</a>
+        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Odhlásit se</a>
     </div>
     <script>
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
@@ -512,12 +522,29 @@
         document.getElementById('themeToggleBtn').addEventListener('click', function() {
             const html = document.documentElement;
             const icon = this.querySelector('i');
-            html.classList.toggle('light');
-            html.classList.toggle('dark');
+            const isLight = html.classList.contains('light');
+            
+            html.classList.toggle('light', !isLight);
+            html.classList.toggle('dark', isLight);
             icon.classList.toggle('fa-moon');
             icon.classList.toggle('fa-sun');
-            localStorage.setItem('fixit-theme', html.classList.contains('light') ? 'light' : 'dark');
+            localStorage.setItem('theme', isLight ? 'dark' : 'light'); // Saves theme
         });
+        
+        // Load saved theme on page load (this IIFE handles initial load for header button)
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const icon = document.querySelector('#themeToggleBtn i');
+            
+            html.classList.toggle('light', savedTheme === 'light');
+            html.classList.toggle('dark', savedTheme === 'dark');
+            if (icon) {
+                icon.classList.toggle('fa-moon', savedTheme === 'light');
+                icon.classList.toggle('fa-sun', savedTheme === 'dark');
+            }
+        })();
+        
         // Tabs logic (only one tab)
         document.querySelectorAll('.settings-tab').forEach(tab => {
             tab.addEventListener('click', function() {
@@ -553,89 +580,98 @@
             });
             const data = await response.json();
             if (data.success) {
-                showToast('Avatar updated successfully!', 'success');
+                showToast('Avatar byl úspěšně aktualizován!', 'success');
             } else {
-                showToast(data.msg || 'Failed to update avatar', 'error');
+                showToast(data.msg || 'Nepodařilo se aktualizovat avatar', 'error');
             }
         } catch (error) {
             console.error('Error:', error);
-            showToast('Error updating avatar', 'error');
+            showToast('Chyba při aktualizaci avataru', 'error');
         }
     }
 });
         // Profile form validation & AJAX
         document.getElementById('profileForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const formData = {
-                displayName: document.getElementById('displayName').value,
-                phone: document.getElementById('phone').value
-            };
+            const displayName = document.getElementById('displayName').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!displayName) {
+                alert('Jméno je povinné');
+                return;
+            }
 
             try {
-                const response = await fetch("{{ url_for('update_profile') }}", {
+                const formData = new FormData();
+                formData.append('displayName', displayName);
+                formData.append('phone', phone);
+
+                const response = await fetch('/update_profile', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                    body: formData
                 });
 
                 const data = await response.json();
                 if (data.success) {
-                    alert('Profile updated successfully!');
+                    alert('Profil byl úspěšně aktualizován!');
                 } else {
-                    alert(data.msg || 'Failed to update profile');
+                    alert(data.message || 'Nepodařilo se aktualizovat profil');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error updating profile');
+                alert('Chyba při aktualizaci profilu');
             }
         });
 
         document.getElementById('passwordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const formData = {
-                oldPassword: document.getElementById('oldPassword').value,
-                newPassword: document.getElementById('newPassword').value
-            };
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
 
-            if (formData.newPassword !== document.getElementById('confirmPassword').value) {
-                alert('Passwords do not match');
+            if (!oldPassword || !newPassword || !confirmPassword) {
+                alert('Všechna pole jsou povinná');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('Hesla se neshodují');
                 return;
             }
 
             try {
-                const response = await fetch("{{ url_for('change_password') }}", {
+                const formData = new FormData();
+                formData.append('oldPassword', oldPassword);
+                formData.append('newPassword', newPassword);
+
+                const response = await fetch('/change_password', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
+                    body: formData
                 });
 
                 const data = await response.json();
                 if (data.success) {
-                    alert('Password updated successfully!');
+                    alert('Heslo bylo úspěšně aktualizováno!');
                     this.reset();
                 } else {
-                    alert(data.msg || 'Failed to update password');
+                    alert(data.message || 'Nepodařilo se aktualizovat heslo');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error updating password');
+                alert('Chyba při aktualizaci hesla');
             }
         });
         // Notifications form
         document.getElementById('notificationsForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            showToast('Notification preferences saved!', 'success');
+            showToast('Uložení preferencí notifikací bylo úspěšné!', 'success');
         });
         // Language form
         document.getElementById('languageForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            showToast('Language & region saved!', 'success');
+            showToast('Uložení jazyka a regionu bylo úspěšné!', 'success');
         });
-        // Theme tab logic
+        // Theme toggle with localStorage consistency (for settings page internal buttons)
         function setTheme(theme) {
             const html = document.documentElement;
             if (theme === 'light') {
@@ -645,35 +681,55 @@
                 html.classList.add('dark');
                 html.classList.remove('light');
             }
-            localStorage.setItem('fixit-theme', theme);
-            updateThemeButtons();
-            // Save theme to server (AJAX)
-            fetch("{{ url_for('update_profile') }}", {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({theme: theme})
-            }).catch(() => {});
+            localStorage.setItem('theme', theme); // Saves theme
+            updateThemeButtons(); // Updates buttons on settings page
+            updateHeaderThemeIcon(); // Updates header icon
         }
         function updateThemeButtons() {
             const html = document.documentElement;
-            document.getElementById('lightModeBtn').classList.toggle('active', html.classList.contains('light'));
-            document.getElementById('darkModeBtn').classList.toggle('active', html.classList.contains('dark'));
+            const lightModeBtn = document.getElementById('lightModeBtn');
+            const darkModeBtn = document.getElementById('darkModeBtn');
+            if (lightModeBtn) lightModeBtn.classList.toggle('active', html.classList.contains('light'));
+            if (darkModeBtn) darkModeBtn.classList.toggle('active', html.classList.contains('dark'));
         }
-        document.getElementById('lightModeBtn').addEventListener('click', function() {
-            setTheme('light');
-        });
-        document.getElementById('darkModeBtn').addEventListener('click', function() {
-            setTheme('dark');
-        });
-        // Load theme from localStorage on page load
+        function updateHeaderThemeIcon() {
+            const headerIcon = document.querySelector('#themeToggleBtn i');
+            if (headerIcon) {
+                const isLight = document.documentElement.classList.contains('light');
+                headerIcon.classList.toggle('fa-moon', isLight);
+                headerIcon.classList.toggle('fa-sun', !isLight);
+            }
+        }
+        const lightModeBtn = document.getElementById('lightModeBtn');
+        const darkModeBtn = document.getElementById('darkModeBtn');
+
+        if (lightModeBtn) {
+            lightModeBtn.addEventListener('click', function() {
+                setTheme('light');
+            });
+        }
+        if (darkModeBtn) {
+            darkModeBtn.addEventListener('click', function() {
+                setTheme('dark');
+            });
+        }
+        
+        // Load theme from localStorage on page load and apply to settings buttons
         (function() {
-            const theme = localStorage.getItem('fixit-theme');
-            if (theme) setTheme(theme);
-            else updateThemeButtons();
+            const theme = localStorage.getItem('theme') || 'light';
+            setTheme(theme); // This ensures settings page buttons and header icon are synced on load
         })();
         // Account actions
         document.getElementById('logoutBtn').addEventListener('click', function() {
-            window.location.href = "{{ url_for('logout') }}";
+            // Změna - přidání fetch požadavku s redirect
+            fetch('/logout')
+                .then(() => {
+                    window.location.href = "/";  // Redirect na hlavní stránku
+                })
+                .catch(err => {
+                    console.error("Logout error:", err);
+                    window.location.href = "/"; // Pokus o redirect i při chybě
+                });
         });
         // Delete account modal
         const deleteModal = document.getElementById('deleteModal');
@@ -685,7 +741,7 @@
         });
         document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
             deleteModal.style.display = 'none';
-            showToast('Account deleted!', 'success');
+            showToast('Účet byl smazán!', 'success');
             // window.location.href = 'signup.html';
         });
         // Toast
@@ -698,4 +754,5 @@
         }
     </script>
 </body>
+</html>
 </html>

@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "TechFix Pro",
+        "address": "Václavské náměstí 123, Praha 1",
+        "rating": 4.8,
+        "reviews_count": 124,
+        "phone": "+420 123 456 789",
+        "supported_devices": ["phone", "tablet", "laptop"],
+        "image": "techfix.jpg",
+        "description": "Profesionální servis s certifikovanými techniky pro opravy mobilů, tabletů a laptopů.",
+        "specialties": ["výměna displeje", "opravy po vodě", "obnova dat"]
+    },
+    {
+        "id": 2,
+        "name": "Mobile Masters",
+        "address": "Havlíčkova 456, Praha 2",
+        "rating": 4.6,
+        "reviews_count": 98,
+        "phone": "+420 234 567 890",
+        "supported_devices": ["phone", "tablet"],
+        "image": "mobilemasters.jpg",
+        "description": "Specializujeme se na rychlé opravy mobilních telefonů a tabletů všech značek.",
+        "specialties": ["výměna baterie", "opravy displeje", "softwarové problémy"]
+    },
+    {
+        "id": 3,
+        "name": "Laptop Clinic",
+        "address": "Můstek 789, Praha 1",
+        "rating": 4.9,
+        "reviews_count": 215,
+        "phone": "+420 345 678 901",
+        "supported_devices": ["laptop", "desktop"],
+        "image": "laptopClinic.jpg",
+        "description": "Experti na všechny typy oprav notebooků a stolních počítačů.",
+        "specialties": ["upgrade hardwaru", "odvirování", "opravy základní desky"]
+    },
+    {
+        "id": 4,
+        "name": "Game Console Repair",
+        "address": "Národní 101, Praha 1",
+        "rating": 4.7,
+        "reviews_count": 78,
+        "phone": "+420 456 789 012",
+        "supported_devices": ["console", "gaming_pc"],
+        "image": "gameConsoleRepair.jpg",
+        "description": "Specializovaný servis na všechny typy herních zařízení a konzolí.",
+        "specialties": ["opravy ovladačů", "problémy s mechanikou disků", "přehřívání"]
+    },
+    {
+        "id": 5,
+        "name": "iOpravna",
+        "address": "Jindřišská 42, Praha 1",
+        "rating": 4.5,
+        "reviews_count": 156,
+        "phone": "+420 567 890 123",
+        "supported_devices": ["phone", "tablet", "laptop"],
+        "image": "iopravna.jpg",
+        "description": "Specializujeme se na opravy zařízení Apple a poskytujeme expresní servis.",
+        "specialties": ["opravy iPhone", "výměna displeje iPad", "opravy MacBook"]
+    },
+    {
+        "id": 6,
+        "name": "PC Doctor",
+        "address": "Karlovo náměstí 555, Praha 2",
+        "rating": 4.4,
+        "reviews_count": 89,
+        "phone": "+420 678 901 234",
+        "supported_devices": ["laptop", "desktop", "server"],
+        "image": "pcdoctor.jpg",
+        "description": "Komplexní řešení problémů s počítači a servery pro firmy i jednotlivce.",
+        "specialties": ["záchrana dat", "konfigurace serverů", "síťová řešení"]
+    },
+    {
+        "id": 7,
+        "name": "Opravme.to",
+        "address": "Pařížská 77, Praha 1",
+        "rating": 4.9,
+        "reviews_count": 203,
+        "phone": "+420 789 012 345",
+        "supported_devices": ["phone", "tablet", "laptop", "console", "smartwatch"],
+        "image": "opravmeto.jpg",
+        "description": "Opravíme jakoukoliv elektroniku s garancí kvality a rychlého servisu.",
+        "specialties": ["expresní opravy", "vyzvednutí zařízení", "prodloužená záruka"]
+    },
+    {
+        "id": 8,
+        "name": "SmartWatch Servis",
+        "address": "Na Příkopě 333, Praha 1",
+        "rating": 4.6,
+        "reviews_count": 67,
+        "phone": "+420 890 123 456",
+        "supported_devices": ["smartwatch", "fitness_tracker"],
+        "image": "smartwatchservis.jpg",
+        "description": "Specializovaný servis pro chytré hodinky a fitness náramky všech značek.",
+        "specialties": ["výměna displeje", "výměna baterie", "opravy vodotěsnosti"]
+    }
+]

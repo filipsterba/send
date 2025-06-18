@@ -66,6 +66,16 @@
             transition: all 0.3s ease;
         }
 
+        .header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 1.5rem;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -81,6 +91,7 @@
             font-weight: 700;
             color: var(--color-primary);
             text-decoration: none;
+            margin-right: 24px;
         }
 
         .nav-links {
@@ -103,7 +114,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 20px;
         }
 
         .toggle-mode {
@@ -112,22 +123,7 @@
             border: none;
             cursor: pointer;
             color: var(--color-text); /* Ensure toggle button matches theme */
-        }
-
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--color-primary);
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle.active::before {
-            transform: translateX(24px);
+            margin-right: 0;
         }
 
         .profile-dropdown {
@@ -146,6 +142,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            padding: 0;
         }
 
         .dropdown-menu {
@@ -606,6 +603,9 @@
     max-width: 500px;
     margin: 0 auto; 
     background: var(--color-card);
+    border-radius: 
+    margin: 0 auto; 
+    background: var(--color-card);
     border-radius: var(--radius);
     padding: 3rem;
     box-shadow: var(--shadow);
@@ -733,4 +733,33 @@
     font-size: 0.9rem;
     margin-top: 0.5rem;
     text-align: center;
+}
+
+/* Alert styles for flash messages */
+.alert {
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alert-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #E74C3C;
+    border-left: 4px solid #E74C3C;
+}
+
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ECC71;
+    border-left: 4px solid #2ECC71;
+}
+
+.alert-info {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498DB;
+    border-left: 4px solid #3498DB;
 }

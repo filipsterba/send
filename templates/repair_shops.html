@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Repair Shops | FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- ... header content ... -->
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 class="page-title">Available Repair Shops for {{ device_type|capitalize }}</h1>
+            
+            <div class="shop-grid">
+                {% if shops %}
+                    {% for shop in shops %}
+                        <div class="shop-card">
+                            <div class="shop-img">
+                                <img src="{{ url_for('static', filename='images/' + shop.image) }}" alt="{{ shop.name }}">
+                            </div>
+                            <div class="shop-details">
+                                <h2 class="shop-name">{{ shop.name }}</h2>
+                                <p class="shop-address"><i class="fas fa-map-marker-alt"></i> {{ shop.address }}</p>
+                                <div class="shop-rating">
+                                    <span class="stars">
+                                        {% for i in range(5) %}
+                                            {% if i < shop.rating|int %}
+                                                <i class="fas fa-star"></i>
+                                            {% elif (i + 0.5)|round == shop.rating|round %}
+                                                <i class="fas fa-star-half-alt"></i>
+                                            {% else %}
+                                                <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    <span class="rating-value">{{ shop.rating }}</span>
+                                    <span class="review-count">({{ shop.reviews_count }} reviews)</span>
+                                </div>
+                                <p class="shop-desc">{{ shop.description }}</p>
+                                <div class="shop-specialties">
+                                    {% for specialty in shop.specialties %}
+                                        <span class="specialty-tag">{{ specialty }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="shop-actions">
+                                <a href="{{ url_for('select_shop', shop_id=shop.id) }}" class="btn-primary">Select this shop</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-store-slash"></i>
+                        <p>No repair shops are currently available for {{ device_type|capitalize }} devices.</p>
+                        <a href="{{ url_for('submit') }}" class="btn-primary">Choose Different Device Type</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <!-- ... footer content ... -->
+    </footer>
+    
+    <script>
+        // JavaScript code for interactivity
+    </script>
+</body>
+</html>

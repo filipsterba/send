@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="cs" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Repair Request | FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root.light {
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border: #E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon: #00C08B;
+            --color-primary: #FF7849;
+            --color-accent: #2D3E50;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
+        }
+        
+        :root {
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #FF7849;
+            --color-btn-hover: #E66A40;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border: #474545;
+            --color-primary: #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon: #00C08B;
+            --radius: 16px;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        
+        body {
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        header {
+            background: var(--bg-accent);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            padding: 0 1.5rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .profile-dropdown {
+            position: relative;
+        }
+
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            min-width: 150px;
+            display: none;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--color-primary);
+        }
+        
+        /* Page Layout */
+        .page-header {
+            margin: 2.5rem 0 1.5rem 0;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-muted);
+        }
+        
+        /* Form Styles */
+        .repair-form {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .form-section {
+            margin-bottom: 2.2rem;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        
+        .form-section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1.2rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            font-size: 1rem;
+            transition: border var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(255, 120, 73, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-help {
+            color: var(--color-muted);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--radius);
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--color-primary) 60%, var(--color-accent) 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 120, 73, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-primary) 100%);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--color-text);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-border);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        /* Photo Upload */
+        .photo-upload {
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color var(--transition-speed) ease;
+        }
+        
+        .photo-upload:hover {
+            border-color: var(--color-primary);
+        }
+        
+        .photo-upload-icon {
+            font-size: 2.5rem;
+            color: var(--color-muted);
+            margin-bottom: 0.8rem;
+        }
+        
+        .photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+        }
+        
+        .success-message {
+            color: var(--color-progress);
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+        }
+        
+        /* Alerts */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: rgba(0, 192, 139, 0.2);
+            color: #00C08B;
+        }
+        
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+        }
+        
+        .alert-danger {
+            background: rgba(231, 76, 60, 0.2);
+            color: #E74C3C;
+        }
+        
+        /* Shop Selection */
+        .shop-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .shop-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+        
+        .shop-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .shop-card.selected {
+            border-color: var(--color-primary);
+        }
+        
+        .shop-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .shop-address, .shop-phone {
+            font-size: 0.9rem;
+            color: var(--color-muted);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* File input styling */
+        .file-input-container {
+            position: relative;
+        }
+        
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
+            <a href="{{ url_for('index') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('price_list') }}">Price List</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Find Repair Shops</a></li>
+                <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
+                        <!-- Fix avatar display to handle both string and dictionary user formats -->
+                        {% if user is mapping %}
+                            <img src="{{ user.avatar }}" alt="Profile" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- Flash messages display section -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <!-- Page Title -->
+            <div class="page-header">
+                <h1 class="page-title">Submit Repair Request</h1>
+                <div class="page-subtitle">Tell us about your device and the issue you're experiencing</div>
+            </div>
+            
+            <!-- Repair Form -->
+            <form class="repair-form" id="repairForm" method="POST" action="{{ url_for('submit_repair') }}" enctype="multipart/form-data">
+                <!-- Device Information -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Device Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="deviceType">Device Type <span style="color: var(--color-primary);">*</span></label>
+                            <select class="form-control" id="deviceType" name="deviceType" required>
+                                <option value="">Select Device Type</option>
+                                <option value="phone" {% if form_data and form_data.device_type == 'phone' %}selected{% endif %}>Phone</option>
+                                <option value="laptop" {% if form_data and form_data.device_type == 'laptop' %}selected{% endif %}>Laptop</option>
+                                <option value="tablet" {% if form_data and form_data.device_type == 'tablet' %}selected{% endif %}>Tablet</option>
+                                <option value="desktop" {% if form_data and form_data.device_type == 'desktop' %}selected{% endif %}>Desktop</option>
+                                <option value="console" {% if form_data and form_data.device_type == 'console' %}selected{% endif %}>Gaming Console</option>
+                                <option value="other" {% if form_data and form_data.device_type == 'other' %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="brand">Brand <span style="color: var(--color-primary);">*</span></label>
+                            <input type="text" class="form-control" id="brand" name="brand" placeholder="e.g. Apple, Samsung, Dell" required value="{{ form_data.brand if form_data }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="model">Model <span style="color: var(--color-primary);">*</span></label>
+                        <input type="text" class="form-control" id="model" name="model" placeholder="e.g. iPhone 13, Galaxy S21" required value="{{ form_data.model if form_data }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="issue">Describe the Issue <span style="color: var(--color-primary);">*</span></label>
+                        <textarea class="form-control" id="issue" name="issue" placeholder="Please describe the problem in detail" required>{{ form_data.issue if form_data }}</textarea>
+                        <div class="form-help">The more details you provide, the better we can diagnose the problem</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Upload a Photo (Optional)</label>
+                        <div class="photo-upload" id="photoUploadArea">
+                            <div class="file-input-container">
+                                <input type="file" name="photo" id="photoInput" class="file-input" accept="image/*">
+                                <div class="photo-upload-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div>Click or drag to upload a photo of the device/issue</div>
+                            </div>
+                            <img id="photoPreview" class="photo-preview" alt="Photo preview">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Contact Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="full_name">Full Name <span style="color: var(--color-primary);">*</span></label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Your full name" 
+                                value="{{ form_data.full_name if form_data else user.username if user }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email <span style="color: var(--color-primary);">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Your email address" 
+                                value="{{ form_data.email if form_data else session.user if session.user }}" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number <span style="color: var(--color-primary);">*</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your phone number" 
+                                value="{{ form_data.phone if form_data else user.phone if user and user.phone }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Your street address"
+                                value="{{ form_data.address if form_data }}">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Your city"
+                                value="{{ form_data.city if form_data }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="zip_code">ZIP Code</label>
+                            <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Your ZIP code"
+                                value="{{ form_data.zip_code if form_data }}">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pickup Schedule -->
+                <div class="form-section">
+                    <h2 class="form-section-title">Pickup Schedule</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="pickupDate">Preferred Pickup Date</label>
+                            <input type="date" class="form-control" id="pickupDate" name="pickupDate" 
+                                min="{{ now.strftime('%Y-%m-%d') }}"
+                                value="{{ form_data.pickupDate if form_data }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="pickupTime">Preferred Pickup Time</label>
+                            <select class="form-control" id="pickupTime" name="pickupTime">
+                                <option value="">Select Time</option>
+                                <option value="morning" {% if form_data and form_data.pickupTime == 'morning' %}selected{% endif %}>Morning (9:00 - 12:00)</option>
+                                <option value="afternoon" {% if form_data and form_data.pickupTime == 'afternoon' %}selected{% endif %}>Afternoon (12:00 - 15:00)</option>
+                                <option value="evening" {% if form_data and form_data.pickupTime == 'evening' %}selected{% endif %}>Evening (15:00 - 18:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Získání dat o opravnách z Jinja template do JavaScriptu
+            const repairShops = {{ repair_shops | tojson }};
+            
+            // Toggle dropdown
+            window.toggleDropdown = function() {
+                const dropdown = document.getElementById('dropdownMenu');
+                if (dropdown) dropdown.classList.toggle('active');
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const navLinks = document.getElementById('navLinks');
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Theme toggle
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            if (themeToggleBtn) {
+                const icon = themeToggleBtn.querySelector('i');
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.toggle('light', savedTheme === 'light');
+                
+                if (savedTheme === 'light') {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+                
+                themeToggleBtn.addEventListener('click', function() {
+                    const isLight = document.documentElement.classList.toggle('light');
+                    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                    
+                    if (isLight) {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    } else {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                });
+            }
+            
+            // File input preview
+            const photoInput = document.getElementById('photoInput');
+            const photoPreview = document.getElementById('photoPreview');
+            
+            if (photoInput) {
+                photoInput.addEventListener('change', function(e) {
+                    if (e.target.files.length > 0) {
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            photoPreview.src = e.target.result;
+                            photoPreview.style.display = 'block';
+                        }
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            // Funkce pro filtrování opraven podle typu zařízení
+            function filterShopsByDeviceType(deviceType) {
+                // Pokud není vybrán žádný typ zařízení, zobrazujeme všechny opravny
+                if (!deviceType) {
+                    return repairShops;
+                }
+                
+                // Filtrujeme opravny podle vybraného typu zařízení
+                return repairShops.filter(shop => {
+                    return shop.device_types && shop.device_types.includes(deviceType);
+                });
+            }
+            
+            // Funkce pro aktualizaci select boxu s opravnami
+            function updateRepairShopOptions(deviceType) {
+                const repairShopSelect = document.getElementById('repair_shop');
+                const shopCardsContainer = document.getElementById('shopCardsContainer');
+                
+                // Vyčistíme současné možnosti
+                repairShopSelect.innerHTML = '<option value="">-- Please select a repair shop --</option>';
+                shopCardsContainer.innerHTML = '';
+                
+                // Filtrujeme opravny podle typu zařízení
+                const filteredShops = filterShopsByDeviceType(deviceType);
+                
+                // Pokud nejsou žádné opravny pro vybraný typ zařízení
+                if (filteredShops.length === 0) {
+                    repairShopSelect.innerHTML += '<option value="" disabled>No repair shops available for this device type</option>';
+                    shopCardsContainer.innerHTML = '<p>No repair shops are currently available for this device type. Please choose a different device type or contact us directly.</p>';
+                    return;
+                }
+                
+                // Přidáme nové možnosti do selectu a vytvoříme shop cards
+                filteredShops.forEach(shop => {
+                    // Přidání do selectu
+                    const option = document.createElement('option');
+                    option.value = shop.id;
+                    option.textContent = shop.name;
+                    repairShopSelect.appendChild(option);
+                    
+                    // Vytvoření shop card
+                    const shopCard = document.createElement('div');
+                    shopCard.classList.add('shop-card');
+                    shopCard.dataset.shopId = shop.id;
+                    shopCard.innerHTML = `
+                        <div class="shop-name">${shop.name}</div>
+                        <div class="shop-address">${shop.address || 'Address not available'}</div>
+                        <div class="shop-phone">${shop.phone || 'Phone not available'}</div>
+                    `;
+                    shopCardsContainer.appendChild(shopCard);
+                    
+                    // Event listener pro kliknutí na shop card
+                    shopCard.addEventListener('click', function() {
+                        // Odznačení všech shop cards
+                        document.querySelectorAll('.shop-card').forEach(card => {
+                            card.classList.remove('selected');
+                        });
+                        
+                        // Označení vybrané shop card
+                        this.classList.add('selected');
+                        
+                        // Aktualizace hodnoty v selectu
+                        repairShopSelect.value = shop.id;
+                    });
+                });
+            }
+            
+            // Event listener pro změnu typu zařízení
+            const deviceTypeSelect = document.getElementById('deviceType');
+            if (deviceTypeSelect) {
+                deviceTypeSelect.addEventListener('change', function() {
+                    const selectedDeviceType = this.value;
+                    updateRepairShopOptions(selectedDeviceType);
+                });
+            }
+            
+            // Event listener pro změnu vybrané opravny v selectu
+            const repairShopSelect = document.getElementById('repair_shop');
+            if (repairShopSelect) {
+                repairShopSelect.addEventListener('change', function() {
+                    const selectedShopId = this.value;
+                    
+                    // Odznačení všech shop cards
+                    document.querySelectorAll('.shop-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                    
+                    // Označení vybrané shop card
+                    if (selectedShopId) {
+                        const selectedCard = document.querySelector(`.shop-card[data-shop-id="${selectedShopId}"]`);
+                        if (selectedCard) {
+                            selectedCard.classList.add('selected');
+                            // Scrollování na vybranou kartu
+                            selectedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+            }
+            
+            // Form validation
+            const repairForm = document.getElementById('repairForm');
+            
+            if (repairForm) {
+                repairForm.addEventListener('submit', function(e) {
+                    let isValid = true;
+                    const requiredFields = repairForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.classList.add('is-invalid');
+                        } else {
+                            field.classList.remove('is-invalid');
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        e.preventDefault();
+                        alert('Please fill in all required fields');
+                    }
+                });
+            }
+            
+            // Inicializace - při načtení stránky
+            // Pokud je již vybrán typ zařízení (např. po refresh nebo chybě ve formuláři)
+            if (deviceTypeSelect && deviceTypeSelect.value) {
+                updateRepairShopOptions(deviceTypeSelect.value);
+            }
+        });
+    </script>
+</body>
+</html>

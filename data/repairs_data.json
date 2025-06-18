@@ -1,0 +1,278 @@
+[
+  {
+    "id": "REP1653289035000",
+    "user_id": "user_123",
+    "status": "pending",
+    "status_key": "pending",
+    "progress_width": 10,
+    "device_info": {
+      "type": "phone",
+      "brand": "Samsung",
+      "model": "Galaxy S21",
+      "issue_description": "Broken screen"
+    },
+    "user_info": {
+      "full_name": "John Doe",
+      "email": "john@example.com",
+      "phone": "+1234567890",
+      "address": "123 Main Street",
+      "city": "Prague",
+      "zip_code": "10000"
+    },
+    "shop_info": {
+      "id": "shop_1",
+      "name": "Prague Phone Repair",
+      "address": "Wenceslas Square 15, Prague 1",
+      "phone": "+420 123 456 789"
+    },
+    "dates": {
+      "submitted": "2023-05-23",
+      "pickup": "2023-05-25",
+      "pickup_time": "10:00",
+      "estimated_completion": "2023-05-27"
+    },
+    "timeline_events": [
+      {
+        "text": "Repair request submitted (2023-05-23)",
+        "date": "2023-05-23",
+        "completed": true
+      },
+      {
+        "text": "Waiting for device pickup",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Device received by repair shop",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Diagnostics completed",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair in progress",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair completed",
+        "date": "",
+        "completed": false
+      }
+    ],
+    "price": "",
+    "device_icon_class": "fa-mobile-alt",
+    "status_display": "Pending Pickup",
+    "eta": "Estimated pickup: 2023-05-25"
+  },
+  {
+    "id": "REP1750099852957",
+    "user_id": "guest",
+    "status": "pending",
+    "status_key": "pending",
+    "progress_width": 10,
+    "device_info": {
+      "type": "phone",
+      "brand": "apple",
+      "model": "iphone 15",
+      "issue_description": "battery change"
+    },
+    "user_info": {
+      "full_name": "",
+      "email": "negr@gmail.com",
+      "phone": "phone",
+      "address": "gay street 69",
+      "city": "asdf",
+      "zip_code": ""
+    },
+    "shop_info": {
+      "id": "shop_1",
+      "name": "Prague Phone Repair",
+      "address": "Wenceslas Square 15, Prague 1",
+      "phone": "+420 123 456 789"
+    },
+    "dates": {
+      "submitted": "2025-06-16",
+      "pickup": "2025-06-19",
+      "pickup_time": "21:51",
+      "estimated_completion": "2025-06-19"
+    },
+    "timeline_events": [
+      {
+        "text": "Repair request submitted (2025-06-16)",
+        "date": "2025-06-16",
+        "completed": true
+      },
+      {
+        "text": "Waiting for device pickup",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Device received by repair shop",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Diagnostics completed",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair in progress",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair completed",
+        "date": "",
+        "completed": false
+      }
+    ],
+    "price": "",
+    "device_icon_class": "fa-mobile-alt",
+    "status_display": "Pending Pickup",
+    "eta": "Estimated pickup: 2025-06-19"
+  },
+  {
+    "id": "REP1750261506754",
+    "user_id": "neco@gmail.com",
+    "status": "pending",
+    "status_key": "pending",
+    "progress_width": 10,
+    "device_info": {
+      "type": "tablet",
+      "brand": "apple",
+      "model": "iphone 15",
+      "issue_description": "broken screen"
+    },
+    "user_info": {
+      "full_name": "this",
+      "email": "neco@gmail.com",
+      "phone": "+420 732375043",
+      "address": "gay street 69",
+      "city": "Dětmarovice",
+      "zip_code": "73571"
+    },
+    "shop_info": {
+      "id": "shop1",
+      "name": "FixIt Central",
+      "address": "123 Main Street, New York",
+      "phone": "+1 (212) 555-1234"
+    },
+    "dates": {
+      "submitted": "2025-06-18",
+      "pickup": "2025-06-27",
+      "pickup_time": "afternoon",
+      "estimated_completion": "2025-06-24"
+    },
+    "timeline_events": [
+      {
+        "text": "Repair request submitted (2025-06-18)",
+        "date": "2025-06-18",
+        "completed": true
+      },
+      {
+        "text": "Waiting for device pickup",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Device received by repair shop",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Diagnostics completed",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair in progress",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair completed",
+        "date": "",
+        "completed": false
+      }
+    ],
+    "price": "To be determined",
+    "device_icon_class": "fa-tablet-alt",
+    "status_display": "Pending Pickup",
+    "eta": "Estimated pickup: 2025-06-27"
+  },
+  {
+    "id": "REP1750271884489",
+    "user_id": "neco@gmail.com",
+    "status": "pending",
+    "status_key": "pending",
+    "progress_width": 10,
+    "device_info": {
+      "type": "laptop",
+      "brand": "apple",
+      "model": "iphone 13",
+      "issue_description": "broken neo"
+    },
+    "user_info": {
+      "full_name": "this",
+      "email": "neco@gmail.com",
+      "phone": "+420 732375043",
+      "address": "gay street 69",
+      "city": "Dětmarovice",
+      "zip_code": "73571"
+    },
+    "shop_info": {
+      "id": "6",
+      "name": "PC Doctor",
+      "address": "Karlovo náměstí 555, Praha 2",
+      "phone": "+420 678 901 234"
+    },
+    "dates": {
+      "submitted": "2025-06-18",
+      "pickup": "2025-06-27",
+      "pickup_time": "afternoon",
+      "estimated_completion": "2025-06-25"
+    },
+    "timeline_events": [
+      {
+        "text": "Repair request submitted (2025-06-18)",
+        "date": "2025-06-18",
+        "completed": true
+      },
+      {
+        "text": "Waiting for device pickup",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Device received by repair shop",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Diagnostics completed",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair in progress",
+        "date": "",
+        "completed": false
+      },
+      {
+        "text": "Repair completed",
+        "date": "",
+        "completed": false
+      }
+    ],
+    "price": "To be determined",
+    "device_icon_class": "fa-laptop",
+    "status_display": "Pending Pickup",
+    "eta": "Estimated pickup: 2025-06-27"
+  }
+]

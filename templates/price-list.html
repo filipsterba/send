@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="cs" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price List</title>
+    <title>Ceník | FixIt</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -19,68 +19,83 @@
             --color-text: #1C1C1E;
             --color-muted: #6B6B6D;
             --color-white: #FFFFFF;
-            --color-border:#E4DAD1;
+            --color-border: #E4DAD1;
             --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
             --radius: 16px;
-            --color-icon:       #00C08B;
-            --color-icon-devices:       #1C1C1E;
-            --color-primary:    #FF7849;
-            --color-accent:     #2D3E50;
+            --color-icon: #00C08B;
+            --color-primary: #FF7849;
+            --color-accent: #2D3E50;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
         }
         :root {
             --bg-primary: #0B0F1C;
             --bg-secondary: #1E2639;
             --bg-accent: #2C3E50;
-            --color-btn: #2C3E50;
-            --color-btn-hover: #0B0F1C;
-            --color-login-btn: #2C3E50;
-            --color-login-btn-hover: #0B0F1C;
+            --color-btn: #FF7849;
+            --color-btn-hover: #E66A40;
             --color-card: #2C3E50;
             --color-text: #F4F4F4;
             --color-muted: #AAB0BC;
             --color-white: #FFFFFF;
-            --color-border:#474545;
-            --color-primary:    #FF7849;
+            --color-border: #474545;
+            --color-primary: #FF7849;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --color-icon:       #00C08B;
-            --color-icon-devices:       #00C08B;
+            --color-icon: #00C08B;
             --radius: 16px;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
         }
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
-        body {
+        html, body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg-secondary);
             color: var(--color-text);
-            line-height: 1.6;
-            transition: all 0.3s ease;
+            min-height: 100vh;
         }
-        .header {
+        body {
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        header {
             background: var(--bg-accent);
-            color: var(--color-text);
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: all 0.3s ease;
         }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .header-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 80px;
+            padding: 0 1.5rem;
+            max-width: 1180px;
+            margin: 0 auto;
         }
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--color-primary);
             text-decoration: none;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
         }
         .nav-links {
             display: flex;
@@ -107,20 +122,6 @@
             border: none;
             cursor: pointer;
             color: var(--color-text);
-        }
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--color-primary);
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
-        }
-        .theme-toggle.active::before {
-            transform: translateX(24px);
         }
         .profile-dropdown {
             position: relative;
@@ -162,14 +163,356 @@
         .dropdown-menu a:hover {
             color: var(--color-primary);
         }
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
+        
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(120deg, var(--color-primary) 0%, var(--bg-secondary) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Pricing Tabs */
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 40px 0 30px;
+        }
+        .pricing-tab {
+            background: var(--color-card);
             color: var(--color-text);
-            font-size: 24px;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
             cursor: pointer;
-            padding: 8px;
+            transition: all 0.3s ease;
+        }
+        .pricing-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        .pricing-tab.active {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        /* Price Cards */
+        .pricing-container {
+            margin-bottom: 60px;
+        }
+        .pricing-category {
+            margin-bottom: 50px;
+            display: none;
+        }
+        .pricing-category.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .category-title {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .price-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 25px;
+        }
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .service-name {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--color-text);
+            font-weight: 600;
+        }
+        .service-description {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--color-border);
+            padding-top: 15px;
+        }
+        .service-time {
+            display: flex;
+            align-items: center;
+        }
+        .service-time i {
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+        .service-warranty {
+            display: flex;
+            align-items: center;
+        }
+        .service-warranty i {
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+        .service-cta {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .service-btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .service-btn:hover {
+            background: var(--color-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,120,73,0.2);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-primary);
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+        .section-title {
+            color: var(--color-primary);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .section-subtitle {
+            color: var(--color-muted);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--color-muted);
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 1000px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--color-muted);
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 30px;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .cta-btn i {
+            margin-left: 10px;
+        }
+        .cta-btn:hover {
+            background: var(--color-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,120,73,0.2);
+        }
+        .cta-btn.secondary {
+            background: var(--bg-accent);
+            color: var(--color-text);
+        }
+        .cta-btn.secondary:hover {
+            background: var(--bg-secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1A202C;
+            color: var(--color-white);
+            padding: 80px 0 32px;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            display: grid;
+            padding-left: 7%;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-grid p {
+            color: var(--color-white);
+        }
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+        .footer-brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        .footer-link-list {
+            list-style: none;
+        }
+        .footer-link-list li {
+            margin-bottom: 16px;
+        }
+        .footer-link-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-link-list a:hover {
+            color: var(--color-white);
+        }
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            background-color: var(--color-btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        .footer-bottom a:hover {
+            color: var(--color-white);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .social-link {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+            }
         }
         @media (max-width: 768px) {
             .mobile-menu-btn {
@@ -207,366 +550,10 @@
                 border-radius: var(--radius);
             }
         }
-        /* ...existing code... */
-        .price-main {
-            max-width: 1100px;
-            margin: 0 auto 3rem auto;
-            padding: 2.5rem 1rem 0 1rem;
-        }
-        .tabs {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-            background: var(--color-card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 1.2rem 0.5rem;
-            position: sticky;
-            top: 90px;
-            z-index: 10;
-        }
-        .tab-btn {
-            background: var(--color-card);
-            color: var(--color-text);
-            border: none;
-            border-radius: var(--radius);
-            padding: 0.8rem 2.2rem;
-            font-size: 1.12rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: none;
-            transition: background 0.4s, color 0.2s, transform 0.2s;
-            outline: none;
-            position: relative;
-            min-width: 120px;
-        }
-        .tab-btn.active, .tab-btn:hover {
-            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-            color: #fff;
-            transform: translateY(-4px) scale(1.06);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        }
-        .tab-btn:focus-visible {
-            outline: 2px solid var(--color-primary);
-        }
-        .price-cards-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-        .price-card-group {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-            min-height: 420px;
-            /* Animation for switching */
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
-        .price-card {
-            background: var(--color-card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 2.5rem 2.5rem 2rem 2.5rem;
-            min-width: 340px;
-            max-width: 440px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
-            margin: 0 1.5rem;
-            position: relative;
-        }
-        .price-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 8px;
-            border-radius: var(--radius) var(--radius) 0 0;
-            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
-            opacity: 0.18;
-        }
-        .price-card:hover {
-            transform: translateY(-12px) scale(1.04);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-        }
-        .price-card-header {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        .price-card-icon {
-            font-size: 2.5rem;
-        }
-        .price-card-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--color-primary);
-        }
-        .diagnostic-fee {
-            font-size: 1.12rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255,255,255,0.04);
-            border-radius: 8px;
-            padding: 0.5rem 0.8rem;
-            font-weight: 500;
-        }
-        .repair-list {
-            list-style: none;
-            margin: 0 0 1.2rem 0;
-            padding: 0;
-        }
-        .repair-list li {
-            font-size: 1.08rem;
-            margin-bottom: 0.7rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255,255,255,0.02);
-            border-radius: 6px;
-            padding: 0.3rem 0.6rem;
-        }
-        .repair-icon {
-            font-size: 1.2em;
-            margin-right: 0.3em;
-        }
-        .accordion.unusual-repair {
-            margin-bottom: 1.2rem;
-        }
-        .accordion-toggle {
-            background: none;
-            border: none;
-            color: var(--color-primary);
-            font-weight: 600;
-            font-size: 1.08rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            transition: color 0.2s;
-        }
-        .accordion-toggle i {
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-        .accordion.open .accordion-toggle i {
-            transform: rotate(180deg);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
-            padding-left: 1.2rem;
-        }
-        .accordion.open .accordion-content {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 0.5rem;
-        }
-        .accordion-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .accordion-content li {
-            font-size: 1.02rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn.request-quote-btn {
-            margin-top: 1.2rem;
-            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
-            color: #fff;
-            font-weight: 600;
-            border: none;
-            border-radius: var(--radius);
-            padding: 0.9rem 1.5rem;
-            font-size: 1.1rem;
-            cursor: pointer;
-            background-size: 200% 100%;
-            background-position: left center;
-            transition: background-position 0.4s cubic-bezier(.4,0,.2,1), background 0.4s cubic-bezier(.4,0,.2,1), transform 0.2s;
-            box-shadow: 0 2px 12px 0 rgba(255,120,73,0.08);
-            letter-spacing: 0.02em;
-        }
-        .btn.request-quote-btn:hover {
-            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
-            background-position: right center;
-            transform: translateY(-3px) scale(1.04);
-            box-shadow: 0 6px 24px 0 rgba(255,120,73,0.18);
-        }
-        .price-disclaimer-section {
-            margin: 2.5rem auto 0 auto;
-            max-width: 700px;
-            text-align: center;
-        }
-        .price-disclaimer {
-            background: var(--color-card);
-            color: var(--color-text);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 1.5rem 1rem;
-            font-size: 1.1rem;
-            opacity: 0.92;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #1A202C;
-            color: var(--color-white);
-            padding: 80px 0 32px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            padding-left: 7%;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        .footer-grid p {
-            color: var(--color-white);
-        }
-        
-        .footer-brand {
-            margin-bottom: 24px;
-        }
-        
-        .footer-brand-logo {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--color-white);
-            margin-bottom: 16px;
-            display: inline-block;
-        }
-        
-        .footer-links h3 {
-            font-size: 20px;
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-        
-        .footer-link-list {
-            list-style: none;
-        }
-        
-        .footer-link-list li {
-            margin-bottom: 16px;
-        }
-        
-        .footer-link-list a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-link-list a:hover {
-            color: var(--color-white);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 16px;
-            margin-top: 32px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            background-color: var(--color-btn);
-        }
-        
-        .social-link:hover {
-            background-color: var(--color-btn-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-        }
-        
-        .footer-bottom {
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
-        }
-        
-        .footer-bottom a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-        }
-        
-        .footer-bottom a:hover {
-            color: var(--color-white);
-        }
-
-        @media (max-width: 1100px) {
-            .price-main {
-                max-width: 98vw;
-            }
-            .price-card {
-                margin: 0 0.5rem;
-            }
-        }
-        @media (max-width: 900px) {
-            .tabs {
-                gap: 0.5rem;
-                padding: 0.7rem 0.2rem;
-            }
-            .price-card {
-                min-width: 0;
-                max-width: 100%;
-                padding: 1.2rem 0.7rem 1.2rem 0.7rem;
-            }
-        }
-        @media (max-width: 700px) {
-            .price-card-group {
-                min-height: 0;
-            }
-            .price-card {
-                margin: 0;
-            }
-        }
-        @media (max-width: 992px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-            .social-links {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-            .social-link {
-                width: 100%;
-                height: 40px;
-                border-radius: 8px;
-            }
-        }
         @media (max-width: 576px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
             .footer-grid {
                 grid-template-columns: 1fr;
             }
@@ -575,280 +562,521 @@
                 gap: 16px;
                 text-align: center;
             }
-        }
-        .loader-overlay {
-            position: fixed;
-            z-index: 9999;
-            inset: 0;
-            background: rgba(30, 38, 57, 0.45);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.4s;
-        }
-        .loader-spinner {
-            border: 5px solid #eee;
-            border-top: 5px solid var(--color-primary, #FF7849);
-            border-radius: 50%;
-            width: 56px;
-            height: 56px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg);}
-            100% { transform: rotate(360deg);}
-        }
-        body.loading .container {
-            filter: blur(4px);
-            pointer-events: none;
-            user-select: none;
+            .pricing-tab {
+                width: calc(50% - 5px);
+                padding: 10px;
+                text-align: center;
+            }
         }
     </style>
 </head>
-<body class="loading">
+<body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
+    <header>
+        <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
             <a href="{{ url_for('home') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
-                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
-                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+                <li><a href="{{ url_for('home') }}">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}" class="active">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít opravny</a></li>
+                <li><a href="{{ url_for('about_us') }}">O nás</a></li>
             </ul>
             <div class="nav-right">
                 <button class="toggle-mode" id="themeToggleBtn">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="profile-dropdown">
-                    <button class="profile-btn" onclick="toggleDropdown()">
-                        {% if user.avatar %}
-                            <img src="{{ user.avatar }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
+                        {% if user is mapping and user.avatar %}
+                            <img src="{{ user.avatar }}" alt="Profil" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
                         {% else %}
                             <i class="fas fa-user"></i>
                         {% endif %}
                     </button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#"><i class="fas fa-user"></i> Profile</a>
-                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="{{ url_for('home') }}"><i class="fas fa-user"></i> Profil</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Nastavení</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Odhlásit se</a>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main class="price-main">
-        <section class="price-tabs-section">
-            <div class="tabs" id="deviceTabs">
-                <button class="tab-btn active" data-tab="phone">📱 Phone</button>
-                <button class="tab-btn" data-tab="laptop">💻 Laptop</button>
-                <button class="tab-btn" data-tab="smartwatch">⌚ Smartwatch</button>
-                <button class="tab-btn" data-tab="console">🕹 Console</button>
-                <button class="tab-btn" data-tab="audio">🎧 Audio</button>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Ceník oprav</h1>
+            <p>Transparentní ceny pro všechny vaše potřeby opravy zařízení</p>
+        </div>
+    </section>
 
-        <section class="price-cards-section">
-            <!-- Phone -->
-            <div class="price-card-group" data-tab-content="phone">
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <span class="price-card-icon">📱</span>
-                        <span class="price-card-title">Phone Repairs</span>
-                    </div>
-                    <div class="price-card-body">
-                        <div class="diagnostic-fee">
-                            <span class="repair-icon">💬</span>
-                            Diagnostic: <strong>290&nbsp;Kč</strong>
-                        </div>
-                        <ul class="repair-list">
-                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>1 500&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>900&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 800&nbsp;Kč</strong></li>
-                        </ul>
-                        <div class="accordion unusual-repair">
-                            <button class="accordion-toggle">
-                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li><span class="repair-icon">📶</span> SIM/Chip issues – from <strong>1 200&nbsp;Kč</strong></li>
-                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 000–4 500&nbsp;Kč</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn request-quote-btn">Request Custom Quote</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Laptop -->
-            <div class="price-card-group" data-tab-content="laptop" style="display:none;">
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <span class="price-card-icon">💻</span>
-                        <span class="price-card-title">Laptop Repairs</span>
-                    </div>
-                    <div class="price-card-body">
-                        <div class="diagnostic-fee">
-                            <span class="repair-icon">💬</span>
-                            Diagnostic: <strong>290&nbsp;Kč</strong>
-                        </div>
-                        <ul class="repair-list">
-                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>2 000&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>1 200&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">💧</span> Water damage – from <strong>2 500&nbsp;Kč</strong></li>
-                        </ul>
-                        <div class="accordion unusual-repair">
-                            <button class="accordion-toggle">
-                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li><span class="repair-icon">💾</span> Data recovery – from <strong>1 500&nbsp;Kč</strong></li>
-                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 500–5 000&nbsp;Kč</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn request-quote-btn">Request Custom Quote</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Smartwatch -->
-            <div class="price-card-group" data-tab-content="smartwatch" style="display:none;">
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <span class="price-card-icon">⌚</span>
-                        <span class="price-card-title">Smartwatch Repairs</span>
-                    </div>
-                    <div class="price-card-body">
-                        <div class="diagnostic-fee">
-                            <span class="repair-icon">💬</span>
-                            Diagnostic: <strong>290&nbsp;Kč</strong>
-                        </div>
-                        <ul class="repair-list">
-                            <li><span class="repair-icon">🪟</span> Broken display – from <strong>1 200&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>700&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 500&nbsp;Kč</strong></li>
-                        </ul>
-                        <div class="accordion unusual-repair">
-                            <button class="accordion-toggle">
-                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li><span class="repair-icon">🔗</span> Strap/connection issues – from <strong>500&nbsp;Kč</strong></li>
-                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>1 500–3 500&nbsp;Kč</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn request-quote-btn">Request Custom Quote</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Console -->
-            <div class="price-card-group" data-tab-content="console" style="display:none;">
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <span class="price-card-icon">🕹</span>
-                        <span class="price-card-title">Console Repairs</span>
-                    </div>
-                    <div class="price-card-body">
-                        <div class="diagnostic-fee">
-                            <span class="repair-icon">💬</span>
-                            Diagnostic: <strong>290&nbsp;Kč</strong>
-                        </div>
-                        <ul class="repair-list">
-                            <li><span class="repair-icon">🪟</span> HDMI/Display issues – from <strong>1 200&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">🔋</span> Power supply – from <strong>1 000&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">💧</span> Water damage – from <strong>2 000&nbsp;Kč</strong></li>
-                        </ul>
-                        <div class="accordion unusual-repair">
-                            <button class="accordion-toggle">
-                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li><span class="repair-icon">🎮</span> Controller repairs – from <strong>600&nbsp;Kč</strong></li>
-                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>2 000–4 000&nbsp;Kč</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn request-quote-btn">Request Custom Quote</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Audio -->
-            <div class="price-card-group" data-tab-content="audio" style="display:none;">
-                <div class="price-card">
-                    <div class="price-card-header">
-                        <span class="price-card-icon">🎧</span>
-                        <span class="price-card-title">Audio Device Repairs</span>
-                    </div>
-                    <div class="price-card-body">
-                        <div class="diagnostic-fee">
-                            <span class="repair-icon">💬</span>
-                            Diagnostic: <strong>290&nbsp;Kč</strong>
-                        </div>
-                        <ul class="repair-list">
-                            <li><span class="repair-icon">🔊</span> Speaker repair – from <strong>800&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">🔋</span> Battery replacement – from <strong>600&nbsp;Kč</strong></li>
-                            <li><span class="repair-icon">💧</span> Water damage – from <strong>1 200&nbsp;Kč</strong></li>
-                        </ul>
-                        <div class="accordion unusual-repair">
-                            <button class="accordion-toggle">
-                                <span class="repair-icon">🛠️</span> Unusual repairs <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li><span class="repair-icon">🎤</span> Microphone issues – from <strong>700&nbsp;Kč</strong></li>
-                                    <li><span class="repair-icon">💻</span> Motherboard repairs – approx. <strong>1 500–3 000&nbsp;Kč</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn request-quote-btn">Request Custom Quote</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Pricing Tabs & Content -->
+    <section class="container pricing-container">
+        <div class="pricing-tabs">
+            <button class="pricing-tab active" data-category="phone">
+                <i class="fas fa-mobile-alt"></i> Telefon
+            </button>
+            <button class="pricing-tab" data-category="laptop">
+                <i class="fas fa-laptop"></i> Notebook
+            </button>
+            <button class="pricing-tab" data-category="tablet">
+                <i class="fas fa-tablet-alt"></i> Tablet
+            </button>
+            <button class="pricing-tab" data-category="console">
+                <i class="fas fa-gamepad"></i> Herní konzole
+            </button>
+            <button class="pricing-tab" data-category="other">
+                <i class="fas fa-headphones"></i> Ostatní
+            </button>
+        </div>
 
-        <section class="price-disclaimer-section">
-            <div class="price-disclaimer">
-                <strong>Note:</strong> The prices listed are approximate. The exact amount will be provided after device diagnostics.<br>
-                Diagnostics are free if you proceed with the repair.
+        <!-- Phone Pricing -->
+        <div class="pricing-category active" id="phone-pricing">
+            <h2 class="category-title">Ceny oprav telefonů</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="service-name">Výměna displeje</div>
+                    <div class="service-description">Vyměňte prasklý nebo poškozený displej za nový vysoce kvalitní.</div>
+                    <div class="service-price">Od 79,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=screen" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Výměna baterie</div>
+                    <div class="service-description">Obnovte životnost baterie telefonu novou baterií.</div>
+                    <div class="service-price">Od 49,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 30-60 minut</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=battery" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava nabíjecího portu</div>
+                    <div class="service-description">Oprava problémů s nabíjením výměnou nabíjecího portu.</div>
+                    <div class="service-price">Od 59,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=charging" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Výměna kamery</div>
+                    <div class="service-description">Vyměňte rozbitou nebo nefunkční přední či zadní kameru.</div>
+                    <div class="service-price">Od 69,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=camera" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava poškození vodou</div>
+                    <div class="service-description">Profesionální diagnostika a oprava poškození vodou.</div>
+                    <div class="service-price">Od 89,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 24-48 hodin</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 30 dní záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=water" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Úplná diagnostika</div>
+                    <div class="service-description">Kompletní diagnostika hardwaru a softwaru všech problémů s telefonem.</div>
+                    <div class="service-price">39,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> n/a</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=diagnosis" class="service-btn">Objednat službu</a>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <!-- Laptop Pricing -->
+        <div class="pricing-category" id="laptop-pricing">
+            <h2 class="category-title">Ceny oprav notebooků</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="service-name">Výměna displeje</div>
+                    <div class="service-description">Vyměňte prasklý nebo poškozený displej notebooku za nový.</div>
+                    <div class="service-price">Od 149,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 2-3 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_screen" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Výměna baterie</div>
+                    <div class="service-description">Instalace nové baterie pro delší výdrž notebooku.</div>
+                    <div class="service-price">Od 89,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1 hodina</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_battery" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Upgrade pevného disku/SSD</div>
+                    <div class="service-description">Zvyšte svou kapacitu úložiště rychlejším SSD nebo větší kapacitou.</div>
+                    <div class="service-price">Od 99,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 1 rok záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_storage" class="service-btn">Objednat službu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Upgrade RAM</div>
+                    <div class="service-description">Zlepšete výkon přidáním nebo rychlejší RAM.</div>
+                    <div class="service-price">Od 69,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 30-60 minut</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 1 rok záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_ram" class="service-btn">Objednat službu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Výměna klávesnice</div>
+                    <div class="service-description">Vyměňte poškozenou nebo nereagující klávesnici.</div>
+                    <div class="service-price">Od 129,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_keyboard" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Odstranění virů a oprava softwaru</div>
+                    <div class="service-description">Odstraňte viry a opravte softwarové problémy.</div>
+                    <div class="service-price">Od 79,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-3 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 30 dní záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=laptop_software" class="service-btn">Objednat službu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tablet Pricing -->
+        <div class="pricing-category" id="tablet-pricing">
+            <h2 class="category-title">Ceny oprav tabletů</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="service-name">Výměna displeje</div>
+                    <div class="service-description">Vyměňte prasklý nebo poškozený displej tabletu.</div>
+                    <div class="service-price">Od 99,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=tablet_screen" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Výměna baterie</div>
+                    <div class="service-description">Vyměňte starou nebo selhávající baterii tabletu.</div>
+                    <div class="service-price">Od 69,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=tablet_battery" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava nabíjecího portu</div>
+                    <div class="service-description">Oprava nabíjecích problémů výměnou nabíjecího portu.</div>
+                    <div class="service-price">Od 79,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=tablet_charging" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava poškození vodou</div>
+                    <div class="service-description">Profesionální diagnostika a oprava poškození vodou u tabletů.</div>
+                    <div class="service-price">Od 99,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 24-48 hodin</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 30 dní záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=tablet_water" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Pricing -->
+        <div class="pricing-category" id="console-pricing">
+            <h2 class="category-title">Ceny oprav herních konzolí</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="service-name">Oprava HDMI portu</div>
+                    <div class="service-description">Oprava problémů s připojením HDMI na vaší herní konzoli.</div>
+                    <div class="service-price">Od 89,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=console_hdmi" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava mechaniky disku</div>
+                    <div class="service-description">Výměna nebo oprava poškozeného mechanismu mechaniky disku.</div>
+                    <div class="service-price">Od 79,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 6 měsíců záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=console_drive" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava ovladače</div>
+                    <div class="service-description">Oprava driftu joysticku, problémů s tlačítky a dalších problémů s ovladačem.</div>
+                    <div class="service-price">Od 49,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1 hodina</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=console_controller" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava přehřívání</div>
+                    <div class="service-description">Vyřešte problémy s přehříváním výměnou tepelné pasty a čištěním.</div>
+                    <div class="service-price">Od 69,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=console_overheat" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Pricing -->
+        <div class="pricing-category" id="other-pricing">
+            <h2 class="category-title">Ostatní opravy zařízení</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="service-name">Oprava displeje chytrých hodinek</div>
+                    <div class="service-description">Vyměňte prasklý nebo poškozený displej chytrých hodinek.</div>
+                    <div class="service-price">Od 79,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1-2 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=watch_screen" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava bezdrátových sluchátek</div>
+                    <div class="service-description">Oprava problémů s připojením nebo zvukem u bezdrátových sluchátek.</div>
+                    <div class="service-price">Od 59,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1 hodina</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=headphones" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava chytrého reproduktoru</div>
+                    <div class="service-description">Oprava problémů s napájením, připojením nebo zvukem u chytrého reproduktoru.</div>
+                    <div class="service-price">Od 49,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 1 hodina</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=speaker" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="service-name">Oprava digitálního fotoaparátu</div>
+                    <div class="service-description">Oprava problémů s objektivem, tlačítky nebo elektronikou u digitálních fotoaparátů.</div>
+                    <div class="service-price">Od 89,99 $</div>
+                    <div class="service-meta">
+                        <span class="service-time"><i class="fas fa-clock"></i> 2-3 hodiny</span>
+                        <span class="service-warranty"><i class="fas fa-shield-alt"></i> 3 měsíce záruka</span>
+                    </div>
+                    <div class="service-cta">
+                        <a href="{{ url_for('submit_repair') }}?service=camera_repair" class="service-btn">Objednat opravu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Často kladené otázky</h2>
+            <div class="section-subtitle">Máte dotazy ohledně našich opravárenských služeb? Najděte odpovědi na běžné otázky níže.</div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Jak dlouho trvá typická oprava?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Většina oprav telefonů a tabletů je dokončena během 1-2 hodin. Opravy notebooků obvykle trvají 1-24 hodin v závislosti na složitosti. Opravy poškození vodou a složité opravy mohou trvat až 48 hodin pro důkladnou diagnostiku a opravu.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Jakou záruku poskytujete na opravy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Na většinu hardwarových oprav a výměn dílů nabízíme 6měsíční záruku. Opravy softwaru mají 30denní záruku. Opravy poškození vodou mají omezenou 30denní záruku kvůli nepředvídatelnému charakteru poškození tekutinou.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Používáte originální nebo náhradní díly?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nabízíme jak originální výrobce (OEM), tak vysoce kvalitní náhradní díly. OEM díly stojí více, ale poskytují stejnou kompatibilitu a výkon jako vaše původní díly zařízení. Naše náhradní díly jsou pečlivě vybírány z hlediska kvality a kompatibility, přičemž jsou cenově dostupnější.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Je má data během opravy v bezpečí?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Prioritizujeme vaše soukromí a bezpečnost dat. Naši technici během oprav nepřistupují k vašim osobním údajům. Doporučujeme však zálohovat data před jakoukoli opravou jako opatření. Některé opravy mohou vyžadovat resetování zařízení, což by vedlo k vymazání dat.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Nabízíte vyzvednutí a doručení?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ano! Nabízíme pohodlné služby vyzvednutí a doručení v rámci městských hranic Prahy za malý poplatek. Tuto službu si můžete objednat při rezervaci opravy online nebo kontaktováním našeho zákaznického podpůrného týmu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Jste připraveni nechat si opravit zařízení?</h2>
+            <p>Naši technici jsou připraveni pomoci s rychlými a cenově dostupnými opravami</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('submit_repair') }}" class="cta-btn">Objednat opravu <i class="fas fa-arrow-right"></i></a>
+                <a href="tel:+420123456789" class="cta-btn secondary">Zavolejte nám <i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-brand-logo">FixIt</div>
-                <p>Smart Tech Repairs Without the Stress</p>
+                <p>Opravy chytré techniky bez stresu</p>
             </div>
             
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3>Rychlé odkazy</h3>
                 <ul class="footer-link-list">
-                    <li><a href="user-page.html">Home</a></li>
-                    <li><a href="price-list.html">Pricing</a></li>
-                    <li><a href="my-repairs.html">My Repairs</a></li>
-                    <li><a href="about.html">About us</a></li>
+                    <li><a href="{{ url_for('home') }}">Úvod</a></li>
+                    <li><a href="{{ url_for('price_list') }}">Ceník</a></li>
+                    <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                    <li><a href="{{ url_for('repair_guides') }}">Najít servisy</a></li>
+                    <li><a href="{{ url_for('about_us') }}">O nás</a></li>
                 </ul>
             </div>
             
             <div class="footer-contact">
-                <h3>Contact Us</h3>
+                <h3>Kontaktujte nás</h3>
                 <p>Email: support@fixit.com</p>
-                <p>Phone: 1-800-FIX-IT-NOW</p>
+                <p>Telefon: 1-800-FIX-IT-NOW</p>
             </div>
             
             <div class="footer-social">
-                <h3>Follow Us</h3>
+                <h3>Sledujte nás</h3>
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -867,47 +1095,65 @@
         </div>
         
         <div class="footer-bottom">
-            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>&copy; 2025 FixIt. Všechna práva vyhrazena.</div>
             <div>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Terms of Service</a>
+                <a href="#">Zásady ochrany osobních údajů</a> |
+                <a href="#">Podmínky služby</a>
             </div>
         </div>
     </footer>
 
-    <div class="loader-overlay" id="loaderOverlay">
-        <div class="loader-spinner"></div>
-    </div>
-
     <script>
-        // Profile dropdown functionality
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon.classList.contains('fa-times')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+        
+        // Profile dropdown
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
             dropdown.classList.toggle('active');
         }
 
-        // Close dropdown when clicking outside or on dropdown link
+        // Close dropdown when clicking outside
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('dropdownMenu');
             const profileBtn = document.querySelector('.profile-btn');
+            
             if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-            // Zavřít dropdown při kliknutí na odkaz
-            if (dropdown.contains(event.target) && event.target.tagName === 'A') {
                 dropdown.classList.remove('active');
             }
         });
 
-        // Theme toggle functionality
+        // Theme toggle
         document.addEventListener('DOMContentLoaded', function () {
-            const toggleBtn = document.querySelector('.toggle-mode');
+            const toggleBtn = document.querySelector('#themeToggleBtn');
+            const icon = toggleBtn.querySelector('i');
+            
+            // Load saved theme
             const savedTheme = localStorage.getItem('theme') || 'light';
-
             document.documentElement.classList.toggle('light', savedTheme === 'light');
             document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-
-            const icon = toggleBtn.querySelector('i');
+            
+            // Update icon
             if (savedTheme === 'dark') {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
@@ -916,82 +1162,55 @@
                 icon.classList.add('fa-moon');
             }
 
+            // Toggle theme on click
             toggleBtn.addEventListener('click', () => {
                 const isLight = document.documentElement.classList.contains('light');
                 document.documentElement.classList.toggle('light', !isLight);
                 document.documentElement.classList.toggle('dark', isLight);
+
+                // Update icon
                 icon.classList.toggle('fa-moon');
                 icon.classList.toggle('fa-sun');
+
+                // Save theme preference
                 localStorage.setItem('theme', isLight ? 'dark' : 'light');
             });
         });
 
-        // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            const navLinks = document.querySelector('.nav-links');
-            const icon = this.querySelector('i');
-            navLinks.classList.toggle('active');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Zavřít menu při kliknutí na odkaz
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                const navLinks = document.querySelector('.nav-links');
-                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                navLinks.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        // Pricing tabs
+        document.querySelectorAll('.pricing-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all categories
+                document.querySelectorAll('.pricing-category').forEach(cat => cat.classList.remove('active'));
+                
+                // Show selected category
+                const category = this.getAttribute('data-category');
+                document.getElementById(category + '-pricing').classList.add('active');
             });
         });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const navLinks = document.querySelector('.nav-links');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            }
-        });
-
-        // Tabs logic
-        function showTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
-            document.querySelectorAll('.price-card-group').forEach(group => {
-                group.style.display = group.getAttribute('data-tab-content') === tab ? 'flex' : 'none';
-            });
-        }
-        // Nastavit výchozí tab při načtení
-        document.addEventListener('DOMContentLoaded', function() {
-            showTab('phone');
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    showTab(this.getAttribute('data-tab'));
+        
+        // FAQ accordions
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isOpen = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
                 });
+                
+                // If the clicked item wasn't open, open it
+                if (!isOpen) {
+                    item.classList.add('active');
+                }
             });
         });
-
-        // Accordion logic
-        document.querySelectorAll('.accordion-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const accordion = this.closest('.accordion');
-                accordion.classList.toggle('open');
-            });
-        });
-
-        // Loader hide after all content is loaded
-        window.onload = function () {
-            document.body.classList.remove('loading');
-            document.getElementById('loaderOverlay').style.opacity = '0';
-            setTimeout(function () {
-                document.getElementById('loaderOverlay').style.display = 'none';
-            }, 400);
-        };
     </script>
 </body>
 </html>

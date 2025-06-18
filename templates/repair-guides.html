@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Guides & Find Shops | FixIt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root.light {
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border: #E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon: #00C08B;
+            --color-primary: #FF7849;
+            --color-accent: #2D3E50;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
+        }
+        :root {
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #FF7849;
+            --color-btn-hover: #E66A40;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border: #474545;
+            --color-primary: #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon: #00C08B;
+            --radius: 16px;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--color-text);
+            min-height: 100vh;
+        }
+        body {
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        header {
+            background: var(--bg-accent);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .toggle-mode {
+            padding: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .profile-dropdown {
+            position: relative;
+        }
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            min-width: 150px;
+            display: none;
+        }
+        .dropdown-menu.active {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            color: var(--color-primary);
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(120deg, var(--color-primary) 0%, var(--bg-secondary) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Tabs */
+        .guides-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 40px 0 30px;
+        }
+        .guide-tab {
+            background: var(--color-card);
+            color: var(--color-text);
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .guide-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        .guide-tab.active {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        /* Guide Cards */
+        .guides-container {
+            margin-bottom: 60px;
+        }
+        .guide-category {
+            margin-bottom: 50px;
+            display: none;
+        }
+        .guide-category.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .category-title {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .guide-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .guide-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        .guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .guide-card:hover .guide-image img {
+            transform: scale(1.05);
+        }
+        .guide-content {
+            padding: 20px;
+        }
+        .guide-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--color-text);
+        }
+        .guide-description {
+            color: var(--color-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-muted);
+            font-size: 0.85rem;
+        }
+        .guide-difficulty {
+            display: flex;
+            align-items: center;
+        }
+        .guide-difficulty i {
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+        .guide-time i {
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+        
+        /* Shop Finder Section */
+        .shop-finder-section {
+            background: var(--bg-primary);
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+        .section-title {
+            color: var(--color-primary);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .section-subtitle {
+            color: var(--color-muted);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .shops-map-container {
+            height: 400px;
+            background: var(--color-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        .shops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .shop-card {
+            background: var(--color-card);
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .shop-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .shop-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .shop-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            flex-shrink: 0;
+        }
+        .shop-main-info {
+            flex: 1;
+        }
+        .shop-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+        .shop-specialties {
+            font-size: 0.9rem;
+            color: var(--color-muted);
+            margin-bottom: 8px;
+        }
+        .shop-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.9rem;
+            color: var(--color-primary);
+        }
+        .shop-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .shop-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--color-muted);
+        }
+        .shop-detail-item i {
+            color: var(--color-primary);
+            width: 16px;
+        }
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .action-btn:hover {
+            background: var(--color-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,120,73,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1A202C;
+            color: var(--color-white);
+            padding: 80px 0 32px;
+            margin-top: 80px;
+        }
+        .footer-grid {
+            display: grid;
+            padding-left: 7%;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-grid p {
+            color: var(--color-white);
+        }
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+        .footer-brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        .footer-link-list {
+            list-style: none;
+        }
+        .footer-link-list li {
+            margin-bottom: 16px;
+        }
+        .footer-link-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-link-list a:hover {
+            color: var(--color-white);
+        }
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-btn);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            background-color: var(--color-btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        .footer-bottom a:hover {
+            color: var(--color-white);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .social-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .social-link {
+                width: 100%;
+                height: 40px;
+                border-radius: 8px;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--bg-accent);
+                padding: 20px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                visibility: hidden;
+            }
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                box-shadow: var(--shadow);
+            }
+            .nav-links a {
+                font-size: 18px;
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .nav-links a:hover {
+                background: var(--bg-secondary);
+                border-radius: var(--radius);
+            }
+            .shops-grid {
+                grid-template-columns: 1fr;
+            }
+            .shop-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 576px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bar">
+            <a href="{{ url_for('index') }}" class="logo">FixIt</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+               <li><a href="{{ url_for('home') }}">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}" class="active">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít opravny</a></li>
+                <li><a href="{{ url_for('about_us') }}">O nás</a></li>
+            </ul>
+            <div class="nav-right">
+                <button class="toggle-mode" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
+                        <img src="{{ user.avatar }}" alt="Profile" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Fix It Yourself or Find Local Repair Shops</h1>
+            <p>Explore our guides to fix your device yourself or find trusted repair shops near you</p>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section class="container guides-container">
+        <div class="guides-tabs">
+            <button class="guide-tab active" data-category="phone">
+                <i class="fas fa-mobile-alt"></i> Phone
+            </button>
+            <button class="guide-tab" data-category="laptop">
+                <i class="fas fa-laptop"></i> Laptop
+            </button>
+            <button class="guide-tab" data-category="tablet">
+                <i class="fas fa-tablet-alt"></i> Tablet
+            </button>
+            <button class="guide-tab" data-category="console">
+                <i class="fas fa-gamepad"></i> Console
+            </button>
+            <button class="guide-tab" data-category="other">
+                <i class="fas fa-headphones"></i> Other
+            </button>
+        </div>
+
+        <!-- Phone Guides -->
+        <div class="guide-category active" id="phone-guides">
+            <h2 class="category-title">Phone Repair Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1559445368-b8a993676dfb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGhvbmUlMjByZXBhaXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Screen repair">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Replacing iPhone Screen</h3>
+                        <p class="guide-description">Learn how to safely replace a cracked iPhone screen at home with common tools.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Medium</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 45 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGhvbmUlMjBiYXR0ZXJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Battery replacement">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Battery Replacement</h3>
+                        <p class="guide-description">Fix your phone's battery life by replacing the old battery with a new one.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Easy</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 30 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1546027031-7d82a9d812f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmUlMjBjYW1lcmF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Camera repair">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Camera Module Repair</h3>
+                        <p class="guide-description">Replace a broken or malfunctioning camera on your smartphone.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Hard</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 60 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Laptop Guides -->
+        <div class="guide-category" id="laptop-guides">
+            <h2 class="category-title">Laptop Repair Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwcmVwYWlyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="RAM upgrade">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">RAM Upgrade</h3>
+                        <p class="guide-description">Improve your laptop's performance by upgrading its memory.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Easy</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 15 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwaGFyZCUyMGRyaXZlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="SSD upgrade">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">SSD Installation</h3>
+                        <p class="guide-description">Replace your old hard drive with a faster solid-state drive.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Medium</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 40 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1587614295999-6c1c13675117?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wJTIwY2xlYW5pbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Laptop cleaning">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Cleaning & Maintenance</h3>
+                        <p class="guide-description">Keep your laptop running cool and efficiently with proper cleaning.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Easy</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 30 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tablet Guides -->
+        <div class="guide-category" id="tablet-guides">
+            <h2 class="category-title">Tablet Repair Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1544244015-9c6cf3195c9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGFibGV0JTIwcmVwYWlyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Tablet screen repair">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">iPad Screen Replacement</h3>
+                        <p class="guide-description">Fix your cracked iPad screen with this step-by-step guide.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Medium</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 50 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1616410081359-b0910e5a0f77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRhYmxldCUyMGJhdHRlcnl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Tablet battery">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Tablet Battery Replacement</h3>
+                        <p class="guide-description">Restore your tablet's battery life with a new battery installation.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Hard</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 60 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Guides -->
+        <div class="guide-category" id="console-guides">
+            <h2 class="category-title">Game Console Repair Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1605901309584-818e25960a8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGxheXN0YXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="PS5 overheating">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">PS5 Overheating Fix</h3>
+                        <p class="guide-description">Resolve overheating issues in your PlayStation 5 console.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Medium</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 45 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1621259182978-fbf93132d53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8eGJveHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Xbox controller">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Xbox Controller Repair</h3>
+                        <p class="guide-description">Fix joystick drift and button issues in your Xbox controller.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Easy</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 30 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1560983719-c115de397f6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmludGVuZG8lMjBzd2l0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Nintendo Switch">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Nintendo Switch Screen Replacement</h3>
+                        <p class="guide-description">Replace a cracked or damaged Nintendo Switch display screen.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Hard</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 70 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Guides -->
+        <div class="guide-category" id="other-guides">
+            <h2 class="category-title">Other Device Repair Guides</h2>
+            <div class="guides-grid">
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1564046247017-4462f3c1e9f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c21hcnR3YXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Smartwatch">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Smartwatch Battery Replacement</h3>
+                        <p class="guide-description">Replace the battery in your smartwatch to extend its life.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Hard</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 40 mins</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="guide-card">
+                    <div class="guide-image">
+                        <img src="https://images.unsplash.com/photo-1590658268037-7e82c2dieefc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Ymx1ZXRvb3RoJTIwaGVhZHBob25lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Bluetooth headphones">
+                    </div>
+                    <div class="guide-content">
+                        <h3 class="guide-title">Bluetooth Headphones Repair</h3>
+                        <p class="guide-description">Fix common issues with wireless headphones and earbuds.</p>
+                        <div class="guide-meta">
+                            <span class="guide-difficulty"><i class="fas fa-cogs"></i> Medium</span>
+                            <span class="guide-time"><i class="fas fa-clock"></i> 25 mins</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Finder Section -->
+    <section class="shop-finder-section">
+        <div class="container">
+            <h2 class="section-title">Find Repair Shops Near You</h2>
+            <p class="section-subtitle">Need professional help? Discover trusted repair shops in your area</p>
+            
+            <div class="shops-map-container" id="repairShopsMap">
+                <!-- Map will be loaded here -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d22747.081406618723!2d14.410129805464117!3d50.07796465884778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sphone%20repair%20prague!5e0!3m2!1sen!2scz!4v1686202150327!5m2!1sen!2scz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <div class="shops-grid" id="nearbyShops">
+                <!-- Shops will be populated dynamically, but here are examples -->
+                <div class="shop-card">
+                    <div class="shop-header">
+                        <div class="shop-logo">PP</div>
+                        <div class="shop-main-info">
+                            <div class="shop-name">Prague Phone Repair</div>
+                            <div class="shop-specialties">iPhone, Samsung, Huawei, Xiaomi</div>
+                            <div class="shop-rating">
+                                <i class="fas fa-star"></i>
+                                4.8 (245 reviews)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-details">
+                        <div class="shop-detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Wenceslas Square 15, Prague 1</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-route"></i>
+                            <span>0.5 km away</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+420 123 456 789</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri 9:00-18:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shop-card">
+                    <div class="shop-header">
+                        <div class="shop-logo">LD</div>
+                        <div class="shop-main-info">
+                            <div class="shop-name">Laptop Doctors</div>
+                            <div class="shop-specialties">MacBook, ThinkPad, Dell</div>
+                            <div class="shop-rating">
+                                <i class="fas fa-star"></i>
+                                4.9 (98 reviews)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-details">
+                        <div class="shop-detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Národní Street 45, Prague 1</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-route"></i>
+                            <span>0.7 km away</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+420 456 789 012</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri 9:00-17:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shop-card">
+                    <div class="shop-header">
+                        <div class="shop-logo">TF</div>
+                        <div class="shop-main-info">
+                            <div class="shop-name">TechFix Universal</div>
+                            <div class="shop-specialties">All electronic devices</div>
+                            <div class="shop-rating">
+                                <i class="fas fa-star"></i>
+                                4.4 (203 reviews)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-details">
+                        <div class="shop-detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Místní Street 67, Prague 3</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-route"></i>
+                            <span>1.8 km away</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+420 890 123 456</span>
+                        </div>
+                        <div class="shop-detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri 9:00-17:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="{{ url_for('submit_repair') }}" class="action-btn">
+                    <i class="fas fa-tools" style="margin-right: 10px;"></i> Submit a Repair Request
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-brand-logo">FixIt</div>
+                <p>Smart Tech Repairs Without the Stress</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul class="footer-link-list">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('price_list') }}">Price List</a></li>
+                    <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: support@fixit.com</p>
+                <p>Phone: 1-800-FIX-IT-NOW</p>
+            </div>
+            
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon.classList.contains('fa-times')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+        
+        // Profile dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const profileBtn = document.querySelector('.profile-btn');
+            
+            if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Theme toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.querySelector('#themeToggleBtn');
+            const icon = toggleBtn.querySelector('i');
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('light', savedTheme === 'light');
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            
+            // Update icon
+            if (savedTheme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            // Toggle theme on click
+            toggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light');
+                document.documentElement.classList.toggle('light', !isLight);
+                document.documentElement.classList.toggle('dark', isLight);
+
+                // Update icon
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+
+                // Save theme preference
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            });
+        });
+
+        // Guide tabs
+        document.querySelectorAll('.guide-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.guide-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all categories
+                document.querySelectorAll('.guide-category').forEach(cat => cat.classList.remove('active'));
+                
+                // Show selected category
+                const category = this.getAttribute('data-category');
+                document.getElementById(category + '-guides').classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

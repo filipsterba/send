@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Fix-It - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - FixIt</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -20,7 +20,7 @@
             transition: opacity 0.4s;
         }
         .loader-spinner {
-            border: 5px solid #eee;
+            border: 5px solid #ffffff;
             border-top: 5px solid var(--color-primary, #FF7849);
             border-radius: 50%;
             width: 56px;
@@ -45,37 +45,38 @@
     </div>
     <!-- Header -->
     <header class="header">
-        <nav class="nav-container">
-            <a href="#" class="logo">FixIt</a>
+        <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
+            <a href="{{ url_for('index') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
-                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
-                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+                <li><a href="{{ url_for('index') }}" class="active">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít opravny</a></li> 
+                <li><a href="{{ url_for('about_us') }}">O nás</a></li>
             </ul>
             <div class="nav-right">
-                <button class="toggle-mode">
+                <button class="toggle-mode" id="themeToggleBtn">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="profile-dropdown">
-                    <button class="profile-btn" onclick="toggleDropdown()">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
                         {% if user.avatar %}
-                            <img src="{{ user.avatar }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                            <img src="{{ user.avatar }}" alt="Profil" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
                         {% else %}
                             <i class="fas fa-user"></i>
                         {% endif %}
                     </button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#"><i class="fas fa-user"></i> Profile</a>
-                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profil</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Nastavení</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Odhlásit se</a>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -83,8 +84,8 @@
         <!-- Welcome Section -->
         <section class="welcome-section">
             <div class="welcome-content">
-                <h1>Welcome back, {{ username }}!</h1>
-                <p>Here's the latest on your repairs.</p>
+                <h1>Vítejte zpět, {{ username }}!</h1>
+                <p>Zde jsou novinky ohledně vašich oprav.</p>
             </div>
         </section>
 
@@ -96,12 +97,12 @@
                     <div class="card-icon icon-progress">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <h3 class="card-title">Repair in Progress</h3>
+                    <h3 class="card-title">Opravy probíhající</h3>
                 </div>
                 <div class="repair-item">
                     <div class="repair-info">
                         <h4>iPhone 14 Pro</h4>
-                        <p class="repair-status">Screen replacement • ETA: 2 days</p>
+                        <p class="repair-status">Výměna obrazovky • Očekávané dokončení: za 2 dny</p>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 75%"></div>
@@ -110,7 +111,7 @@
                 <div class="repair-item">
                     <div class="repair-info">
                         <h4>MacBook Air M2</h4>
-                        <p class="repair-status">Battery replacement • ETA: 1 day</p>
+                        <p class="repair-status">Výměna baterie • Očekávané dokončení: za 1 den</p>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 90%"></div>
@@ -124,15 +125,15 @@
                     <div class="card-icon icon-completed">
                         <i class="fas fa-check"></i>
                     </div>
-                    <h3 class="card-title">Completed Repairs</h3>
+                    <h3 class="card-title">Dokončené opravy</h3>
                 </div>
                 <div class="stats-number">12</div>
-                <p class="repair-status">Total successful repairs</p>
+                <p class="repair-status">Celkem úspěšných oprav</p>
                 <div style="margin-top: 1rem;">
-                    <p style="margin-bottom: 0.5rem;"><strong>Recent:</strong></p>
-                    <p class="repair-status">• iPad Pro - Screen repair (Dec 15)</p>
-                    <p class="repair-status">• Samsung Galaxy - Battery (Dec 8)</p>
-                    <p class="repair-status">• AirPods Pro - Left speaker (Nov 28)</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Poslední:</strong></p>
+                    <p class="repair-status">• iPad Pro - Oprava obrazovky (15. prosince)</p>
+                    <p class="repair-status">• Samsung Galaxy - Baterie (8. prosince)</p>
+                    <p class="repair-status">• AirPods Pro - Levý reproduktor (28. listopadu)</p>
                 </div>
             </div>
 
@@ -142,57 +143,57 @@
                     <div class="card-icon icon-messages">
                         <i class="fas fa-comment"></i>
                     </div>
-                    <h3 class="card-title">Messages</h3>
+                    <h3 class="card-title">Zprávy</h3>
                 </div>
                 <div class="message-item">
                     <div class="message-meta">
-                        <span><strong>Tech Support</strong></span>
-                        <span>2 hours ago</span>
+                        <span><strong>Technická podpora</strong></span>
+                        <span>Před 2 hodinami</span>
                     </div>
-                    <p>Your iPhone screen repair is almost complete. We'll notify you when it's ready for pickup!</p>
+                    <p>Oprava obrazovky vašeho iPhone je téměř dokončena. Oznámíme vám, až bude připravena k vyzvednutí!</p>
                 </div>
                 <div class="message-item">
                     <div class="message-meta">
-                        <span><strong>Repair Update</strong></span>
-                        <span>Yesterday</span>
+                        <span><strong>Aktualizace opravy</strong></span>
+                        <span>Včera</span>
                     </div>
-                    <p>MacBook battery replacement has started. Estimated completion: tomorrow afternoon.</p>
+                    <p>Výměna baterie MacBooku byla zahájena. Očekávané dokončení: zítra odpoledne.</p>
                 </div>
             </div>
         </section>
 
         <!-- Repair Timeline -->
         <section class="timeline-section">
-            <h2 class="timeline-title">Repair Timeline</h2>
+            <h2 class="timeline-title">Časová osa opravy</h2>
             <div class="timeline">
                 <div class="timeline-item completed">
                     <div class="timeline-content">
-                        <h4>Package Received</h4>
-                        <p>Your iPhone 14 Pro has been received at our facility - Dec 18, 10:30 AM</p>
+                        <h4>Balíček přijat</h4>
+                        <p>Váš iPhone 14 Pro byl přijat v našem zařízení - 18. prosince, 10:30</p>
                     </div>
                 </div>
                 <div class="timeline-item completed">
                     <div class="timeline-content">
-                        <h4>Diagnostics Complete</h4>
-                        <p>Screen damage confirmed, repair quote approved - Dec 18, 2:15 PM</p>
+                        <h4>Diagnostika dokončena</h4>
+                        <p>Poškození obrazovky potvrzeno, cena opravy schválena - 18. prosince, 14:15</p>
                     </div>
                 </div>
                 <div class="timeline-item completed">
                     <div class="timeline-content">
-                        <h4>Repair Started</h4>
-                        <p>Technician has started the screen replacement - Dec 19, 9:00 AM</p>
+                        <h4>Oprava zahájena</h4>
+                        <p>Technik zahájil výměnu obrazovky - 19. prosince, 9:00</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h4>Quality Check</h4>
-                        <p>Final testing and quality assurance - Expected: Dec 20, 2:00 PM</p>
+                        <h4>Kvalitativní kontrola</h4>
+                        <p>Finální testování a zajištění kvality - Očekáváno: 20. prosince, 14:00</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h4>Ready for Pickup</h4>
-                        <p>Device ready for collection or shipping - Expected: Dec 20, 4:00 PM</p>
+                        <h4>Připraveno k vyzvednutí</h4>
+                        <p>Zařízení připraveno k vyzvednutí nebo odeslání - Očekáváno: 20. prosince, 16:00</p>
                     </div>
                 </div>
             </div>
@@ -200,47 +201,71 @@
 
         <!-- Quick Actions -->
         <section class="quick-actions">
-            <a href="{{ url_for('create_repair') }}" class="action-btn btn-primary" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); border: none; padding: 16px 32px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; transform-origin: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+            <a href="{{ url_for('submit_repair')}}" class="action-btn btn-primary" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); border: none; padding: 16px 32px; font-size: 1.1rem; display: flex; align-items: center; gap: 12px; transform-origin: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
                 <i class="fas fa-plus-circle" style="font-size: 1.2em;"></i>
-                Start New Repair
+                Zahájit novou opravu
             </a>
             <a href="#" class="action-btn btn-secondary">
                 <i class="fas fa-download"></i>
-                Download Invoice
+                Stáhnout fakturu
             </a>
-            <a href="#" class="action-btn btn-secondary">
+            <a href="#" class="action-btn btn-secondary" id="openSupportMessageBtn">
                 <i class="fas fa-envelope"></i>
-                Message Support
+                Zpráva podpoře
             </a>
         </section>
     </main>
+
+    <!-- Support Message Modal -->
+    <div id="supportMessageModal" style="display:none;position:fixed;z-index:9999;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
+        <div style="background:var(--color-card);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 1.5rem;max-width:350px;width:95%;margin:auto;display:flex;flex-direction:column;gap:1rem;">
+            <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">
+                <i class="fas fa-envelope" style="color:var(--color-primary)"></i> Zpráva podpoře
+            </h2>
+            <form id="supportMessageForm">
+                <label for="supportMessageEmail" style="font-weight:600;">Váš email</label>
+                <input type="email" id="supportMessageEmail" name="supportMessageEmail" required placeholder="you@email.com"
+                    style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid var(--color-border);background:var(--bg-secondary);color:var(--color-text);font-size:1rem;margin-bottom:0.5rem;">
+                <label for="supportMessageBody" style="font-weight:600;">Zpráva</label>
+                <textarea id="supportMessageBody" name="supportMessageBody" rows="5" required placeholder="Napište svou zprávu zde..."
+                    style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid var(--color-border);background:var(--bg-secondary);color:var(--color-text);font-size:1rem;margin-bottom:0.5rem;"></textarea>
+                <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:1rem;">
+                    <button type="submit" class="btn-primary" style="min-width:100px;"><i class="fas fa-paper-plane"></i> Odeslat</button>
+                    <button type="button" id="closeSupportMessageModal" class="btn-secondary" style="min-width:100px;">Zrušit</button>
+                </div>
+                <div id="supportMessageSuccess" style="display:none;color:var(--color-progress);font-weight:600;text-align:center;margin-top:1rem;">
+                    Vaše zpráva byla odeslána!
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-brand-logo">FixIt</div>
-                <p>Smart Tech Repairs Without the Stress</p>
+                <p>Chytré opravy techniky bez stresu</p>
             </div>
             
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3>Rychlé odkazy</h3>
                 <ul class="footer-link-list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">My Repairs</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Úvod</a></li>
+                    <li><a href="#">Ceník</a></li>
+                    <li><a href="#">Moje opravy</a></li>
+                    <li><a href="#">O nás</a></li>
                 </ul>
             </div>
             
             <div class="footer-contact">
-                <h3>Contact Us</h3>
+                <h3>Kontaktujte nás</h3>
                 <p>Email: support@fixit.com</p>
-                <p>Phone: 1-800-FIX-IT-NOW</p>
+                <p>Telefon: 1-800-FIX-IT-NOW</p>
             </div>
             
             <div class="footer-social">
-                <h3>Follow Us</h3>
+                <h3>Sledujte nás</h3>
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -259,14 +284,15 @@
         </div>
         
         <div class="footer-bottom">
-            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>&copy; 2025 FixIt. Všechna práva vyhrazena.</div>
             <div>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Terms of Service</a>
+                <a href="#">Zásady ochrany osobních údajů</a> |
+                <a href="#">Podmínky služby</a>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
@@ -295,84 +321,163 @@
             });
         });
 
-        // Add loading states to buttons
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                    }, 2000);
+        // EmailJS init
+        emailjs.init("G806k4znYB_JikZf_");
+
+        // Support Message Modal logic
+        const openSupportBtn = document.getElementById('openSupportMessageBtn');
+        const supportModal = document.getElementById('supportMessageModal');
+        const closeSupportBtn = document.getElementById('closeSupportMessageModal');
+        const supportForm = document.getElementById('supportMessageForm');
+        const supportSuccess = document.getElementById('supportMessageSuccess');
+
+        if (openSupportBtn) {
+            openSupportBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Support button clicked'); // Debug log
+                supportModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    document.getElementById('supportMessageEmail').focus();
+                }, 100);
+            });
+        }
+
+        if (closeSupportBtn) {
+            closeSupportBtn.addEventListener('click', function() {
+                supportModal.style.display = 'none';
+                document.body.style.overflow = '';
+                supportForm.reset();
+                supportSuccess.style.display = 'none';
+            });
+        }
+
+        if (supportModal) {
+            supportModal.addEventListener('click', function(e) {
+                if (e.target === supportModal) {
+                    supportModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                    supportForm.reset();
+                    supportSuccess.style.display = 'none';
                 }
             });
-        });
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleBtn = document.querySelector('.toggle-mode');
-    const savedTheme = localStorage.getItem('theme') || 'light';
-
-    document.documentElement.classList.toggle('light', savedTheme === 'light');
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-
-    const icon = toggleBtn.querySelector('i');
-    if (savedTheme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-        const isLight = document.documentElement.classList.contains('light');
-        document.documentElement.classList.toggle('light', !isLight);
-        document.documentElement.classList.toggle('dark', isLight);
-
-        icon.classList.toggle('fa-moon');
-        icon.classList.toggle('fa-sun');
-
-        localStorage.setItem('theme', isLight ? 'dark' : 'light');
-    });
-});
-
-document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        const icon = this.querySelector('i');
-        
-        navLinks.classList.toggle('active');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-    });
-
-    document.addEventListener('click', function(e) {
-        const navLinks = document.querySelector('.nav-links');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        
-        if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-            navLinks.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
         }
-    });
 
-    // Loader hide after all content is loaded
-    window.onload = function () {
-        document.body.classList.remove('loading');
-        document.getElementById('loaderOverlay').style.opacity = '0';
-        setTimeout(function () {
-            document.getElementById('loaderOverlay').style.display = 'none';
-        }, 400);
-    };
-    // Přidáme hover efekty pro tlačítka
-    document.querySelectorAll('#repairChoiceModal .btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
+        if (supportForm) {
+            supportForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Zobrazit loading
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Odesílání...';
+                submitBtn.disabled = true;
+                
+                // Správná konfigurace pro EmailJS
+                const templateParams = {
+                    to_email: "filipsterba007@gmail.com",
+                    to_name: "FixIt Support",
+                    from_name: document.getElementById('supportMessageEmail').value,
+                    from_email: document.getElementById('supportMessageEmail').value,
+                    reply_to: document.getElementById('supportMessageEmail').value,
+                    subject: "Žádost o podporu z dashboardu FixIt",
+                    message: document.getElementById('supportMessageBody').value
+                };
+                
+                emailjs.send("service_s4dnte6", "template_t9coq38", templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    supportSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        supportModal.style.display = 'none';
+                        document.body.style.overflow = '';
+                        supportForm.reset();
+                        supportSuccess.style.display = 'none';
+                    }, 1500);
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    alert("Chyba při odesílání zprávy. Zkuste to prosím znovu později.");
+                })
+                .finally(function() {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+
+        // Add loading states to buttons
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            if (btn.id !== 'openSupportMessageBtn') {
+                btn.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Načítání...';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                        }, 2000);
+                    }
+                });
+            }
         });
-        btn.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.querySelector('.toggle-mode');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+
+            document.documentElement.classList.toggle('light', savedTheme === 'light');
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+
+            const icon = toggleBtn.querySelector('i');
+            if (savedTheme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light');
+                document.documentElement.classList.toggle('light', !isLight);
+                document.documentElement.classList.toggle('dark', isLight);
+
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+            });
+
+            document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const icon = this.querySelector('i');
+                
+                navLinks.classList.toggle('active');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            document.addEventListener('click', function(e) {
+                const navLinks = document.querySelector('.nav-links');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                
+                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                }
+            });
+
+            // Loader hide after all content is loaded
+            window.onload = function () {
+                document.body.classList.remove('loading');
+                document.getElementById('loaderOverlay').style.opacity = '0';
+                setTimeout(function () {
+                    document.getElementById('loaderOverlay').style.display = 'none';
+                }, 400);
+            };
         });
-    });
     </script>
 </body>
 </html>

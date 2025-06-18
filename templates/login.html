@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - FixIt</title>
+    <title>Přihlášení - FixIt</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
@@ -48,7 +48,10 @@
             <button class="toggle-mode" id="toggleModeBtn" style="position:absolute;top:2rem;right:2rem;">
                 <i class="fas fa-moon"></i>
             </button>
-            <a href="{{ url_for('index') }}" class="btn" style="margin-bottom: 1.5rem; display: inline-block; width: auto;">&#8592; Back</a>
+            <div class="login-header">
+                <a href="{{ url_for('index') }}" class="btn" style="margin-bottom: 1.5rem; display: inline-block; width: auto;">&#8592; Zpět </a>
+                
+            </div>
             
             {% with messages = get_flashed_messages() %}
               {% if messages %}
@@ -62,26 +65,26 @@
             
             <form id="loginForm" method="POST" action="{{ url_for('login') }}">
                 <div class="form-header">
-                    <h2>Login to FixIt</h2>
+                    <h2>Přihlášení k FixIt</h2>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-input" id="loginIdentity" name="loginIdentity" placeholder=" " required>
-                    <label for="loginIdentity">Username or Email</label>
-                    <div style="font-size:0.9em;color:var(--color-muted);margin-top:0.3em;">You can use your username or email.</div>
+                    <label for="loginIdentity">Uživatelské jméno nebo Email</label>
+                    <div style="font-size:0.9em;color:var(--color-muted);margin-top:0.3em;">Můžete použít své uživatelské jméno nebo email.</div>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-input" id="loginPassword" name="loginPassword" placeholder=" " required>
-                    <label for="loginPassword">Password</label>
+                    <label for="loginPassword">Heslo</label>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn">Login</button>
+                    <button type="submit" class="btn">Přihlásit se</button>
                 </div>
                 <div class="form-footer">
-                    <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
+                    <p>Nemáte účet? <a href="{{ url_for('register') }}">Zaregistrujte se zde</a>.</p>
                 </div>
             </form>
             <div class="divider">
-                <span>or continue with</span>
+                <span>nebo pokračujte s</span>
             </div>
             <div class="social-buttons">
                 <button class="social-btn google-btn" onclick="socialLogin('google')" type="button">
@@ -127,7 +130,7 @@
         });
 
         function socialLogin(provider) {
-            alert('Login with ' + provider);
+            alert('Přihlásit se pomocí ' + provider);
         }
     </script>
 </body>

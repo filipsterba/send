@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>About Us</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About us - FixIt</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -727,46 +727,47 @@
         <div class="loader-spinner"></div>
     </div>
     <!-- Header -->
-    <header class="header animate-on-load animate-delay-1">
-        <nav class="nav-container">
+    <header class="header">
+        <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
             <a href="{{ url_for('home') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
-                <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
-                <li><a href="{{ url_for('about_us') }}" class="active">About us</a></li>
+                <li><a href="{{ url_for('index') }}">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít servisy</a></li>
+                <li><a href="{{ url_for('about_us') }}" class="active">O nás</a></li>
             </ul>
             <div class="nav-right">
                 <button class="toggle-mode" id="themeToggleBtn">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="profile-dropdown">
-                    <button class="profile-btn" onclick="toggleDropdown()">
+                    <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
                         {% if user.avatar %}
-                <img src="{{ user.avatar }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-            {% else %}
-                <i class="fas fa-user"></i>
-            {% endif %}
+                            <img src="{{ user.avatar }}" alt="Profil" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
                     </button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#"><i class="fas fa-user"></i> Profile</a>
-                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profil</a>
+                        <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Nastavení</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Odhlásit se</a>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!--Hero Section-->
     <section class="hero scroll-fade">
         <div class="hero-content">
-            <h1 class="hero-title animate-on-load animate-delay-2">Our tools are real. Our emotional stability? Held together by hope and caffeine</h1>
+            <h1 class="hero-title animate-on-load animate-delay-2">Naše nástroje jsou skutečné. Naše emocionální stabilita? Držena pohromadě nadějí a kofeinem</h1>
             <p class="hero-subtext animate-on-load animate-delay-3">
-                <i>- Fix It team.</i>
+                <i>- Tým Fix It.</i>
             </p>
         </div>
         <div class="hero-image animate-on-load animate-delay-4">
@@ -777,27 +778,27 @@
     <!-- Mission Section -->
     <section class="mission scroll-fade">
         <div class="container">
-            <h2 class="section-title animate-on-load animate-delay-2">Our Mission</h2>
+            <h2 class="section-title animate-on-load animate-delay-2">Naše poslání</h2>
             <div class="mission-grid">
                 <div class="glass-card mission-card scroll-fade">
                     <span class="mission-icon">♻️</span>
-                    <h3>Reduce E-Waste</h3>
-                    <p>Every repair prevents electronic waste from ending up in landfills</p>
+                    <h3>Redukce elektronického odpadu</h3>
+                    <p>Každá oprava brání elektronickému odpadu skončit na skládkách</p>
                 </div>
                 <div class="glass-card mission-card scroll-fade">
                     <span class="mission-icon">🔧</span>
-                    <h3>Make Repair Accessible</h3>
-                    <p>Professional repairs should be convenient and affordable for everyone</p>
+                    <h3>Učinit opravy dostupné</h3>
+                    <p>Profesionální opravy by měly být pohodlné a cenově dostupné pro každého</p>
                 </div>
                 <div class="glass-card mission-card scroll-fade">
                     <span class="mission-icon">🤝</span>
-                    <h3>Support Local Technicians</h3>
-                    <p>Empowering skilled repair professionals in communities worldwide</p>
+                    <h3>Podpora místních techniků</h3>
+                    <p>Posilování dovedných opravářských profesionálů v komunitách po celém světě</p>
                 </div>
                 <div class="glass-card mission-card scroll-fade">
                     <span class="mission-icon">🌍</span>
-                    <h3>Build a Sustainable Future</h3>
-                    <p>Creating a circular economy where technology lasts longer</p>
+                    <h3>Budování udržitelné budoucnosti</h3>
+                    <p>Vytváření oběhového hospodářství, kde technologie vydrží déle</p>
                 </div>
             </div>
         </div>
@@ -805,7 +806,7 @@
 
     <!--Team Section-->
     <section class="team-section scroll-fade">
-        <h2 class="team-title animate-on-load animate-delay-2">Meet the Team</h2>
+        <h2 class="team-title animate-on-load animate-delay-2">Seznamte se s týmem</h2>
         <div class="team-grid">
             <div class="team-card scroll-fade">
                 <div class="team-avatar">
@@ -813,7 +814,7 @@
                 </div>
                 <div class="team-info">
                     <h3>Mykyta Nikolenko</h3>
-                    <p class="team-role">Frontend and UI/UX</p>
+                    <p class="team-role">Frontend a UI/UX</p>
                 </div>
                 <div class="team-hover">
                     <p class="team-quote">“Moje produktivita stoupá úměrně s hladinou kofeinu.”</p>
@@ -826,7 +827,7 @@
                 </div>
                 <div class="team-info">
                     <h3>Dominik Olšansky</h3>
-                    <p class="team-role">Sustainability Lead</p>
+                    <p class="team-role">Vedoucí udržitelnosti</p>
                 </div>
                 <div class="team-hover">
                     <p class="team-quote">“Když prší tak leje”</p>
@@ -839,7 +840,7 @@
                 </div>
                 <div class="team-info">
                     <h3>Filip Štěrba</h3>
-                    <p class="team-role">Customer Hero</p>
+                    <p class="team-role">Hrdina zákaznického servisu</p>
                 </div>
                 <div class="team-hover">
                     <p class="team-quote">“Roblox, Roblox, Roblox...”</p>
@@ -851,15 +852,15 @@
 
     <!-- Why Choose Us Section -->
     <section class="why-choose-us scroll-fade">
-        <h2 class="why-title animate-on-load animate-delay-2">Why Choose Us</h2>
+        <h2 class="why-title animate-on-load animate-delay-2">Proč si vybrat nás</h2>
         <div class="why-features">
             <div class="why-card scroll-fade">
                 <div class="why-icon" style="background: linear-gradient(135deg, #FF7849 60%, #FFD6C0 100%);">
                     ⚡
                 </div>
                 <div class="why-info">
-                    <h3>Fast Pickup & Delivery</h3>
-                    <p>We collect and return your device quickly, so you’re never long without your tech.</p>
+                    <h3>Rychlé vyzvednutí a doručení</h3>
+                    <p>Rychle vyzvedneme a vrátíme vaše zařízení, takže nikdy nejste dlouho bez své technologie.</p>
                 </div>
             </div>
             <div class="why-card scroll-fade">
@@ -867,8 +868,8 @@
                     🔒
                 </div>
                 <div class="why-info">
-                    <h3>Secure Repairs</h3>
-                    <p>Your data and device are protected by strict security protocols at every step.</p>
+                    <h3>Bezpečné opravy</h3>
+                    <p>Vaše data a zařízení jsou chráněna přísnými bezpečnostními protokoly na každém kroku.</p>
                 </div>
             </div>
             <div class="why-card scroll-fade">
@@ -876,8 +877,8 @@
                     🌿
                 </div>
                 <div class="why-info">
-                    <h3>Eco-Certified Process</h3>
-                    <p>Our repairs are certified eco-friendly, minimizing environmental impact.</p>
+                    <h3>Ekologicky certifikovaný proces</h3>
+                    <p>Naše opravy jsou certifikovány jako šetrné k životnímu prostředí, minimalizují dopad na životní prostředí.</p>
                 </div>
             </div>
         </div>
@@ -888,27 +889,27 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-brand-logo">FixIt</div>
-                <p>Smart Tech Repairs Without the Stress</p>
+                <p>Opravy chytré technologie bez stresu</p>
             </div>
             
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3>Rychlé odkazy</h3>
                 <ul class="footer-link-list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">My Repairs</a></li>
-                    <li><a href="#">About us</a></li>
+                    <li><a href="{{ url_for('index') }}">Úvod</a></li>
+                    <li><a href="{{ url_for('price_list') }}">Ceník</a></li>
+                    <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                    <li><a href="{{ url_for('about_us') }}">O nás</a></li>
                 </ul>
             </div>
             
             <div class="footer-contact">
-                <h3>Contact Us</h3>
+                <h3>Kontaktujte nás</h3>
                 <p>Email: support@fixit.com</p>
-                <p>Phone: 1-800-FIX-IT-NOW</p>
+                <p>Telefon: 1-800-FIX-IT-NOW</p>
             </div>
             
             <div class="footer-social">
-                <h3>Follow Us</h3>
+                <h3>Sledujte nás</h3>
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -927,10 +928,10 @@
         </div>
         
         <div class="footer-bottom">
-            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>&copy; 2025 FixIt. Všechna práva vyhrazena.</div>
             <div>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Terms of Service</a>
+                <a href="#">Zásady ochrany osobních údajů</a> |
+                <a href="#">Podmínky služby</a>
             </div>
         </div>
     </footer>

@@ -2,46 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FixIt - Úvod</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Fix-It - Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Přidán odkaz na FontAwesome pro správné zobrazení ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root.light {
-        --bg-primary: #FFFDFB;
-        --bg-secondary: #FDE4D2;
-        --bg-accent: #FFF4EB;
-        --color-btn: #2D3E50;
-        --color-btn-hover: #0B0F1C;
-        --color-card: #FDE4D2;
-        --color-text: #1C1C1E;
-        --color-muted: #6B6B6D;
-        --color-white: #FFFFFF;
-        --color-border:#E4DAD1;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        --radius: 16px;
-        --color-icon:       #00C08B;
-        --color-icon-devices:       #1C1C1E;
-        --color-primary:    #FF7849;     /* soft orange / coral */
-        --color-accent:     #2D3E50;     /* deep petrol */
+            --bg-primary: #FFFDFB;
+            --bg-secondary: #FDE4D2;
+            --bg-accent: #FFF4EB;
+            --color-btn: #2D3E50;
+            --color-btn-hover: #0B0F1C;
+            --color-card: #FFF4EB;
+            --color-text: #1C1C1E;
+            --color-muted: #6B6B6D;
+            --color-white: #FFFFFF;
+            --color-border: #E4DAD1;
+            --shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --color-icon: #00C08B;
+            --color-primary: #FF7849;
+            --color-accent: #2D3E50;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s; /* Added for consistent transitions */
         }
 
 
         :root {
-        --bg-primary: #0B0F1C;
-        --bg-secondary: #1E2639;
-        --bg-accent: #2C3E50;
-        --color-btn: #2C3E50;
-        --color-btn-hover: #0B0F1C;
-        --color-card: #2C3E50;
-        --color-text: #F4F4F4;
-        --color-muted: #AAB0BC;
-        --color-white: #FFFFFF;
-        --color-border:#474545;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        --color-icon:       #00C08B;
-        --color-icon-devices:       #00C08B;
-        --radius: 16px;
+            --bg-primary: #0B0F1C;
+            --bg-secondary: #1E2639;
+            --bg-accent: #2C3E50;
+            --color-btn: #FF7849;
+            --color-btn-hover: #E66A40;
+            --color-card: #2C3E50;
+            --color-text: #F4F4F4;
+            --color-muted: #AAB0BC;
+            --color-white: #FFFFFF;
+            --color-border: #474545;
+            --color-primary: #FF7849;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --color-icon: #00C08B;
+            --color-icon-devices: #00C08B; /* Sjednoceno pro konzistentní barvy ikon */
+            --radius: 16px;
+            --color-progress: #00C08B;
+            --transition-speed: 0.3s;
         }
         
         * {
@@ -64,7 +68,7 @@
         }
         
         section {
-            padding: 80px 0;
+            padding: 40px 0; /* Zmenšeno z původních 80px */
         }
         
         h1, h2, h3, h4 {
@@ -123,6 +127,9 @@
         }
         
         .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -132,6 +139,7 @@
             font-size: 24px;
             font-weight: 700;
             color: var(--color-text);
+            text-decoration: none;
         }
         
         .nav-links {
@@ -142,7 +150,8 @@
         .nav-links a {
             color: var(--color-muted);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 500; /* Upraveno na stejnou tloušťku jako v ostatních šablonách */
+            font-size: 16px; /* Sjednocená velikost písma */
             transition: color 0.3s ease;
         }
         
@@ -640,6 +649,10 @@
                 height: 40px;
                 border-radius: 8px;
             }
+
+            .header-bar {
+                padding-left: 1.5rem;
+            }
         }
         
         /* Mobile Navigation */
@@ -780,27 +793,100 @@
             pointer-events: none;
             user-select: none;
         }
+        
+        /* Header - zmenšení výšky, aby byl stejný jako na user-page.html */
+        header {
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-primary);
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Jednoduché animace pro různé prvky */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animace pro nadpisy sekcí */
+        .section-title {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .section-subtitle {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Hover efekty pro karty */
+        .device-card:hover .device-icon {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Animace pro CTA tlačítko */
+        .hero-buttons .btn, .cta .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-buttons .btn:after, .cta .btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.8s;
+        }
+        
+        .hero-buttons .btn:hover:after, .cta .btn:hover:after {
+            left: 100%;
+        }
     </style>
 </head>
 <body class="loading">
-    <!-- Header -->
+    <!-- Header - zjednodušený s odstraněným profilem -->
     <header>
         <div class="container header-container">
-            <div class="logo">FixIt</div>
-            <button class="toggle-mode" id="toggleModeBtn" style="margin-right:16px;">
-                <i class="fas fa-moon"></i>
-            </button>
+            <a href="{{ url_for('index') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <nav class="nav-links">
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="{{ url_for('price_list') }}">Pricing</a>
-                <a href="{{ url_for('home') }}">My Repairs</a>
-                <a href="{{ url_for('about_us') }}">About us</a>
+                <a href="#why-fixit" class="active">Proč FixIt</a>
+                <a href="#devices">Zařízení</a>
+                <a href="#how-it-works">Jak to funguje</a>
+                <a href="#testimonials">Recenze</a>
+                <a href="#faq">FAQ</a>
             </nav>
             <div class="header-buttons">
-                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <button class="toggle-mode" id="toggleModeBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="{{ url_for('login') }}" class="btn">Přihlášení</a>
             </div>
         </div>
     </header>
@@ -809,10 +895,10 @@
     <section class="hero" id="hero">
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Don't Toss It. FixIt.</h1>
-                <p class="hero-subtitle">You send it. We fix it. Simple as that.</p>
+                <h1 class="hero-title">Don´t toss it. Fix it.</h1>
+                <p class="hero-subtitle">Pošlete to. Opraviť to. Tak jednoduché je to.</p>
                 <div class="hero-buttons">
-                    <a href="{{ url_for('login') }}" class="btn" id="startRepairBtn">Start a Repair</a>
+                    <a href="{{ url_for('login') }}" class="btn" id="startRepairBtn">Začít opravu</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -825,32 +911,32 @@
     <!-- Why FixIt -->
     <section class="why-fixit" id="why-fixit">
         <div class="container">
-            <h2 class="section-title">Why FixIt?</h2>
-            <p class="section-subtitle">We make device repairs simple, reliable, and eco-friendly</p>
+            <h2 class="section-title">Proč FixIt?</h2>
+            <p class="section-subtitle">Opravy zařízení děláme jednoduché, spolehlivé a ekologické</p>
             
             <div class="features">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3 class="feature-title">Fast & Easy Process</h3>
-                    <p>Submit your repair request online in minutes. We handle the logistics from there.</p>
+                    <h3 class="feature-title">Rychlý a snadný proces</h3>
+                    <p>Odeslání žádosti o opravu online zabere jen pár minut. Odtud se postaráme o logistiku my.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="feature-title">Verified Repair Partners</h3>
-                    <p>We only work with certified technicians who meet our strict quality standards.</p>
+                    <h3 class="feature-title">Ověření opraváři</h3>
+                    <p>Spolupracujeme pouze s certifikovanými techniky, kteří splňují naše přísné standardy kvality.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <h3 class="feature-title">Eco-Friendly Mission</h3>
-                    <p>Every repair prevents electronic waste and helps build a more sustainable future.</p>
+                    <h3 class="feature-title">Ekologická mise</h3>
+                    <p>Každá oprava zabraňuje vzniku elektronického odpadu a pomáhá budovat udržitelnější budoucnost.</p>
                 </div>
             </div>
         </div>
@@ -859,19 +945,19 @@
     <!-- Device Categories -->
     <section class="device-categories" id="devices">
         <div class="container">
-            <h2 class="section-title">What We Repair</h2>
-            <p class="section-subtitle">Professional repairs for all your favorite devices</p>
+            <h2 class="section-title">Co opravujeme</h2>
+            <p class="section-subtitle">Profesionální opravy pro všechna vaše oblíbená zařízení</p>
             
             <div class="devices">
                 <div class="device-card">
                     <div class="device-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3 class="device-title">Phones</h3>
+                    <h3 class="device-title">Telefony</h3>
                     <ul class="device-features">
-                        <li>Screen replacements</li>
-                        <li>Battery repairs</li>
-                        <li>Water damage</li>
+                        <li>Výměna displeje</li>
+                        <li>Opravy baterií</li>
+                        <li>Opravy po vodě</li>
                     </ul>
                 </div>
                 
@@ -879,11 +965,11 @@
                     <div class="device-icon">
                         <i class="fas fa-laptop"></i>
                     </div>
-                    <h3 class="device-title">Laptops</h3>
+                    <h3 class="device-title">Notebooky</h3>
                     <ul class="device-features">
-                        <li>Screen replacements</li>
-                        <li>Battery upgrades</li>
-                        <li>Hardware repairs</li>
+                        <li>Výměna displeje</li>
+                        <li>Vylepšení baterie</li>
+                        <li>Opravy hardwaru</li>
                     </ul>
                 </div>
                 
@@ -891,11 +977,11 @@
                     <div class="device-icon">
                         <i class="fas fa-headphones"></i>
                     </div>
-                    <h3 class="device-title">Headphones</h3>
+                    <h3 class="device-title">Sluchátka</h3>
                     <ul class="device-features">
-                        <li>Audio fixes</li>
-                        <li>Battery replacements</li>
-                        <li>Charging ports</li>
+                        <li>Opravy zvuku</li>
+                        <li>Výměna baterie</li>
+                        <li>Opravy nabíjecích portů</li>
                     </ul>
                 </div>
                 
@@ -903,11 +989,11 @@
                     <div class="device-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
-                    <h3 class="device-title">Consoles</h3>
+                    <h3 class="device-title">Konzole</h3>
                     <ul class="device-features">
-                        <li>Controller repairs</li>
-                        <li>Disc drive issues</li>
-                        <li>Overheating fixes</li>
+                        <li>Opravy ovladačů</li>
+                        <li>Problémy s mechanikou disků</li>
+                        <li>Opravy přehřívání</li>
                     </ul>
                 </div>
                 
@@ -915,11 +1001,11 @@
                     <div class="device-icon">
                         <i class="fas fa-object-group"></i>
                     </div>
-                    <h3 class="device-title">Other</h3>
+                    <h3 class="device-title">Ostatní</h3>
                     <ul class="device-features">
-                        <li>Screen replacements</li>
-                        <li>Battery swaps</li>
-                        <li>Water damage fixes</li>
+                        <li>Výměna displeje</li>
+                        <li>Výměna baterie</li>
+                        <li>Opravy po vodě</li>
                     </ul>
                 </div>
             </div>
@@ -929,38 +1015,38 @@
     <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Simple 3-step process to get your devices fixed</p>
+            <h2 class="section-title">Jak to funguje</h2>
+            <p class="section-subtitle">Jednoduchý proces ve 3 krocích, jak nechat opravit vaše zařízení</p>
             
             <div class="steps">
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <div class="step-image">
                         <!-- Placeholder for step illustration -->
-                        <img src="/api/placeholder/180/140" alt="Submit your repair request" />
+                        <img src="/api/placeholder/180/140" alt="Odeslat žádost o opravu" />
                     </div>
-                    <h3 class="step-title">Submit your repair request</h3>
-                    <p>Fill out our simple online form with details about your device and the issue you're experiencing.</p>
+                    <h3 class="step-title">Odeslat žádost o opravu</h3>
+                    <p>Vyplňte náš jednoduchý online formulář s detaily o vašem zařízení a problému, který máte.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <div class="step-image">
                         <!-- Placeholder for step illustration -->
-                        <img src="/api/placeholder/180/140" alt="Forward to trusted partner" />
+                        <img src="/api/placeholder/180/140" alt="Předat důvěryhodnému partnerovi" />
                     </div>
-                    <h3 class="step-title">We forward it to a trusted partner</h3>
-                    <p>Your device is matched with the right repair specialist from our network of certified technicians.</p>
+                    <h3 class="step-title">Předáme to důvěryhodnému partnerovi</h3>
+                    <p>Vaše zařízení je přiřazeno k správnému specialistovi na opravy z naší sítě certifikovaných techniků.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <div class="step-image">
                         <!-- Placeholder for step illustration -->
-                        <img src="/api/placeholder/180/140" alt="Get it back fixed" />
+                        <img src="/api/placeholder/180/140" alt="Získat opravené zařízení zpět" />
                     </div>
-                    <h3 class="step-title">You get it back, fixed & working</h3>
-                    <p>Your repaired device is returned to you, often within days, ready to use and with a repair guarantee.</p>
+                    <h3 class="step-title">Získáte zpět, opravené a funkční</h3>
+                    <p>Vaše opravené zařízení je vám vráceno, často během několika dní, připravené k použití a s garancí opravy.</p>
                 </div>
             </div>
         </div>
@@ -969,12 +1055,12 @@
     <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <p class="section-subtitle">Real reviews from real people</p>
+            <h2 class="section-title">Co říkají naši zákazníci</h2>
+            <p class="section-subtitle">Skutečné recenze od skutečných lidí</p>
             
             <div class="reviews">
                 <div class="review-card">
-                    <p class="review-text">Sent my phone Monday, got it back Friday. No stress! My screen looks brand new and the whole process was so easy.</p>
+                    <p class="review-text">Poslal jsem svůj telefon v pondělí, v pátek jsem ho měl zpět. Bez stresu! Můj displej vypadá jako nový a celý proces byl tak snadný.</p>
                     <div class="reviewer">
                         <div>
                             <div class="reviewer-name">Elon Mask</div>
@@ -984,7 +1070,7 @@
                 </div>
                 
                 <div class="review-card">
-                    <p class="review-text">My laptop wouldn't turn on and I thought I'd lost all my data. FixIt not only repaired it but also recovered everything. Life-saving service!</p>
+                    <p class="review-text">Můj notebook se nezapínal a myslel jsem, že jsem přišel o všechna data. FixIt nejenže to opravil, ale také všechno obnovil. Zachránili mi život!</p>
                     <div class="reviewer">
                         <div>
                             <div class="reviewer-name">Steve Jobs</div>
@@ -994,11 +1080,11 @@
                 </div>
                 
                 <div class="review-card">
-                    <p class="review-text">Third time using FixIt for various devices. Always professional, always fair pricing, and always fixed right the first time.</p>
+                    <p class="review-text">Už potřetí používám FixIt na různá zařízení. Vždy profesionální, vždy férové ceny a vždy opraveno na první pokus.</p>
                     <div class="reviewer">
                         <div>
                             <div class="reviewer-name">Mark Zuckerberg</div>
-                            <div class="reviewer-device">Multiple devices</div>
+                            <div class="reviewer-device">Více zařízení</div>
                         </div>
                     </div>
                 </div>
@@ -1009,47 +1095,47 @@
     <!-- FAQ -->
     <section class="faq" id="faq">
         <div class="container">
-            <h2 class="section-title">Ask Us Anything</h2>
-            <p class="section-subtitle">Common questions about our repair service</p>
+            <h2 class="section-title">Zeptejte se nás na cokoliv</h2>
+            <p class="section-subtitle">Často kladené otázky o naší opravárenské službě</p>
             
             <div class="questions">
                 <div class="question-card">
                     <div class="question-header">
-                        <h3 class="question-title">How long does it take?</h3>
+                        <h3 class="question-title">Jak dlouho to trvá?</h3>
                         <i class="fas fa-plus"></i>
                     </div>
                     <div class="question-answer">
-                        <p>Most repairs are completed within 3-5 business days from when we receive your device. More complex repairs might take longer, but we'll always keep you updated on the progress.</p>
+                        <p>Většina oprav je dokončena během 3-5 pracovních dní od okamžiku, kdy vaše zařízení obdržíme. Složitější opravy mohou trvat déle, ale vždy vás budeme informovat o postupu.</p>
                     </div>
                 </div>
                 
                 <div class="question-card">
                     <div class="question-header">
-                        <h3 class="question-title">What if my device can't be fixed?</h3>
+                        <h3 class="question-title">Co když moje zařízení nejde opravit?</h3>
                         <i class="fas fa-plus"></i>
                     </div>
                     <div class="question-answer">
-                        <p>If our technicians determine that your device cannot be repaired, we'll return it to you and provide a detailed explanation. You'll only be charged a diagnostic fee in this case, which will be waived if you choose to proceed with the repair.</p>
+                        <p>Pokud naši technici zjistí, že vaše zařízení nelze opravit, vrátíme vám ho a poskytneme podrobné vysvětlení. V tomto případě vám bude účtován pouze poplatek za diagnostiku, který bude zrušen, pokud se rozhodnete opravu provést.</p>
                     </div>
                 </div>
                 
                 <div class="question-card">
                     <div class="question-header">
-                        <h3 class="question-title">Do you offer a warranty?</h3>
+                        <h3 class="question-title">Nabízíte záruku?</h3>
                         <i class="fas fa-plus"></i>
                     </div>
                     <div class="question-answer">
-                        <p>Yes, we offer a warranty on all repairs. The warranty duration and coverage depend on the type of repair and parts used. Please ask your repair specialist for details.</p>
+                        <p>Ano, nabízíme záruku na všechny opravy. Doba trvání a pokrytí záruky závisí na typu opravy a použitých dílech. Podrobnosti vám sdělí váš specialista na opravy.</p>
                     </div>
                 </div>
                 
                 <div class="question-card">
                     <div class="question-header">
-                        <h3 class="question-title">How do I track my repair?</h3>
+                        <h3 class="question-title">Jak mohu sledovat svou opravu?</h3>
                         <i class="fas fa-plus"></i>
                     </div>
                     <div class="question-answer">
-                        <p>Once your repair is underway, we'll provide you with a tracking number and a link to monitor the status of your repair online.</p>
+                        <p>Až bude vaše oprava zahájena, poskytneme vám sledovací číslo a odkaz na online sledování stavu vaší opravy.</p>
                     </div>
                 </div>
             </div>
@@ -1059,9 +1145,9 @@
     <!-- CTA -->
     <section class="cta" id="contact">
         <div class="container">
-            <h2 class="cta-title">Ready to Fix It?</h2>
-            <p class="cta-subtitle">Get started with our simple repair process today</p>
-            <a href="{{ url_for('login') }}" class="btn">Start a Repair</a>
+            <h2 class="cta-title">Připraveni to opravit?</h2>
+            <p class="cta-subtitle">Začněte s naším jednoduchým procesem opravy ještě dnes</p>
+            <a href="{{ url_for('login') }}" class="btn">Začít opravu</a>
         </div>
     </section>
     
@@ -1070,28 +1156,28 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-brand-logo">FixIt</div>
-                <p>Smart Tech Repairs Without the Stress</p>
+                <p>Opravy chytré techniky bez stresu</p>
             </div>
             
             <div class="footer-links">
-                <h3>Quick Links</h3>
+                <h3>Rychlé odkazy</h3>
                 <ul class="footer-link-list">
-                    <li><a href="#why-fixit">Why FixIt</a></li>
-                    <li><a href="#devices">Devices</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#why-fixit">Proč FixIt</a></li>
+                    <li><a href="#devices">Zařízení</a></li>
+                    <li><a href="#how-it-works">Jak to funguje</a></li>
+                    <li><a href="#testimonials">Recenze</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
             
             <div class="footer-contact">
-                <h3>Contact Us</h3>
+                <h3>Kontaktujte nás</h3>
                 <p>Email: support@fixit.com</p>
-                <p>Phone: 1-800-FIX-IT-NOW</p>
+                <p>Telefon: 1-800-FIX-IT-NOW</p>
             </div>
             
             <div class="footer-social">
-                <h3>Follow Us</h3>
+                <h3>Sledujte nás</h3>
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -1110,10 +1196,10 @@
         </div>
         
         <div class="footer-bottom">
-            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>&copy; 2025 FixIt. Všechna práva vyhrazena.</div>
             <div>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Terms of Service</a>
+                <a href="#">Zásady ochrany osobních údajů</a> |
+                <a href="#">Podmínky služby</a>
             </div>
         </div>
     </footer>
@@ -1179,6 +1265,25 @@
             }
         });
 
+        // Redirect to login for protected pages
+        document.querySelectorAll('.login-required').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Store the target URL in sessionStorage so we can redirect after login
+                const targetUrl = this.getAttribute('data-target');
+                sessionStorage.setItem('redirectAfterLogin', targetUrl);
+                window.location.href = "{{ url_for('login') }}";
+            });
+        });
+
+        // Also handle the CTA buttons
+        document.querySelectorAll('#startRepairBtn, .cta .btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "{{ url_for('login') }}";
+            });
+        });
+
         // Loader hide after all content is loaded
         window.onload = function () {
             document.body.classList.remove('loading');
@@ -1187,6 +1292,40 @@
                 document.getElementById('loaderOverlay').style.display = 'none';
             }, 400);
         };
+
+        // Přidání jednoduchých animací při scrollování
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animace při načtení stránky
+            setTimeout(function() {
+                document.querySelectorAll('.feature-card').forEach(function(card, index) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(function() {
+                        card.style.transition = 'opacity 0.8s, transform 0.8s';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100 * index);
+                });
+            }, 500);
+            
+            // Animace při scrollování
+            window.addEventListener('scroll', function() {
+                let cards = document.querySelectorAll('.device-card, .step-card, .review-card');
+                
+                cards.forEach(function(card) {
+                    let position = card.getBoundingClientRect();
+                    
+                    // Pokud je prvek v zorném poli
+                    if(position.top < window.innerHeight - 100) {
+                        if (!card.classList.contains('animated')) {
+                            card.style.animation = 'fadeInUp 0.6s forwards';
+                            card.classList.add('animated');
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

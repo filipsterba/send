@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="cs" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Repairs | FixIt</title>
+    <title>Moje opravy | FixIt</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -24,13 +24,14 @@
             --color-primary: #FF7849;
             --color-accent: #2D3E50;
             --color-progress: #00C08B;
+            --transition-speed: 0.3s; /* Added for consistent transitions */
         }
-        :root {
+        :root { /* Dark theme variables */
             --bg-primary: #0B0F1C;
             --bg-secondary: #1E2639;
             --bg-accent: #2C3E50;
-            --color-btn: #2C3E50;
-            --color-btn-hover: #0B0F1C;
+            --color-btn: #FF7849; /* Changed for better visibility in dark theme */
+            --color-btn-hover: #E66A40; /* Darker shade of primary for hover */
             --color-card: #2C3E50;
             --color-text: #F4F4F4;
             --color-muted: #AAB0BC;
@@ -41,6 +42,7 @@
             --color-icon: #00C08B;
             --radius: 16px;
             --color-progress: #00C08B;
+            --transition-speed: 0.3s; /* Added for consistent transitions */
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
@@ -48,10 +50,11 @@
             background: var(--bg-secondary);
             color: var(--color-text);
             min-height: 100vh;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease; /* Smooth global transitions */
         }
         body {
             line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
+            /* Removed duplicate transition from html, body */
         }
         .container {
             max-width: 1100px;
@@ -64,6 +67,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Specific transitions */
         }
         .header-bar {
             display: flex;
@@ -87,7 +91,7 @@
             color: var(--color-text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color var(--transition-speed) ease; /* Use transition variable */
         }
         .nav-links a:hover {
             color: var(--color-primary);
@@ -152,7 +156,7 @@
             padding: 0.5rem 0;
             text-decoration: none;
             color: var(--color-text);
-            transition: color 0.3s ease;
+            transition: color var(--transition-speed) ease; /* Use transition variable */
         }
 
         .dropdown-menu a:hover {
@@ -219,12 +223,13 @@
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s, transform 0.2s;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Use transition variable */
         }
         .filter-btn.active, .filter-btn:hover {
             background: linear-gradient(90deg, var(--color-primary) 60%, var(--color-accent) 100%);
             color: #fff;
-            transform: translateY(-2px) scale(1.04);
+            transform: translateY(-2px) scale(1.03); /* Adjusted hover effect */
+            box-shadow: 0 4px 10px rgba(var(--color-primary-rgb,255,120,73),0.15); /* Added shadow */
         }
         .search-bar {
             background: var(--color-card);
@@ -277,11 +282,19 @@
             flex-direction: column;
             gap: 1.2rem;
             position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease; /* Use transition variable */
+            animation: popIn 0.4s ease-out forwards; /* Add pop-in animation */
+            opacity: 0; /* Start hidden for animation */
         }
+
+        @keyframes popIn {
+            from { transform: scale(0.95) translateY(10px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
         .repair-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+            transform: translateY(-8px) scale(1.02); /* Slightly reduced scale for subtlety */
+            box-shadow: 0 20px 45px rgba(var(--color-shadow-rgb, 0,0,0),0.18); /* Use RGB shadow var or fallback */
         }
         .repair-card-header {
             display: flex;
@@ -335,7 +348,7 @@
             height: 100%;
             background: linear-gradient(90deg, var(--color-progress) 60%, var(--color-primary) 100%);
             border-radius: 6px;
-            transition: width 0.4s;
+            transition: width 0.5s ease-in-out; /* Smoother progress bar animation */
         }
         .repair-card-actions {
             display: flex;
@@ -352,12 +365,13 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 2px 12px 0 rgba(255,120,73,0.08);
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Use transition variable */
+            box-shadow: 0 2px 12px 0 rgba(var(--color-primary-rgb, 255,120,73),0.08);
         }
         .repair-btn:hover {
             background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-primary) 100%);
-            transform: translateY(-2px) scale(1.04);
+            transform: translateY(-2px) scale(1.03); /* Adjusted hover */
+            box-shadow: 0 4px 15px 0 rgba(var(--color-primary-rgb, 255,120,73),0.15); /* Enhanced shadow */
         }
         /* Accordion Timeline */
         .timeline-accordion {
@@ -374,10 +388,10 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.4rem 0;
-            transition: color 0.2s;
+            transition: color var(--transition-speed) ease; /* Use transition variable */
         }
         .timeline-toggle i {
-            transition: transform 0.3s;
+            transition: transform var(--transition-speed) ease; /* Use transition variable */
         }
         .timeline-accordion.open .timeline-toggle i {
             transform: rotate(90deg);
@@ -386,7 +400,7 @@
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+            transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity var(--transition-speed) ease, margin-top var(--transition-speed) ease; /* Use transition variable */
             padding-left: 1.2rem;
         }
         .timeline-accordion.open .timeline-content {
@@ -444,6 +458,13 @@
             align-items: center;
             gap: 1.2rem;
             margin-bottom: 0.5rem;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease; /* Use transition variable */
+            animation: popIn 0.4s ease-out forwards; /* Add pop-in animation */
+            opacity: 0; /* Start hidden for animation */
+        }
+        .history-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(var(--color-shadow-rgb, 0,0,0),0.15);
         }
         .history-img {
             width: 48px;
@@ -493,10 +514,10 @@
             cursor: pointer;
             text-decoration: underline;
             padding: 0.2rem 0;
-            transition: color 0.2s;
+            transition: color var(--transition-speed) ease; /* Use transition variable */
         }
         .history-btn:hover {
-            color: var(--color-accent);
+            color: var(--color-accent); /* Use theme variable */
         }
 
         /* CTA */
@@ -512,25 +533,17 @@
             padding: 1rem 2.2rem;
             font-size: 1.15rem;
             font-weight: 700;
-            box-shadow: 0 8px 32px 0 rgba(255,120,73,0.18);
+            box-shadow: 0 8px 32px 0 rgba(var(--color-primary-rgb, 255,120,73),0.18);
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Use transition variable */
             display: flex;
             align-items: center;
             gap: 0.7rem;
         }
         .new-repair-cta:hover {
             background: linear-gradient(90deg, var(--color-accent) 60%, var(--color-primary) 100%);
-            transform: translateY(-3px) scale(1.04);
-        }
-        @media (max-width: 700px) {
-            .new-repair-cta {
-                position: static;
-                width: 100%;
-                border-radius: var(--radius);
-                margin: 2rem 0 0 0;
-                justify-content: center;
-            }
+            transform: translateY(-3px) scale(1.03); /* Adjusted hover */
+            box-shadow: 0 10px 35px 0 rgba(var(--color-primary-rgb, 255,120,73),0.25); /* Enhanced shadow */
         }
         /* Footer */
         footer {
@@ -587,19 +600,21 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
+            /* background-color: rgba(255, 255, 255, 0.1); */ /* Replaced by var */
+            background-color: var(--color-btn); /* Use theme variable */
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--color-white);
             text-decoration: none;
-            transition: all 0.3s ease;
-            background-color: var(--color-btn);
+            transition: all var(--transition-speed) ease; /* Use transition variable */
+            /* background-color: var(--color-btn); */ /* Duplicate */
         }
+        
         .social-link:hover {
-            background-color: var(--color-btn-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+            background-color: var(--color-btn-hover); /* Use theme variable */
+            transform: translateY(-3px) scale(1.05); /* Enhanced hover */
+            box-shadow: 0 0 10px rgba(var(--color-primary-rgb, 255,255,255), 0.1); /* Softer shadow */
         }
         .footer-bottom {
             padding-top: 32px;
@@ -644,7 +659,7 @@
             }
         }
         .support-message-section {
-            background: var(--bg-primary);
+            background: rgba(var(--bg-primary-rgb, 11,15,28), 0.5); /* Use RGB of bg-primary for backdrop with opacity */
             padding: 48px 0 60px 0;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -653,7 +668,14 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(5px); /* Increased blur */
+            opacity: 0; /* Start hidden for animation */
+            pointer-events: none; /* Start non-interactive */
+            transition: opacity var(--transition-speed) ease;
+        }
+        .support-message-section.visible { /* Class to show modal */
+            opacity: 1;
+            pointer-events: auto;
         }
         .support-message-container {
             background: var(--color-card);
@@ -666,6 +688,11 @@
             display: flex;
             flex-direction: column;
             align-items: stretch;
+            transform: scale(0.95); /* Start slightly scaled down for animation */
+            transition: transform var(--transition-speed) ease;
+        }
+        .support-message-section.visible .support-message-container { /* Animate in */
+            transform: scale(1);
         }
         .support-message-form label {
             margin-top: 1rem;
@@ -679,16 +706,17 @@
             padding: 0.7rem 1rem;
             border-radius: 8px;
             border: 1px solid var(--color-border);
-            background: var(--bg-secondary);
-            color: var(--color-text);
+            background: var(--bg-secondary); /* Themed background */
+            color: var(--color-text); /* Themed text */
             font-size: 1rem;
             margin-bottom: 0.5rem;
             outline: none;
-            transition: border 0.2s;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease; /* Use transition variable */
         }
         .support-message-form input:focus,
         .support-message-form textarea:focus {
             border: 1.5px solid var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 255,120,73), 0.2); /* Use RGB of primary or fallback */
         }
         .support-message-actions {
             display: flex;
@@ -705,39 +733,54 @@
 
         /* Review Modal */
         #reviewModal {
-            display: none;
+            display: none; /* Will be controlled by JS */
             position: fixed;
             z-index: 10000;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(var(--bg-primary-rgb, 11,15,28), 0.5); /* Use RGB of bg-primary for backdrop */
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px); /* Increased blur */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease;
         }
-        .review-modal-content {
-            background: var(--color-card);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-            padding: 2rem 1.5rem;
-            max-width: 350px;
-            width: 95%;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        #reviewModal.visible { /* Class to show modal */
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .review-modal-content { /* Renamed from inline style for consistency */
+            background:var(--color-card);
+            border-radius:16px;
+            box-shadow:0 8px 32px rgba(var(--color-shadow-rgb,0,0,0),0.18);
+            padding:2rem 1.5rem;
+            max-width:350px;
+            width:95%;
+            margin:auto;
+            display:flex;
+            flex-direction:column;
+            gap:1rem;
+            transform: scale(0.95); /* Start slightly scaled down */
+            transition: transform var(--transition-speed) ease;
+        }
+        #reviewModal.visible .review-modal-content { /* Animate in */
+            transform: scale(1);
         }
         .review-modal-content h2 {
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--color-primary);
             margin-bottom: 0.5rem;
+            text-align: center;
         }
         .review-modal-content #reviewDeviceName {
             color: var(--color-muted);
             font-size: 1rem;
             margin-bottom: 0.5rem;
+            text-align: center;
         }
         .review-modal-content label {
             margin-top: 1rem;
@@ -772,21 +815,28 @@
             font-weight: 600;
             text-align: center;
         }
+
+        /* Add animation if not already present */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="header-bar" style="max-width:1180px;margin:0 auto;padding:0 1.5rem;">
-            <a href="{{ url_for('home') }}" class="logo">FixIt</a>
+            <a href="{{ url_for('index') }}" class="logo">FixIt</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('price_list') }}">Pricing</a></li>
-                <li><a href="{{ url_for('my_repairs') }}" class="active">My Repairs</a></li>
-                <li><a href="{{ url_for('about_us') }}">About us</a></li>
+               <li><a href="{{ url_for('home') }}">Úvod</a></li>
+                <li><a href="{{ url_for('price_list') }}" class="active">Ceník</a></li>
+                <li><a href="{{ url_for('my_repairs') }}">Moje opravy</a></li>
+                <li><a href="{{ url_for('repair_guides') }}">Najít opravny</a></li>
+                <li><a href="{{ url_for('about_us') }}">O nás</a></li>
             </ul>
             <div class="nav-right">
                 <button class="toggle-mode" id="themeToggleBtn">
@@ -794,12 +844,17 @@
                 </button>
                 <div class="profile-dropdown">
                     <button class="profile-btn" onclick="toggleDropdown()" style="padding:0;">
-                        <img src="{{ user.avatar }}" alt="Profile" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                        <!-- Fix avatar display to handle both string and dictionary user formats -->
+                        {% if user is mapping %}
+                            <img src="{{ user.avatar }}" alt="Profile" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
                     </button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="{{ url_for('home') }}"><i class="fas fa-user"></i> Profile</a>
+                        <a href="{{ url_for('dashboard') }}"><i class="fas fa-user"></i> Profile</a>
                         <a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                     </div>
                 </div>
             </div>
@@ -817,8 +872,8 @@
             <div class="repairs-controls">
                 <div class="repairs-filters">
                     <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="inprogress">In Progress</button>
-                    <button class="filter-btn" data-filter="waiting">Waiting for Parts</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="in_progress">In Progress</button>
                     <button class="filter-btn" data-filter="ready">Ready for Pickup</button>
                     <button class="filter-btn" data-filter="completed">Completed</button>
                 </div>
@@ -828,89 +883,51 @@
             <section class="repairs-section" id="activeRepairs">
                 <h2 class="section-title">Active Repairs</h2>
                 <div class="repairs-grid" id="activeRepairsGrid">
-                    <!-- Example Card -->
-                    <div class="repair-card" data-status="inprogress">
-                        <div class="repair-card-header">
-                            <div class="device-img"><i class="fas fa-mobile-alt"></i></div>
-                            <div class="repair-info">
-                                <div class="device-name">iPhone 13 Pro</div>
-                                <div class="repair-type">Screen replacement</div>
-                                <div class="repair-status">In progress</div>
-                                <div class="repair-eta">ETA: 2 days</div>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+                    {% if active_repairs %}
+                        {% for repair in active_repairs %}
+                        <div class="repair-card" data-status="{{ repair.status_key | default('unknown') }}" style="animation-delay: {{ loop.index0 * 0.05 }}s;">
+                            <div class="repair-card-header">
+                                <div class="device-img"><i class="fas {{ repair.device_icon_class | default('fa-tools') }}"></i></div>
+                                <div class="repair-info">
+                                    <div class="device-name">{{ repair.device_name | default('N/A') }}</div>
+                                    <div class="repair-type">{{ repair.repair_type | default('N/A') }}</div>
+                                    <div class="repair-status">{{ repair.status_display | default('Status Unknown') }}</div>
+                                    {% if repair.eta %}
+                                    <div class="repair-eta">ETA: {{ repair.eta | default('Not available') }}</div>
+                                    {% endif %}
+                                    <div class="progress-bar"><div class="progress-fill" style="width: {{ repair.progress_width | default(0) }}%"></div></div>
+                                </div>
+                            </div>
+                            <div class="repair-card-actions">
+                                <button class="repair-btn">Zobrazit detaily</button>
+                                <button class="repair-btn message-support-btn" style="background:var(--color-progress);color:#fff;">Kontaktovat podporu</button>
+                            </div>
+                            <div class="timeline-accordion">
+                                <!-- Timeline toggle might be part of View Details now, or kept separate -->
+                                <button class="timeline-toggle repair-btn" style="background:none;text-decoration:underline;padding-left:0;padding-right:0;">
+                                    <i class="fas fa-chevron-right"></i> Zobrazit časovou osu
+                                </button>
+                                <div class="timeline-content">
+                                    <ul class="timeline-list">
+                                        {% if repair.timeline_events %}
+                                            {% for event in repair.timeline_events %}
+                                            <li><span class="timeline-dot {% if event.completed %}completed{% endif %}"></span> {{ event.text }}</li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <li>Žádné události časové osy nejsou k dispozici.</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="repair-card-actions">
-                            <button class="repair-btn">View Details</button>
-                            <button class="repair-btn message-support-btn" style="background:var(--color-progress);color:#fff;">Message Support</button>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state" style="grid-column: 1 / -1;">
+                            <div class="empty-state-icon"><i class="fas fa-box-open"></i></div>
+                            <p>You don't have any active repairs.</p>
+                            <p>Need something fixed? <a href="{{ url_for('submit_repair') }}" style="color: var(--color-primary); text-decoration: underline;">Submit a new repair request!</a></p>
                         </div>
-                        <div class="timeline-accordion">
-
-                            <div class="timeline-content">
-                                <ul class="timeline-list">
-                                    <li><span class="timeline-dot completed"></span> Device received (Jan 10, 09:00)</li>
-                                    <li><span class="timeline-dot completed"></span> Diagnostics complete (Jan 10, 12:00)</li>
-                                    <li><span class="timeline-dot"></span> Screen replacement started (Jan 11, 10:00)</li>
-                                    <li><span class="timeline-dot"></span> Quality check</li>
-                                    <li><span class="timeline-dot"></span> Ready for pickup</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="repair-card" data-status="waiting">
-                        <div class="repair-card-header">
-                            <div class="device-img"><i class="fas fa-laptop"></i></div>
-                            <div class="repair-info">
-                                <div class="device-name">MacBook Air M2</div>
-                                <div class="repair-type">Battery replacement</div>
-                                <div class="repair-status">Waiting for parts</div>
-                                <div class="repair-eta">ETA: 4 days</div>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
-                            </div>
-                        </div>
-                        <div class="repair-card-actions">
-                            <button class="repair-btn">View Details</button>
-                            <button class="repair-btn message-support-btn" style="background:var(--color-progress);color:#fff;">Message Support</button>
-                        </div>
-                        <div class="timeline-accordion">
-                            <div class="timeline-content">
-                                <ul class="timeline-list">
-                                    <li><span class="timeline-dot completed"></span> Device received (Jan 8, 14:00)</li>
-                                    <li><span class="timeline-dot completed"></span> Diagnostics complete (Jan 8, 16:00)</li>
-                                    <li><span class="timeline-dot"></span> Waiting for battery delivery</li>
-                                    <li><span class="timeline-dot"></span> Battery replacement</li>
-                                    <li><span class="timeline-dot"></span> Ready for pickup</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="repair-card" data-status="ready">
-                        <div class="repair-card-header">
-                            <div class="device-img"><i class="fas fa-headphones"></i></div>
-                            <div class="repair-info">
-                                <div class="device-name">AirPods Pro</div>
-                                <div class="repair-type">Left speaker fix</div>
-                                <div class="repair-status">Ready for pickup</div>
-                                <div class="repair-eta">ETA: Today</div>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
-                            </div>
-                        </div>
-                        <div class="repair-card-actions">
-                            <button class="repair-btn">View Details</button>
-                            <button class="repair-btn message-support-btn" style="background:var(--color-progress);color:#fff;">Message Support</button>
-                        </div>
-                        <div class="timeline-accordion">
-                            <div class="timeline-content">
-                                <ul class="timeline-list">
-                                    <li><span class="timeline-dot completed"></span> Device received (Jan 7, 10:00)</li>
-                                    <li><span class="timeline-dot completed"></span> Diagnostics complete (Jan 7, 12:00)</li>
-                                    <li><span class="timeline-dot completed"></span> Speaker replaced (Jan 8, 11:00)</li>
-                                    <li><span class="timeline-dot completed"></span> Quality check (Jan 8, 13:00)</li>
-                                    <li><span class="timeline-dot"></span> Ready for pickup</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
             </section>
 
@@ -918,48 +935,33 @@
             <section class="repairs-section" id="repairHistory">
                 <h2 class="section-title">Repair History</h2>
                 <div class="history-list">
-                    <div class="history-card">
-                        <div class="history-img"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="history-info">
-                            <div class="history-device">iPhone 12</div>
-                            <div class="history-type">Battery replacement</div>
-                            <div class="history-date">Completed: Dec 15, 2024</div>
+                    {% if completed_repairs %}
+                        {% for repair in completed_repairs %}
+                        <div class="history-card" data-repair-id="{{ repair.id | default('unknown') }}" style="animation-delay: {{ loop.index0 * 0.05 }}s;"> <!-- Staggered animation -->
+                            <div class="history-img"><i class="fas {{ repair.device_icon_class | default('fa-tools') }}"></i></div>
+                            <div class="history-info">
+                                <div class="history-device">{{ repair.device_name | default('N/A') }}</div>
+                                <div class="history-type">{{ repair.repair_type | default('N/A') }}</div>
+                                <div class="history-date">Dokončeno: {{ repair.completed_date | default('N/A') }}</div>
+                            </div>
+                            <div class="history-price">{{ repair.price | default('N/A') }}</div>
+                            <div class="history-actions">
+                                <button class="history-btn leave-review-btn">Zanechat recenzi</button>
+                            </div>
                         </div>
-                        <div class="history-price">1 200 Kč</div>
-                        <div class="history-actions">
-                            <button class="history-btn leave-review-btn">Leave a Review</button>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state" style="grid-column: 1 / -1;"> <!-- Span across all columns -->
+                             <div class="empty-state-icon"><i class="fas fa-history"></i></div>
+                            <p>No repair history found.</p>
                         </div>
-                    </div>
-                    <div class="history-card">
-                        <div class="history-img"><i class="fas fa-laptop"></i></div>
-                        <div class="history-info">
-                            <div class="history-device">Dell XPS 13</div>
-                            <div class="history-type">Keyboard repair</div>
-                            <div class="history-date">Completed: Nov 28, 2024</div>
-                        </div>
-                        <div class="history-price">2 000 Kč</div>
-                        <div class="history-actions">
-                            <button class="history-btn leave-review-btn">Leave a Review</button>
-                        </div>
-                    </div>
-                    <div class="history-card">
-                        <div class="history-img"><i class="fas fa-gamepad"></i></div>
-                        <div class="history-info">
-                            <div class="history-device">PS5 Controller</div>
-                            <div class="history-type">Joystick fix</div>
-                            <div class="history-date">Completed: Nov 10, 2024</div>
-                        </div>
-                        <div class="history-price">600 Kč</div>
-                        <div class="history-actions">
-                            <button class="history-btn leave-review-btn">Leave a Review</button>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
             </section>
 
             <!-- New Repair CTA -->
             <button class="new-repair-cta">
-                <i class="fas fa-plus"></i> Start a New Repair
+                <i class="fas fa-plus"></i> Start New Repair
             </button>
         </div>
     </main>
@@ -969,24 +971,25 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-brand-logo">FixIt</div>
-                <p>Smart Tech Repairs Without the Stress</p>
+                <p>Smart Device Repairs Without Stress</p>
             </div>
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul class="footer-link-list">
-                    <li><a href="user-page.html">Home</a></li>
-                    <li><a href="price-list.html">Pricing</a></li>
-                    <li><a href="repairs.html">My Repairs</a></li>
-                    <li><a href="about us.html">About us</a></li>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('price_list') }}">Price List</a></li>
+                    <li><a href="{{ url_for('my_repairs') }}">My Repairs</a></li>
+                    <li><a href="{{ url_for('repair_guides') }}">Find Repair Shops</a></li>
+                    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
-                <h3>Contact Us</h3>
+                <h3>Kontaktujte nás</h3>
                 <p>Email: support@fixit.com</p>
-                <p>Phone: 1-800-FIX-IT-NOW</p>
+                <p>Telefon: 1-800-FIX-IT-NOW</p>
             </div>
             <div class="footer-social">
-                <h3>Follow Us</h3>
+                <h3>Sledujte nás</h3>
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <i class="fab fa-facebook-f"></i>
@@ -1004,231 +1007,326 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div>&copy; 2025 FixIt. All rights reserved.</div>
+            <div>&copy; 2025 FixIt. Všechna práva vyhrazena.</div>
             <div>
-                <a href="#">Privacy Policy</a> |
-                <a href="#">Terms of Service</a>
+                <a href="#">Zásady ochrany osobních údajů</a> |
+                <a href="#">Podmínky služby</a>
             </div>
         </div>
     </footer>
     <!-- Support Message Section (hidden by default) -->
-    <section class="support-message-section" id="supportMessageSection" style="display:none;">
+    <section class="support-message-section" id="supportMessageSection"> <!-- Removed inline style -->
         <div class="support-message-container">
-            <h2 class="section-title">Contact Support</h2>
+            <h2 class="section-title" style="text-align:center; margin-bottom:1.5rem;">Kontaktujte podporu</h2> <!-- Centered title -->
             <form id="supportMessageForm" class="support-message-form">
-                <label for="supportEmail" style="font-weight:600;">Your Email</label>
+                <label for="supportEmail" style="font-weight:600;">Váš email</label>
                 <input type="email" id="supportEmail" name="supportEmail" required placeholder="you@email.com">
-                <label for="supportSubject" style="font-weight:600;">Subject</label>
-                <input type="text" id="supportSubject" name="supportSubject" required placeholder="Subject">
-                <label for="supportBody" style="font-weight:600;">Message</label>
-                <textarea id="supportBody" name="supportBody" rows="5" required placeholder="How can we help you?"></textarea>
+                <label for="supportSubject" style="font-weight:600;">Předmět</label>
+                <input type="text" id="supportSubject" name="supportSubject" required placeholder="Předmět">
+                <label for="supportBody" style="font-weight:600;">Zpráva</label>
+                <textarea id="supportBody" name="supportBody" rows="5" required placeholder="Jak vám můžeme pomoci?"></textarea>
                 <div class="support-message-actions">
-                    <button type="submit" class="repair-btn" style="min-width:120px;">Send</button>
-                    <button type="button" class="repair-btn" id="closeSupportMessage" style="background:var(--color-accent);color:#fff;min-width:120px;">Cancel</button>
+                    <button type="submit" class="repair-btn" style="min-width:120px;">Odeslat</button>
+                    <button type="button" class="repair-btn" id="closeSupportMessage" style="background:var(--color-accent);color:#fff;min-width:120px;">Zrušit</button>
                 </div>
-                <div id="supportMessageSuccess" style="display:none;color:var(--color-progress);margin-top:1rem;font-weight:600;">Your message has been sent!</div>
+                <div id="supportMessageSuccess" style="display:none;color:var(--color-progress);margin-top:1rem;font-weight:600;">Vaše zpráva byla odeslána!</div>
             </form>
         </div>
     </section>
 
     <!-- Review Modal -->
-    <div id="reviewModal" style="display:none;position:fixed;z-index:10000;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
-        <div style="background:var(--color-card);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 1.5rem;max-width:350px;width:95%;margin:auto;display:flex;flex-direction:column;gap:1rem;">
-            <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">Leave a Review</h2>
-            <div id="reviewDeviceName" style="color:var(--color-muted);font-size:1rem;margin-bottom:0.5rem;"></div>
+    <div id="reviewModal"> <!-- Removed inline style -->
+        <div class="review-modal-content"> <!-- Use class for styling -->
+            <h2 style="font-size:1.2rem;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem; text-align:center;">Zanechat recenzi</h2> <!-- Centered title -->
+            <div id="reviewDeviceName" style="color:var(--color-muted);font-size:1rem;margin-bottom:0.5rem; text-align:center;"></div> <!-- Centered device name -->
             <form id="reviewForm">
-                <label for="reviewText" style="font-weight:600;">Your Review</label>
+                <label for="reviewText" style="font-weight:600;">Vaše recenze</label>
                 <textarea id="reviewText" rows="4" required style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid var(--color-border);background:var(--bg-secondary);color:var(--color-text);font-size:1rem;margin-bottom:0.5rem;"></textarea>
                 <div style="display:flex;gap:1rem;justify-content:flex-end;margin-top:1rem;">
-                    <button type="submit" class="repair-btn" style="min-width:100px;">Submit</button>
-                    <button type="button" id="closeReviewModal" class="repair-btn" style="background:var(--color-accent);color:#fff;min-width:100px;">Cancel</button>
+                    <button type="submit" class="repair-btn" style="min-width:100px;">Odeslat</button>
+                    <button type="button" id="closeReviewModal" class="repair-btn" style="background:var(--color-accent);color:#fff;min-width:100px;">Zrušit</button>
                 </div>
             </form>
-            <div id="reviewSuccessMsg" style="display:none;color:var(--color-progress);font-weight:600;text-align:center;">Thank you for your review!</div>
+            <div id="reviewSuccessMsg" style="display:none;color:var(--color-progress);font-weight:600;text-align:center;">Děkujeme za vaši recenzi!</div>
         </div>
     </div>
 
+    <!-- JavaScript at the end of the body -->
     <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('dropdownMenu');
-            dropdown.classList.toggle('active');
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('dropdownMenu');
-            const profileBtn = document.querySelector('.profile-btn');
-            
-            if (!profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
+        // Make sure all DOM elements are loaded before adding event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // Theme toggle with localStorage
-            const themeToggleBtn = document.getElementById('themeToggleBtn');
-            const icon = themeToggleBtn.querySelector('i');
-            // Load theme from localStorage
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.classList.toggle('light', savedTheme === 'light');
-            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-            if (savedTheme === 'dark') {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+            console.log('DOM loaded, initializing buttons');
+            
+            // Initialize dropdown toggle
+            window.toggleDropdown = function() {
+                const dropdown = document.getElementById('dropdownMenu');
+                if (dropdown) dropdown.classList.toggle('active');
             }
-            themeToggleBtn.addEventListener('click', function() {
-                const html = document.documentElement;
-                const isLight = html.classList.contains('light');
-                html.classList.toggle('light', !isLight);
-                html.classList.toggle('dark', isLight);
-                icon.classList.toggle('fa-moon', isLight);
-                icon.classList.toggle('fa-sun', !isLight);
-                localStorage.setItem('theme', isLight ? 'dark' : 'light');
-            });
+            
+            // Attach click event to profile button
+            const profileBtn = document.querySelector('.profile-btn');
+            if (profileBtn) {
+                profileBtn.onclick = toggleDropdown;
+            }
 
-            // Mobile menu
-            document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-                const navLinks = document.querySelector('.nav-links');
-                navLinks.classList.toggle('active');
-                this.querySelector('i').classList.toggle('fa-bars');
-                this.querySelector('i').classList.toggle('fa-times');
-            });
-            document.addEventListener('click', function(e) {
-                const navLinks = document.querySelector('.nav-links');
-                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const dropdown = document.getElementById('dropdownMenu');
+                const profileBtn = document.querySelector('.profile-btn');
+                
+                if (dropdown && profileBtn && !profileBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
                 }
             });
+            
+            // Theme toggle
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            if (themeToggleBtn) {
+                const icon = themeToggleBtn.querySelector('i');
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.toggle('light', savedTheme === 'light');
+                document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+                
+                if (savedTheme === 'light') {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
 
-            // Filter logic
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    const filter = this.getAttribute('data-filter');
-                    document.querySelectorAll('.repair-card').forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-status') === filter) {
-                            card.style.display = '';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
+                themeToggleBtn.onclick = function() {
+                    const isLight = document.documentElement.classList.toggle('light');
+                    document.documentElement.classList.toggle('dark', !isLight);
+                    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                    
+                    // Update icon immediately
+                    if (isLight) {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    } else {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                }
+            }
 
-            // Accordion logic
-            document.querySelectorAll('.timeline-toggle').forEach(toggle => {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.onclick = function() {
+                    const navLinks = document.querySelector('.nav-links');
+                    navLinks.classList.toggle('active');
+                }
+            }
+
+            // Timeline accordions
+            const timelineToggles = document.querySelectorAll('.timeline-toggle');
+            timelineToggles.forEach(toggle => {
                 toggle.addEventListener('click', function() {
                     const accordion = this.closest('.timeline-accordion');
                     accordion.classList.toggle('open');
                 });
             });
 
-            // View Details logic
-            document.querySelectorAll('.repair-card .repair-btn:first-child').forEach(btn => {
+            // Support message button click
+            const supportBtns = document.querySelectorAll('.message-support-btn');
+            supportBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const card = btn.closest('.repair-card');
-                    const accordion = card.querySelector('.timeline-accordion');
-                    if (accordion) {
-                        accordion.classList.toggle('open');
+                    const supportSection = document.getElementById('supportMessageSection');
+                    supportSection.classList.add('visible');
+                });
+            });
+
+            // Support message form submission
+            const supportMessageForm = document.getElementById('supportMessageForm');
+            if (supportMessageForm) {
+                supportMessageForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(supportMessageForm);
+                    try {
+                        const response = await fetch('/send_support_message', {
+                            method: 'POST',
+                            body: formData,
+                        });
+                        const result = await response.json();
+                        const successMessage = document.getElementById('supportMessageSuccess');
+                        
+                        if (result.success) {
+                            successMessage.style.display = 'block';
+                            supportMessageForm.reset();
+                            
+                            // Auto-hide after 3 seconds
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                                document.getElementById('supportMessageSection').classList.remove('visible');
+                            }, 3000);
+                        } else {
+                            alert('Error sending message: ' + result.message);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error sending message. Please try again later.');
                     }
                 });
-            });
-
-            // New Repair CTA (floating button)
-            document.querySelector('.new-repair-cta').addEventListener('click', function() {
-                window.location.href = "price-list.html";
-            });
-
-            // Show support message section on "Message Support" click
-            document.querySelectorAll('.message-support-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.getElementById('supportMessageSection').style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                });
-            });
+            }
 
             // Close support message section
-            document.getElementById('closeSupportMessage').addEventListener('click', function() {
-                document.getElementById('supportMessageSection').style.display = 'none';
-                document.body.style.overflow = '';
-                document.getElementById('supportMessageForm').reset();
-                document.getElementById('supportMessageSuccess').style.display = 'none';
-            });
+            const closeSupportMessageBtn = document.getElementById('closeSupportMessage');
+            if (closeSupportMessageBtn) {
+                closeSupportMessageBtn.onclick = function() {
+                    const supportMessageSection = document.getElementById('supportMessageSection');
+                    supportMessageSection.classList.remove('visible');
+                    document.getElementById('supportMessageSuccess').style.display = 'none';
+                    if (supportMessageForm) supportMessageForm.reset();
+                }
+            }
 
-            // Review modal logic
-            const reviewModal = document.getElementById('reviewModal');
-            const reviewDeviceName = document.getElementById('reviewDeviceName');
-            const reviewForm = document.getElementById('reviewForm');
-            const reviewText = document.getElementById('reviewText');
-            const reviewSuccessMsg = document.getElementById('reviewSuccessMsg');
-            let lastReviewBtn = null;
-
-            document.querySelectorAll('.leave-review-btn').forEach(btn => {
+            // View Details button click
+            const viewDetailsBtns = document.querySelectorAll('.repair-card .repair-btn:first-of-type');
+            viewDetailsBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    lastReviewBtn = btn;
-                    // Find device name
-                    const card = btn.closest('.history-card');
-                    const device = card.querySelector('.history-device').textContent;
-                    reviewDeviceName.textContent = device;
-                    reviewText.value = '';
-                    reviewSuccessMsg.style.display = 'none';
-                    reviewForm.style.display = '';
-                    reviewModal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+                    const card = this.closest('.repair-card');
+                    const timelineAccordion = card.querySelector('.timeline-accordion');
+                    timelineAccordion.classList.toggle('open');
                 });
             });
 
-            document.getElementById('closeReviewModal').addEventListener('click', function() {
-                reviewModal.style.display = 'none';
-                document.body.style.overflow = '';
+            // Review button click
+            const reviewBtns = document.querySelectorAll('.leave-review-btn');
+            reviewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.history-card');
+                    const repairId = card.getAttribute('data-repair-id');
+                    const deviceName = card.querySelector('.history-device').textContent;
+                    
+                    const reviewModal = document.getElementById('reviewModal');
+                    const reviewDeviceName = document.getElementById('reviewDeviceName');
+                    reviewDeviceName.textContent = deviceName;
+                    
+                    // Add the repair ID to the form for submission
+                    const reviewForm = document.getElementById('reviewForm');
+                    let repairIdInput = reviewForm.querySelector('input[name="repairId"]');
+                    if (!repairIdInput) {
+                        repairIdInput = document.createElement('input');
+                        repairIdInput.type = 'hidden';
+                        repairIdInput.name = 'repairId';
+                        reviewForm.appendChild(repairIdInput);
+                    }
+                    repairIdInput.value = repairId;
+                    
+                    reviewModal.classList.add('visible');
+                    document.getElementById('reviewSuccessMsg').style.display = 'none';
+                });
             });
 
-            reviewForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                reviewForm.style.display = 'none';
-                reviewSuccessMsg.style.display = 'block';
-                setTimeout(() => {
-                    reviewModal.style.display = 'none';
-                    document.body.style.overflow = '';
-                }, 1500);
+            // Close review modal
+            const closeReviewModalBtn = document.getElementById('closeReviewModal');
+            if (closeReviewModalBtn) {
+                closeReviewModalBtn.addEventListener('click', function() {
+                    const reviewModal = document.getElementById('reviewModal');
+                    reviewModal.classList.remove('visible');
+                    document.getElementById('reviewForm').reset();
+                });
+            }
+
+            // Review form submission
+            const reviewForm = document.getElementById('reviewForm');
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(reviewForm);
+                    
+                    try {
+                        const response = await fetch('/submit_review', {
+                            method: 'POST',
+                            body: formData,
+                        });
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            document.getElementById('reviewSuccessMsg').style.display = 'block';
+                            reviewForm.reset();
+                            
+                            // Auto-hide after 3 seconds
+                            setTimeout(() => {
+                                document.getElementById('reviewSuccessMsg').style.display = 'none';
+                                document.getElementById('reviewModal').classList.remove('visible');
+                            }, 3000);
+                        } else {
+                            alert('Error submitting review: ' + result.message);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error submitting review. Please try again later.');
+                    }
+                });
+            }
+
+            // New Repair CTA button
+            const newRepairBtn = document.querySelector('.new-repair-cta');
+            if (newRepairBtn) {
+                newRepairBtn.addEventListener('click', function() {
+                    window.location.href = "{{ url_for('submit_repair') }}";
+                });
+            }
+
+            // Filter repairs
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    const cards = document.querySelectorAll('.repair-card, .history-card');
+                    
+                    cards.forEach(card => {
+                        const status = card.getAttribute('data-status');
+                        
+                        if (filter === 'all' || status === filter) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Check if no repairs are visible after filtering
+                    checkEmptyState();
+                });
+            });
+
+            // Function to check if we need to show empty state message
+            function checkEmptyState() {
+                const activeSection = document.getElementById('activeRepairs');
+                const historySection = document.getElementById('repairHistory');
+                
+                const visibleActiveCards = activeSection.querySelectorAll('.repair-card[style="display: flex;"]').length;
+                const visibleHistoryCards = historySection.querySelectorAll('.history-card[style="display: flex;"]').length;
+                
+                const activeEmptyState = activeSection.querySelector('.empty-state');
+                const historyEmptyState = historySection.querySelector('.empty-state');
+                
+                if (activeEmptyState) {
+                    activeEmptyState.style.display = visibleActiveCards ? 'none' : 'block';
+                }
+                
+                if (historyEmptyState) {
+                    historyEmptyState.style.display = visibleHistoryCards ? 'none' : 'block';
+                }
+            }
+            
+            // Run initial check for empty states
+            checkEmptyState();
+
+            // Apply animation delay to cards
+            const allCards = document.querySelectorAll('.repair-card, .history-card');
+            allCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
             });
         });
     </script>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("G806k4znYB_JikZf_");
-
-  document.getElementById('supportMessageForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    emailjs.send("service_s4dnte6", "template_t9coq38", {
-      supportEmail: document.getElementById('supportEmail').value,
-      supportSubject: document.getElementById('supportSubject').value,
-      supportBody: document.getElementById('supportBody').value
-    })
-    .then(function() {
-      document.getElementById('supportMessageSuccess').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('supportMessageSection').style.display = 'none';
-        document.body.style.overflow = '';
-        document.getElementById('supportMessageForm').reset();
-        document.getElementById('supportMessageSuccess').style.display = 'none';
-      }, 2000);
-    }, function(error) {
-      alert("Chyba při odesílání zprávy: " + error.text);
-    });
-  });
-</script>
-
-<!-- This file is the correct and only version for the "My Repairs" page. 
-If you have another file named my-repairs.html, you can safely delete it. 
-All navigation and routing should use repairs.html (Flask route: my_repairs). -->
-
 </body>
 </html>
