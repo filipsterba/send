@@ -1328,5 +1328,38 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        emailjs.init("vv1sy0EDvm1RXV-Km"); 
+
+        const supportForm = document.getElementById("supportMessageForm");
+
+        supportForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const userEmail = document.getElementById('supportEmail').value;
+            const subject = document.getElementById('supportSubject').value;
+            const message = document.getElementById('supportBody').value;
+
+            emailjs.send("service_jt7ukra", "template_fisvf0l", {
+                user_email: userEmail,
+                subject,
+                message
+            }).then(() => {
+                document.getElementById('supportMessageSuccess').style.display = 'block';
+                supportForm.reset();
+
+                setTimeout(() => {
+                    document.getElementById('supportMessageSection').classList.remove('visible');
+                    document.getElementById('supportMessageSuccess').style.display = 'none';
+                }, 3000);
+            }).catch(error => {
+                alert("❌ Nepodařilo se odeslat zprávu: " + error.text);
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
